@@ -6,6 +6,7 @@ import LessonPanel from '@/components/organisms/LessonPanel'
 import CodeEditor from '@/components/organisms/CodeEditor'
 import PreviewPanel from '@/components/organisms/PreviewPanel'
 import Footer from '@/components/organisms/Footer'
+import ResizablePanel from '@/components/molecules/ResizablePanel'
 
 interface LessonTemplateProps {
   lessonTitle: string
@@ -52,23 +53,24 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
       <Header lessonTitle={lessonTitle} courseTitle={courseTitle} />
 
       {/* メインコンテンツ */}
-      <div className="flex flex-1">
-        {/* 左側パネル */}
-        <div className="w-1/2 border-r border-gray-200">
+      <ResizablePanel
+        className="flex-1"
+        leftPanel={
           <LessonPanel lessonContent={lessonContent} previewContent={previewContent} />
-        </div>
-
-        {/* 右側パネル */}
-        <div className="flex w-1/2 flex-col">
+        }
+        rightPanel={
           <CodeEditor
             files={files}
             activeFile={activeFile}
             onFileChange={handleFileChange}
             onActiveFileChange={setActiveFile}
-            className="flex-1"
+            className="h-full"
           />
-        </div>
-      </div>
+        }
+        initialLeftWidth={50}
+        minLeftWidth={25}
+        maxLeftWidth={75}
+      />
 
       {/* フッター */}
       <Footer
