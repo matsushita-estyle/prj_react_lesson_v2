@@ -15,7 +15,7 @@ const Footer: React.FC<FooterProps> = ({
   className = '',
 }) => {
   return (
-    <footer className={`flex justify-center gap-4 border-t border-gray-200 bg-white p-4 ${className}`}>
+    <footer className={`flex justify-center gap-8 border-t border-gray-700 bg-black p-4 ${className}`}>
       <Button variant="secondary" onClick={onLessonList}>
         レッスン一覧
       </Button>
