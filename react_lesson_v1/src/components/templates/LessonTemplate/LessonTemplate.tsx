@@ -5,6 +5,7 @@ import Header from '@/components/organisms/Header'
 import LessonPanel from '@/components/organisms/LessonPanel'
 import CodeEditor from '@/components/organisms/CodeEditor'
 import PreviewPanel from '@/components/organisms/PreviewPanel'
+import Footer from '@/components/organisms/Footer'
 
 interface LessonTemplateProps {
   lessonTitle: string
@@ -27,6 +28,18 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
       ...prev,
       [fileName]: content,
     }))
+  }
+
+  const handleLessonList = () => {
+    console.log('レッスン一覧を表示')
+  }
+
+  const handleCheckMaterials = () => {
+    console.log('教材を確認')
+  }
+
+  const handleShowAnswer = () => {
+    console.log('答えを表示')
   }
 
   const previewContent = (
@@ -56,6 +69,13 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
           />
         </div>
       </div>
+
+      {/* フッター */}
+      <Footer
+        onLessonList={handleLessonList}
+        onCheckMaterials={handleCheckMaterials}
+        onShowAnswer={handleShowAnswer}
+      />
     </div>
   )
 }
