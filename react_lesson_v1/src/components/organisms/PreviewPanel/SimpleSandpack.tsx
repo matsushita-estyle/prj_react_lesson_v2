@@ -18,7 +18,7 @@ interface SandpackProps {
     editorHeight?: number
     editorWidthPercentage?: number
     layout?: string
-    [key: string]: any
+    [key: string]: string | number | boolean | string[] | undefined
   }
 }
 
@@ -60,8 +60,17 @@ const SimpleSandpack: React.FC<SimpleSandpackProps> = ({ files, className = '' }
     return normalized
   }
 
+  // スクロール制御のためのカスタムスタイル
+  const styleOverride = `
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+`
+
   // 渡されたfilesを正規化し、空の場合はデフォルトを使用
-  const sandpackFiles =
+  const normalizedFiles =
     Object.keys(files).length > 0
       ? normalizeFiles(files)
       : {
@@ -70,24 +79,74 @@ const SimpleSandpack: React.FC<SimpleSandpackProps> = ({ files, className = '' }
 }`,
         }
 
+  // Sandpackに渡すファイル群
+  const sandpackFiles: Record<string, string> = {
+    ...normalizedFiles,
+    '/styles.css': styleOverride,
+  }
+
   return (
-    <div className={`h-full ${className}`} style={{ height: '400px' }}>
-      <Sandpack
-        template="react"
-        files={sandpackFiles}
-        options={{
-          showNavigator: false,
-          showTabs: false,
-          showLineNumbers: false,
-          showEditor: false,
-          showConsole: false,
-          showInlineErrors: false,
-          showRefreshButton: false,
-          editorWidthPercentage: 1,
-          layout: 'preview',
-        }}
-      />
-    </div>
+    <>
+      <style jsx global>{`
+        /* Sandpack全体の高さ設定 */
+        .sp-wrapper {
+          height: 100% !important;
+          display: flex !important;
+          flex-direction: column !important;
+        }
+
+        .sp-layout {
+          height: 100% !important;
+          flex: 1 !important;
+        }
+
+        .sp-stack {
+          height: 100% !important;
+        }
+
+        .sp-preview-container {
+          height: 100% !important;
+          overflow: hidden !important;
+        }
+
+        .sp-preview-iframe {
+          width: 100% !important;
+          height: 100% !important;
+          border: none !important;
+          display: block !important;
+        }
+
+        /* スクロールバーを無効化 */
+        .sp-preview-container > div {
+          height: 100% !important;
+          overflow: hidden !important;
+        }
+
+        /* preview-actionsを非表示 */
+        [class*='sp-preview-actions'] {
+          display: none !important;
+        }
+      `}</style>
+
+      <div className={`h-full ${className}`}>
+        <Sandpack
+          template="react"
+          files={sandpackFiles}
+          options={{
+            showNavigator: false,
+            showTabs: false,
+            showLineNumbers: false,
+            showEditor: false,
+            showConsole: false,
+            showInlineErrors: false,
+            showRefreshButton: false,
+            editorWidthPercentage: 1,
+            layout: 'preview',
+            externalResources: [],
+          }}
+        />
+      </div>
+    </>
   )
 }
 

@@ -21,7 +21,7 @@ const LessonPanel: React.FC<LessonPanelProps> = ({
     {
       id: 'preview',
       label: 'プレビュー',
-      content: <div className="p-4">{previewContent}</div>,
+      content: <div className="h-full">{previewContent}</div>,
     },
   ]
 
