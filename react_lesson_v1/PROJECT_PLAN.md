@@ -3,12 +3,15 @@
 ## プロジェクト概要
 
 ### 目的
+
 社内でのReact研修を行うことを目的としたWebアプリケーション
 
 ### 参考URL
+
 https://mosya.dev/react/lessons/react-basic/challenge
 
 ### 最重要機能
+
 - 右側でソースコードを修正しながら左側でプレビューを表示する機能
 - 認証機能は不要
 
@@ -74,6 +77,7 @@ https://mosya.dev/react/lessons/react-basic/challenge
 ```
 
 #### 左側パネル（タブ切り替え）
+
 1. **問題タブ**
    - レッスンの説明
    - 実装すべき課題
@@ -87,6 +91,7 @@ https://mosya.dev/react/lessons/react-basic/challenge
    - テスト結果
 
 #### 右側パネル（コードエディタ）
+
 - 複数ファイルのタブ切り替え
 - シンタックスハイライト
 - リアルタイム編集
@@ -204,12 +209,14 @@ interface CodeFiles {
 ## CSS設計方針
 
 ### 最終決定事項
+
 **エディタ部分: CSS Variables + style属性**  
 **その他すべて: Tailwind CSS**
 
 ### CSS Variables vs style属性の使い分け
 
 #### CSS Variables使用（推奨）
+
 ```css
 /* 共通テーマ色の定義 */
 :root {
@@ -221,16 +228,19 @@ interface CodeFiles {
 
 ```tsx
 /* CSS変数を参照 */
-<div style={{
-  backgroundColor: 'var(--editor-bg)',
-  color: 'var(--editor-text)',
-  border: '1px solid var(--editor-border)'
-}}>
+<div
+  style={{
+    backgroundColor: 'var(--editor-bg)',
+    color: 'var(--editor-text)',
+    border: '1px solid var(--editor-border)',
+  }}
+>
   エディタ
 </div>
 ```
 
 **メリット:**
+
 - ✅ 再利用性: 一箇所で定義、どこでも使用
 - ✅ 保守性: 変数値だけ変更すればOK
 - ✅ テーマ切り替え: 変数値を変更するだけ
@@ -241,8 +251,8 @@ interface CodeFiles {
 // components/organisms/CodeEditor/CodeEditor.tsx
 const CodeEditor = () => {
   return (
-    <div 
-      className="h-full rounded-lg overflow-hidden"
+    <div
+      className="h-full overflow-hidden rounded-lg"
       style={{
         backgroundColor: 'var(--editor-bg)',
         border: '1px solid var(--editor-border)',
@@ -254,13 +264,13 @@ const CodeEditor = () => {
   )
 }
 
-// components/templates/LessonTemplate/LessonTemplate.tsx  
+// components/templates/LessonTemplate/LessonTemplate.tsx
 const LessonTemplate = () => {
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Tailwind CSSで統一されたUI */}
-      <div className="w-1/2 bg-white border-r border-gray-200">
-        <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md">
+      <div className="w-1/2 border-r border-gray-200 bg-white">
+        <button className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
           実行
         </button>
       </div>
@@ -284,7 +294,7 @@ const LessonTemplate = () => {
   --editor-border: #333333;
   --editor-font: 'Fira Code', 'Monaco', 'Consolas', monospace;
   --editor-line-height: 1.5;
-  
+
   /* Monaco Editor テーマ色 */
   --editor-selection: #264f78;
   --editor-highlight: #2d2d30;
@@ -297,6 +307,7 @@ const LessonTemplate = () => {
 ## 開発環境設定
 
 ### Prettier設定 (.prettierrc.json)
+
 ```json
 {
   "semi": false,
@@ -314,14 +325,96 @@ const LessonTemplate = () => {
 }
 ```
 
-### ESLint設定 (.eslintrc.json)
+### .prettierignore
+
+```
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# testing
+coverage
+
+# next.js
+.next/
+out/
+build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# turbo
+.turbo
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# cache
+.eslintcache
+.prettierignore
+```
+
+### package.json に追加するスクリプト
+
 ```json
 {
-  "extends": [
-    "next/core-web-vitals",
-    "@typescript-eslint/recommended",
-    "prettier"
-  ],
+  "scripts": {
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.5"
+  }
+}
+```
+
+### .vscode/settings.json (VSCode用)
+
+```json
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+```
+
+### ESLint設定 (.eslintrc.json)
+
+```json
+{
+  "extends": ["next/core-web-vitals", "@typescript-eslint/recommended", "prettier"],
   "plugins": ["@typescript-eslint"],
   "rules": {
     "@typescript-eslint/no-unused-vars": "error",
@@ -333,6 +426,29 @@ const LessonTemplate = () => {
   "parserOptions": {
     "ecmaVersion": 2022,
     "sourceType": "module"
+  }
+}
+```
+
+### package.json 追加依存関係
+
+```json
+{
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.5",
+    "eslint-config-prettier": "^9.1.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0"
+  },
+  "scripts": {
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "check": "npm run lint && npm run format:check"
   }
 }
 ```
@@ -355,3 +471,130 @@ const LessonTemplate = () => {
 - リアルタイムでのコード実行とプレビュー更新が最重要機能
 - レスポンシブデザイン対応
 - アクセシビリティ対応
+
+## 実装進捗と技術的な課題
+
+### 実装完了項目
+
+1. ✅ **Next.jsプロジェクトの初期セットアップ**
+   - TypeScript対応
+   - Prettier、ESLint設定
+   - Tailwind CSS導入
+
+2. ✅ **基本レイアウトコンポーネント**
+   - アトミックデザインパターンでの構造化
+   - 左右分割レイアウト（50%ずつ）
+   - タブグループによる問題/プレビュー切り替え
+
+3. ✅ **Monaco Editorの実装**
+   - VSCode風のコードエディタ
+   - 複数ファイルタブ（App.jsx, index.css）
+   - ダークテーマとシンタックスハイライト
+   - CSS Variables使用でテーマ統一
+
+4. ✅ **Sandpackプレビュー機能**
+   - SSR/ハイドレーションエラーの解決
+   - dynamic importによるクライアントサイドレンダリング
+   - プレビューのみ表示の実装
+
+### 技術的な課題と解決策
+
+#### 1. Sandpack SSR/ハイドレーションエラー
+
+**問題**: 
+- Sandpackコンポーネントがサーバーサイドレンダリングでエラー
+- "A tree hydrated but some attributes..." エラー
+
+**解決策**:
+```typescript
+// Next.js dynamic importでSSR無効化
+const Sandpack = dynamic(
+  () => import('@codesandbox/sandpack-react').then(mod => mod.Sandpack),
+  { ssr: false }
+)
+```
+
+#### 2. Sandpackプレビューオプション設定
+
+**問題**: 
+- `editorHeight: 0`, `editorWidthPercentage: 0` で表示されない
+- エディター部分の非表示化が困難
+
+**解決策**:
+```typescript
+// 動作する安全なオプション設定
+options={{
+  showNavigator: false,
+  showTabs: false,
+  showLineNumbers: false,
+  showEditor: false,     // エディター非表示
+  layout: 'preview',     // プレビューレイアウト
+}}
+```
+
+#### 3. ブラウザ拡張機能によるハイドレーションエラー
+
+**問題**: 
+- ColorZilla等の拡張機能が `cz-shortcut-listen="true"` 属性を追加
+- SSRとクライアントのHTML不整合でエラー
+
+**解決策**:
+```tsx
+// layout.tsx でハイドレーション警告を抑制
+<body suppressHydrationWarning={true}>
+  {children}
+</body>
+```
+
+### 現在の実装状況
+
+#### コンポーネント構造
+```
+src/components/
+├── atoms/           # Button, Tab等
+├── molecules/       # TabGroup, ActionBar等  
+├── organisms/       # CodeEditor, PreviewPanel等
+├── templates/       # LessonTemplate
+└── pages/          # (未実装)
+```
+
+#### 動作中の機能
+- ✅ Monaco Editorでのコード編集
+- ✅ Sandpackプレビュー表示
+- ✅ 問題/プレビュータブ切り替え
+- ✅ 複数ファイル編集（App.jsx, index.css）
+- ✅ リアルタイムプレビュー更新
+
+### 失敗した実装アプローチ
+
+#### 1. カスタムiframe実装
+- Cross-originエラーで断念
+- data URLアプローチも試したが複雑
+
+#### 2. SandpackProvider + SandpackPreview
+- コンポーネント分離での表示エラー
+- dynamic importの組み合わせで問題
+
+#### 3. 複雑なSSR回避手法
+- useEffect + useState の組み合わせ
+- Next.js dynamic importがシンプルで確実
+
+### 学んだベストプラクティス
+
+1. **SSR問題の対処**: dynamic import with `ssr: false`
+2. **Sandpackオプション**: 段階的にオプション追加、エラー確認
+3. **ハイドレーション**: 外部要因は `suppressHydrationWarning` で対処
+4. **デバッグ**: 最小構成から徐々に機能追加
+
+### 次の実装予定
+
+1. **レッスンデータ構造の作成**
+   - TypeScript型定義
+   - サンプルレッスンデータ
+   
+2. **動的ファイル読み込み**
+   - MonacoエディタからSandpackへのファイル連携
+   
+3. **UIの調整**
+   - レスポンシブ対応
+   - エラー表示の改善
