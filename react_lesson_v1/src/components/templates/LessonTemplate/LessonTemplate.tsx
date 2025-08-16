@@ -5,7 +5,6 @@ import Header from '@/components/organisms/Header'
 import LessonPanel from '@/components/organisms/LessonPanel'
 import CodeEditor from '@/components/organisms/CodeEditor'
 import PreviewPanel from '@/components/organisms/PreviewPanel'
-import ActionBar from '@/components/molecules/ActionBar'
 
 interface LessonTemplateProps {
   lessonTitle: string
@@ -22,28 +21,12 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
 }) => {
   const [files, setFiles] = useState(initialFiles)
   const [activeFile, setActiveFile] = useState(Object.keys(initialFiles)[0] || '')
-  const [isRunning, setIsRunning] = useState(false)
 
   const handleFileChange = (fileName: string, content: string) => {
     setFiles((prev) => ({
       ...prev,
       [fileName]: content,
     }))
-  }
-
-  const handleRun = () => {
-    setIsRunning(true)
-    // 実行処理をここに実装
-    setTimeout(() => setIsRunning(false), 1000) // 仮の処理
-  }
-
-  const handleReset = () => {
-    setFiles(initialFiles)
-  }
-
-  const handleTest = () => {
-    // テスト実行処理をここに実装
-    console.log('Running tests...')
   }
 
   const previewContent = (
@@ -70,12 +53,6 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
             onFileChange={handleFileChange}
             onActiveFileChange={setActiveFile}
             className="flex-1"
-          />
-          <ActionBar
-            onRun={handleRun}
-            onReset={handleReset}
-            onTest={handleTest}
-            isRunning={isRunning}
           />
         </div>
       </div>
