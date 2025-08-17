@@ -21,6 +21,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
 }) => {
   const fileNames = Object.keys(files)
   const [openTabs, setOpenTabs] = useState<string[]>([activeFile])
+  const [isFileTreeOpen, setIsFileTreeOpen] = useState<boolean>(true)
 
   // ファイル拡張子から言語を判定
   const getLanguageFromFileName = (fileName: string): string => {
@@ -134,18 +135,28 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
   return (
     <div className={`flex h-full ${className}`}>
       {/* ファイルツリー */}
-      <div className="w-64 border-r border-gray-300">
-        <FileTree
-          files={files}
-          activeFile={activeFile}
-          onFileSelect={handleFileSelect}
-        />
-      </div>
+      {isFileTreeOpen && (
+        <div className="w-64 border-r border-gray-300">
+          <FileTree
+            files={files}
+            activeFile={activeFile}
+            onFileSelect={handleFileSelect}
+          />
+        </div>
+      )}
 
       {/* エディター部分 */}
       <div className="flex flex-1 flex-col bg-white">
-        {/* ファイルタブ */}
+        {/* ファイルタブとトグルボタン */}
         <div className="flex border-b border-gray-200 bg-gray-50 overflow-x-auto">
+          {/* ファイルツリートグルボタン */}
+          <button
+            onClick={() => setIsFileTreeOpen(!isFileTreeOpen)}
+            className="flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100 border-r border-gray-200"
+            title={isFileTreeOpen ? 'ファイルツリーを閉じる' : 'ファイルツリーを開く'}
+          >
+            {isFileTreeOpen ? '◀' : '▶'}
+          </button>
           {openTabs.map((fileName) => (
             <div
               key={fileName}

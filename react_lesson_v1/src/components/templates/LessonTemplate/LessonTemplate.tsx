@@ -43,9 +43,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
     console.log('答えを表示')
   }
 
-  const previewContent = (
-    <PreviewPanel code={files} />
-  )
+  const previewContent = <PreviewPanel code={files} />
 
   return (
     <div className="flex h-screen flex-col bg-gray-50">
@@ -54,10 +52,8 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
 
       {/* メインコンテンツ */}
       <ResizablePanel
-        className="flex-1"
-        leftPanel={
-          <LessonPanel lessonContent={lessonContent} previewContent={previewContent} />
-        }
+        className="h-[calc(100vh-128px)] flex-1 overflow-hidden"
+        leftPanel={<LessonPanel lessonContent={lessonContent} previewContent={previewContent} />}
         rightPanel={
           <CodeEditor
             files={files}
