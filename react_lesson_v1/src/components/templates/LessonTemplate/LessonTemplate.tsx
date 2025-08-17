@@ -7,6 +7,7 @@ import CodeEditor from '@/components/organisms/CodeEditor'
 import PreviewPanel from '@/components/organisms/PreviewPanel'
 import Footer from '@/components/organisms/Footer'
 import LessonMaterialModal from '@/components/organisms/LessonMaterialModal'
+import LessonContent from '@/components/organisms/LessonContent'
 import ResizablePanel from '@/components/molecules/ResizablePanel'
 import SideMenu from '@/components/molecules/SideMenu'
 import { useSideMenu } from '@/hooks/useSideMenu'
@@ -15,7 +16,6 @@ import { Lesson } from '@/lib/types/lesson'
 interface LessonTemplateProps {
   lessonTitle: string
   courseTitle: string
-  lessonContent: React.ReactNode
   initialFiles: Record<string, string>
   lesson?: Lesson
 }
@@ -23,7 +23,6 @@ interface LessonTemplateProps {
 const LessonTemplate: React.FC<LessonTemplateProps> = ({
   lessonTitle,
   courseTitle,
-  lessonContent,
   initialFiles,
   lesson,
 }) => {
@@ -50,6 +49,24 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
   const handleShowAnswer = () => {
     console.log('答えを表示')
   }
+
+  const handleApplyCode = (fileName: string, code: string) => {
+    setFiles((prev) => ({
+      ...prev,
+      [fileName]: code,
+    }))
+    // 反映したファイルをアクティブにする
+    setActiveFile(fileName)
+  }
+
+  const lessonContent = (
+    <LessonContent
+      taskDescription={lesson?.taskDescription}
+      solutionFiles={lesson?.solutionFiles}
+      steps={lesson?.steps}
+      onApplyCode={handleApplyCode}
+    />
+  )
 
   const previewContent = <PreviewPanel code={files} />
 

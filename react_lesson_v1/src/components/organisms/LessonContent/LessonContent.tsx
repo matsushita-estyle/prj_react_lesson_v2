@@ -7,18 +7,24 @@ interface LessonContentProps {
   taskDescription?: string
   solutionFiles?: Record<string, string>
   steps?: LessonStep[]
+  onApplyCode?: (fileName: string, code: string) => void
 }
 
-export default function LessonContent({ taskDescription, solutionFiles, steps }: LessonContentProps) {
+export default function LessonContent({
+  taskDescription,
+  solutionFiles,
+  steps,
+  onApplyCode,
+}: LessonContentProps) {
   const [showHints, setShowHints] = useState<Record<number, boolean>>({})
   const [showSolutions, setShowSolutions] = useState<Record<number, boolean>>({})
 
   const toggleHint = (stepIndex: number) => {
-    setShowHints(prev => ({ ...prev, [stepIndex]: !prev[stepIndex] }))
+    setShowHints((prev) => ({ ...prev, [stepIndex]: !prev[stepIndex] }))
   }
 
   const toggleSolution = (stepIndex: number) => {
-    setShowSolutions(prev => ({ ...prev, [stepIndex]: !prev[stepIndex] }))
+    setShowSolutions((prev) => ({ ...prev, [stepIndex]: !prev[stepIndex] }))
   }
 
   const renderMarkdownText = (text: string) => {
@@ -114,9 +120,7 @@ export default function LessonContent({ taskDescription, solutionFiles, steps }:
     return (
       <div className="prose max-w-none">
         {/* 全体の説明 */}
-        {taskDescription && (
-          <div className="mb-8">{renderMarkdownText(taskDescription)}</div>
-        )}
+        {taskDescription && <div className="mb-8">{renderMarkdownText(taskDescription)}</div>}
 
         {/* 全ステップを縦に表示 */}
         <div className="space-y-8">
@@ -127,17 +131,15 @@ export default function LessonContent({ taskDescription, solutionFiles, steps }:
             >
               {/* ステップヘッダー */}
               <div className="mb-4 flex items-center">
-                <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-white font-bold">
+                <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 font-bold text-white">
                   {step.stepNumber}
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">
-                  {step.title}
-                </h2>
+                <h2 className="text-xl font-bold text-gray-900">{step.title}</h2>
               </div>
 
               {/* 課題内容 */}
               <div className="mb-4 rounded-lg border-l-4 border-blue-400 bg-blue-50 p-4">
-                <p className="text-gray-700 whitespace-pre-line">{step.instruction}</p>
+                <p className="whitespace-pre-line text-gray-700">{step.instruction}</p>
               </div>
 
               {/* 初期コード（あれば） */}
@@ -160,7 +162,7 @@ export default function LessonContent({ taskDescription, solutionFiles, steps }:
                 {step.hint && (
                   <button
                     onClick={() => toggleHint(index)}
-                    className="rounded bg-yellow-500 px-4 py-2 text-sm text-white hover:bg-yellow-600 transition-colors"
+                    className="rounded bg-yellow-500 px-4 py-2 text-sm text-white transition-colors hover:bg-yellow-600"
                   >
                     {showHints[index] ? 'ヒントを隠す' : 'ヒントを見る'} 💡
                   </button>
@@ -169,7 +171,7 @@ export default function LessonContent({ taskDescription, solutionFiles, steps }:
                 {/* 解答例ボタン */}
                 <button
                   onClick={() => toggleSolution(index)}
-                  className="rounded bg-green-500 px-4 py-2 text-sm text-white hover:bg-green-600 transition-colors"
+                  className="rounded bg-green-500 px-4 py-2 text-sm text-white transition-colors hover:bg-green-600"
                 >
                   {showSolutions[index] ? '解答例を隠す' : '解答例を見る'} ✅
                 </button>
@@ -185,10 +187,20 @@ export default function LessonContent({ taskDescription, solutionFiles, steps }:
               {/* 解答例表示 */}
               {showSolutions[index] && (
                 <div className="mt-4 overflow-hidden rounded-lg border border-green-300">
-                  <div className="bg-green-600 px-4 py-2 font-mono text-sm text-white">
-                    解答例
-                  </div>
-                  <div className="bg-green-50 p-4">
+                  <div className="bg-green-600 px-4 py-2 font-mono text-sm text-white">解答例</div>
+                  <div className="relative bg-green-50 p-4">
+                    {step.solutionCode && onApplyCode && (
+                      <button
+                        onClick={() => {
+                          // App.js または index.js のファイル名で反映
+                          const fileName = 'App.js'
+                          onApplyCode(fileName, step.solutionCode)
+                        }}
+                        className="absolute top-2 right-2 z-10 rounded bg-blue-500 px-3 py-2 text-xs text-white transition-colors hover:bg-blue-600"
+                      >
+                        コードに反映 📝
+                      </button>
+                    )}
                     <pre className="overflow-x-auto text-xs text-gray-700">
                       <code>{step.solutionCode}</code>
                     </pre>
@@ -223,7 +235,15 @@ export default function LessonContent({ taskDescription, solutionFiles, steps }:
                 <div className="bg-green-600 px-4 py-2 font-mono text-sm text-white">
                   {fileName}
                 </div>
-                <div className="bg-green-50 p-4">
+                <div className="relative bg-green-50 p-4">
+                  {onApplyCode && (
+                    <button
+                      onClick={() => onApplyCode(fileName, fileContent)}
+                      className="absolute top-2 right-2 z-10 rounded bg-blue-500 px-3 py-1 text-xs text-white transition-colors hover:bg-blue-600"
+                    >
+                      コードに反映 📝
+                    </button>
+                  )}
                   <pre className="overflow-x-auto text-xs text-gray-700">
                     <code>{fileContent}</code>
                   </pre>

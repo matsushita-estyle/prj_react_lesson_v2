@@ -159,7 +159,7 @@ function Footer() {
 次回は、コンポーネントに動きを加える方法を学びます！`,
 
   taskDescription: `
-# Reactに触れてみよう - 実践編
+# Reactを触ってみよう
 
 このレッスンでは、学んだ知識を使って実際にReactコンポーネントを作っていきます。
 少しずつステップを踏んで、最初のコンポーネントを完成させましょう！
@@ -179,9 +179,7 @@ function Footer() {
 }
 
 export default App`,
-      solutionCode: `import './styles.css'
-
-function App() {
+      solutionCode: `function App() {
   return <div>こんにちは</div>
 }
 
@@ -202,9 +200,7 @@ h1タグは大きな見出しを表示するためのタグです。`,
 }
 
 export default App`,
-      solutionCode: `import './styles.css'
-
-function App() {
+      solutionCode: `function App() {
   return <h1>ようこそReactへ！</h1>
 }
 
@@ -227,9 +223,7 @@ h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表
 }
 
 export default App`,
-      solutionCode: `import './styles.css'
-
-function App() {
+      solutionCode: `function App() {
   return (
     <div>
       <h1>React App</h1>
@@ -248,8 +242,10 @@ export default App`,
       title: 'クラス名を追加してスタイリングの準備をしよう',
       instruction: `最後に、classNameを使ってクラス名を追加してみましょう。
 divタグに「container」、h1タグに「title」、pタグに「description」というクラス名を追加してください。
-これでCSSでスタイルを適用する準備ができます！`,
-      hint: 'JSXではclassではなくclassNameを使います',
+
+**今度は、CSSを適用するためのインポート文も追加する必要があります！**
+ファイルの先頭に \`import './styles.css'\` を追加してスタイルを読み込みましょう。`,
+      hint: 'JSXではclassではなくclassNameを使います。また、ファイルの先頭にimport文も忘れずに！',
       initialCode: `function App() {
   return (
     <div>
@@ -281,8 +277,10 @@ export default App`,
       title: 'セルフクロージングタグを使ってみよう',
       instruction: `JSXでは、すべてのタグを閉じる必要があります。
 画像を表示するimgタグを追加してみましょう。
-imgタグは「セルフクロージング」といって、最後に/を付けて閉じます。`,
-      hint: 'imgタグの最後に必ず/を付けてください',
+imgタグは「セルフクロージング」といって、最後に/を付けて閉じます。
+
+**忘れずに、ファイルの先頭に \`import './styles.css'\` も追加してくださいね！**`,
+      hint: 'imgタグの最後に必ず/を付けてください。import文も忘れずに！',
       initialCode: `function App() {
   return (
     <div className="container">
