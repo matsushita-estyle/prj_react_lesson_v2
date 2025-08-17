@@ -35,7 +35,7 @@ Reactは、これらの問題を「コンポーネント」という考え方で
 Reactでコンポーネントを作る最も基本的な方法は、JavaScript の関数として定義することです。
 
 \`\`\`jsx
-function Welcome() {
+const Welcome = () => {
   return <h1>ようこそReactの世界へ！</h1>;
 }
 \`\`\`
@@ -50,7 +50,7 @@ function Welcome() {
 ### JSXの基本ルール
 
 \`\`\`jsx
-function MyComponent() {
+const MyComponent = () => {
   return (
     <div>
       <h2>JSXの例</h2>
@@ -86,7 +86,7 @@ JSXでは、複数の要素を返す場合、必ず1つの親要素で包む必�
 
 \`\`\`jsx
 // ❌ エラー：複数の要素が並んでいる
-function BadExample() {
+const BadExample = () => {
   return (
     <h1>見出し</h1>
     <p>段落</p>
@@ -94,7 +94,7 @@ function BadExample() {
 }
 
 // ✅ 正しい：divで包んでいる
-function GoodExample() {
+const GoodExample = () => {
   return (
     <div>
       <h1>見出し</h1>
@@ -123,7 +123,7 @@ HTMLの \`class\` 属性は、JSXでは \`className\` になります。
 Reactでは、コンポーネントを入れ子にして、より複雑な画面を構築できます。
 
 \`\`\`jsx
-function Page() {
+const Page = () => {
   return (
     <div className="page">
       <Header />
@@ -133,15 +133,15 @@ function Page() {
   );
 }
 
-function Header() {
+const Header = () => {
   return <header>ページのヘッダー</header>;
 }
 
-function MainContent() {
+const MainContent = () => {
   return <main>メインコンテンツ</main>;
 }
 
-function Footer() {
+const Footer = () => {
   return <footer>ページのフッター</footer>;
 }
 \`\`\`
@@ -173,13 +173,13 @@ function Footer() {
       instruction: `まずは、最もシンプルなReactコンポーネントを作ってみましょう。
 「こんにちは」というテキストを表示するだけのコンポーネントです。`,
       hint: 'divタグの中に「こんにちは」と書くだけでOKです',
-      initialCode: `function App() {
+      initialCode: `const App = () => {
   // ここにコードを書いてください
   return <div>???</div>
 }
 
 export default App`,
-      solutionCode: `function App() {
+      solutionCode: `const App = () => {
   return <div>こんにちは</div>
 }
 
@@ -194,13 +194,13 @@ export default App`,
       instruction: `次は、h1タグを使って「ようこそReactへ！」という見出しを作りましょう。
 h1タグは大きな見出しを表示するためのタグです。`,
       hint: 'divタグの代わりにh1タグを使います',
-      initialCode: `function App() {
+      initialCode: `const App = () => {
   // h1タグを使って「ようこそReactへ！」と表示してください
   return <div>???</div>
 }
 
 export default App`,
-      solutionCode: `function App() {
+      solutionCode: `const App = () => {
   return <h1>ようこそReactへ！</h1>
 }
 
@@ -215,7 +215,7 @@ export default App`,
       instruction: `JSXのルールを思い出してください。複数の要素を返すときは、必ず1つの親要素で包む必要があります。
 h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表示してみましょう。`,
       hint: 'divタグで全体を包み、その中にh1とpタグを入れます',
-      initialCode: `function App() {
+      initialCode: `const App = () => {
   // 複数の要素を返すときは、divタグで包む必要があります
   return (
     // ここにコードを書いてください
@@ -223,7 +223,7 @@ h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表
 }
 
 export default App`,
-      solutionCode: `function App() {
+      solutionCode: `const App = () => {
   return (
     <div>
       <h1>React App</h1>
@@ -246,7 +246,7 @@ divタグに「container」、h1タグに「title」、pタグに「description�
 **今度は、CSSを適用するためのインポート文も追加する必要があります！**
 ファイルの先頭に \`import './styles.css'\` を追加してスタイルを読み込みましょう。`,
       hint: 'JSXではclassではなくclassNameを使います。また、ファイルの先頭にimport文も忘れずに！',
-      initialCode: `function App() {
+      initialCode: `const App = () => {
   return (
     <div>
       <h1>React App</h1>
@@ -258,7 +258,7 @@ divタグに「container」、h1タグに「title」、pタグに「description�
 export default App`,
       solutionCode: `import './styles.css'
 
-function App() {
+const App = () => {
   return (
     <div className="container">
       <h1 className="title">React App</h1>
@@ -281,7 +281,7 @@ imgタグは「セルフクロージング」といって、最後に/を付け�
 
 **忘れずに、ファイルの先頭に \`import './styles.css'\` も追加してくださいね！**`,
       hint: 'imgタグの最後に必ず/を付けてください。import文も忘れずに！',
-      initialCode: `function App() {
+      initialCode: `const App = () => {
   return (
     <div className="container">
       <h1 className="title">React App</h1>
@@ -294,7 +294,7 @@ imgタグは「セルフクロージング」といって、最後に/を付け�
 export default App`,
       solutionCode: `import './styles.css'
 
-function App() {
+const App = () => {
   return (
     <div className="container">
       <h1 className="title">React App</h1>
@@ -313,7 +313,7 @@ export default App`,
 
   // 互換性のため、最終的な完成形も残す
   initialFiles: {
-    'App.jsx': `function App() {
+    'App.jsx': `const App = () => {
   // このファイルは段階的に編集していきます
   return <div>スタート</div>
 }
@@ -381,7 +381,7 @@ export default App`,
   solutionFiles: {
     'App.jsx': `import './styles.css'
 
-function App() {
+const App = () => {
   return (
     <div className="container">
       <h1 className="title">React App</h1>

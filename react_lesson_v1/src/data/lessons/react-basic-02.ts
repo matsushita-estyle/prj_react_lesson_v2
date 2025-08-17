@@ -18,7 +18,7 @@ JSXでは、波括弧 \`{}\` を使ってJavaScriptの変数や式を埋め込�
 変数の値をJSXで表示する例を見てみましょう。
 
 \`\`\`jsx
-function WelcomeMessage() {
+const WelcomeMessage = () => {
   const userName = "太郎";
   return <h1>こんにちは、{userName}さん！</h1>;
 }
@@ -32,7 +32,7 @@ function WelcomeMessage() {
 JSXの中では、変数だけでなく計算式も実行できます。
 
 \`\`\`jsx
-function Calculator() {
+const Calculator = () => {
   const price = 1000;
   const taxRate = 0.1;
   
@@ -50,11 +50,11 @@ function Calculator() {
 JSXの中で関数を呼び出すこともできます。ただし、関数は画面に表示可能な値（文字列、数値、JSX要素など）を返す必要があります。
 
 \`\`\`jsx
-function getCurrentTime() {
+const getCurrentTime = () => {
   return new Date().toLocaleTimeString();
 }
 
-function Clock() {
+const Clock = () => {
   return <p>現在時刻: {getCurrentTime()}</p>;
 }
 \`\`\`
@@ -64,7 +64,7 @@ function Clock() {
 HTML要素の属性にも変数を使用できます。
 
 \`\`\`jsx
-function ProfileImage() {
+const ProfileImage = () => {
   const imageUrl = "/images/profile.jpg";
   const altText = "プロフィール画像";
   
@@ -88,7 +88,7 @@ JSXで直接表示できるのは以下の値です：
 
 \`\`\`jsx
 // ❌ エラーになる例
-function BadExample() {
+const BadExample = () => {
   const user = { name: "田中", age: 25 };
   return <h1>{user}</h1>; // エラー！
 }
@@ -98,7 +98,7 @@ function BadExample() {
 
 \`\`\`jsx
 // ✅ 正しい例
-function GoodExample() {
+const GoodExample = () => {
   const user = { name: "田中", age: 25 };
   return (
     <div>
@@ -131,7 +131,7 @@ function GoodExample() {
       instruction: `まずは、シンプルな変数をJSXで表示してみましょう。
 「userName」という変数を定義し、あなたの名前を代入して、画面に「こんにちは、{名前}さん！」と表示してください。`,
       hint: '波括弧{}を使って変数を埋め込みます',
-      initialCode: `function App() {
+      initialCode: `const App = () => {
   // ここに変数を定義してください
   const userName = "???";
   
@@ -143,7 +143,7 @@ function GoodExample() {
 }
 
 export default App`,
-      solutionCode: `function App() {
+      solutionCode: `const App = () => {
   const userName = "太郎";
   
   return (
@@ -165,7 +165,7 @@ export default App`,
 「price」変数に1000を代入し、「tax」変数に0.1（10%）を代入して、
 「商品価格: 1000円」と「税込価格: 1100円」を表示してください。`,
       hint: '計算式は {price + price * tax} のように書けます',
-      initialCode: `function App() {
+      initialCode: `const App = () => {
   const userName = "太郎";
   // ここに価格と税率の変数を追加してください
   
@@ -179,7 +179,7 @@ export default App`,
 }
 
 export default App`,
-      solutionCode: `function App() {
+      solutionCode: `const App = () => {
   const userName = "太郎";
   const price = 1000;
   const tax = 0.1;
@@ -205,7 +205,7 @@ export default App`,
 「getCurrentTime」という関数を定義し、現在の時刻を返すようにしてください。
 そして、「現在時刻: {時刻}」を表示してください。`,
       hint: 'new Date().toLocaleTimeString()で現在時刻を取得できます',
-      initialCode: `function App() {
+      initialCode: `const App = () => {
   const userName = "太郎";
   const price = 1000;
   const tax = 0.1;
@@ -223,12 +223,12 @@ export default App`,
 }
 
 export default App`,
-      solutionCode: `function App() {
+      solutionCode: `const App = () => {
   const userName = "太郎";
   const price = 1000;
   const tax = 0.1;
   
-  function getCurrentTime() {
+  const getCurrentTime = () => {
     return new Date().toLocaleTimeString();
   }
   
@@ -254,12 +254,12 @@ export default App`,
 「imageUrl」変数に画像のURLを代入し、「altText」変数にalt属性の内容を代入して、
 img要素で画像を表示してください。`,
       hint: 'src={imageUrl} alt={altText} のように属性に変数を設定します',
-      initialCode: `function App() {
+      initialCode: `const App = () => {
   const userName = "太郎";
   const price = 1000;
   const tax = 0.1;
   
-  function getCurrentTime() {
+  const getCurrentTime = () => {
     return new Date().toLocaleTimeString();
   }
   
@@ -281,12 +281,12 @@ img要素で画像を表示してください。`,
 }
 
 export default App`,
-      solutionCode: `function App() {
+      solutionCode: `const App = () => {
   const userName = "太郎";
   const price = 1000;
   const tax = 0.1;
   
-  function getCurrentTime() {
+  const getCurrentTime = () => {
     return new Date().toLocaleTimeString();
   }
   
@@ -320,12 +320,12 @@ export default App`,
 「user」オブジェクトを作成し、nameとageプロパティを持たせてください。
 そして、「ユーザー名: {名前}」と「年齢: {年齢}歳」を表示してください。`,
       hint: 'オブジェクトのプロパティは user.name や user.age でアクセスできます',
-      initialCode: `function App() {
+      initialCode: `const App = () => {
   const userName = "太郎";
   const price = 1000;
   const tax = 0.1;
   
-  function getCurrentTime() {
+  const getCurrentTime = () => {
     return new Date().toLocaleTimeString();
   }
   
@@ -353,12 +353,12 @@ export default App`,
 }
 
 export default App`,
-      solutionCode: `function App() {
+      solutionCode: `const App = () => {
   const userName = "太郎";
   const price = 1000;
   const tax = 0.1;
   
-  function getCurrentTime() {
+  const getCurrentTime = () => {
     return new Date().toLocaleTimeString();
   }
   
@@ -397,7 +397,7 @@ export default App`,
 
   // 互換性のため、最終的な完成形も残す
   initialFiles: {
-    'App.jsx': `function App() {
+    'App.jsx': `const App = () => {
   const userName = "太郎";
   
   return (
@@ -411,12 +411,12 @@ export default App`,
   },
 
   solutionFiles: {
-    'App.jsx': `function App() {
+    'App.jsx': `const App = () => {
   const userName = "太郎";
   const price = 1000;
   const tax = 0.1;
   
-  function getCurrentTime() {
+  const getCurrentTime = () => {
     return new Date().toLocaleTimeString();
   }
   
