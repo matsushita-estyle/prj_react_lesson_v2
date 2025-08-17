@@ -14,6 +14,7 @@ export default function LessonDetailPage({ lesson }: LessonDetailPageProps) {
     <LessonContent
       taskDescription={lesson.taskDescription}
       solutionFiles={lesson.solutionFiles}
+      steps={lesson.steps}
     />
   )
 
@@ -22,7 +23,7 @@ export default function LessonDetailPage({ lesson }: LessonDetailPageProps) {
       lessonTitle={lesson.title}
       courseTitle={`レッスン ${lesson.lessonNumber}`}
       lessonContent={lessonContent}
-      initialFiles={lesson.initialFiles}
+      initialFiles={lesson.initialFiles || {}}
       lesson={lesson}
     />
   )

@@ -4,120 +4,453 @@ export const reactBasic01: Lesson = {
   id: 'react-basic-01',
   title: 'Reactに触れてみよう',
   lessonNumber: 1,
-  
-  material: `# React とは
 
-Reactは、Facebook（現 Meta Platforms） によって開発された JavaScript のライブラリーの一つで、Web 上の部品（コンポーネント）を作るためのものです。
-特に、複雑な Web サイトや、ユーザーがたくさん操作するページを簡単に作るために、React はとても便利です。
+  material: `# Reactって何だろう？
 
-## JavaScript だけじゃ、それはできないの？
+Reactは、ユーザーインターフェース（UI）を作るためのJavaScriptライブラリです。
+ウェブサイトやアプリケーションの画面を、効率的かつ柔軟に構築できるツールとして、世界中の開発者に愛用されています。
 
-JavaScript だけでももちろんページは作れます。でも、ページが大きくなったり複雑になったりすると、その管理や更新が難しくなります。
-Reactでは、ページを小さな「コンポーネント」という部品に分けて考えることで、純粋な JavaScript だけを使うよりも簡単に作ることができるんです。
+## なぜReactが必要なの？
 
-## コンポーネントとは
+従来のJavaScriptだけでも画面は作れますが、アプリケーションが複雑になると、以下のような課題が出てきます：
 
-React では、画面に表示する部品のことを「コンポーネント」と呼びます。
-たとえば、ボタンやテキストボックスなどの小さな部品から、ヘッダーやフッターのような大きな部分まで、何でもコンポーネントとして作ることができます。
+- コードの管理が大変になる
+- 同じような処理を何度も書く必要がある
+- 画面の更新処理が複雑になる
 
-そして、一度作ったコンポーネントは、他の場所でも簡単に使い回すことができるのが魅力です。
+Reactは、これらの問題を「コンポーネント」という考え方で解決します。
 
-## React の基本的な書き方
+## コンポーネント - Reactの基本単位
 
-Web ページに表示される内容は、通常 HTML という言語で書かれています。
-たとえば、<div>Hello</div>というコードは、画面に「Hello」と表示するための HTML の一部です。
+コンポーネントは、画面を構成する独立した部品のことです。
+レゴブロックのように、小さな部品を組み合わせて大きな作品を作るイメージです。
 
-## コンポーネントをつくる
+### コンポーネントの特徴
+- **再利用可能**：一度作れば何度でも使える
+- **独立性**：それぞれが独立して動作する
+- **組み合わせ可能**：複数のコンポーネントを組み合わせて複雑な画面を作れる
 
-React では、この HTML を表示するために関数を作ります。この関数を「関数コンポーネント（Function Component）」と呼びます。
-下のApp関数（コンポーネント）は、「Hello」という文字を画面に表示するためのコンポーネント（部品）です。
+## はじめてのReactコンポーネント
+
+Reactでコンポーネントを作る最も基本的な方法は、JavaScript の関数として定義することです。
 
 \`\`\`jsx
-function App() {
-  return <div>Hello</div>;
+function Welcome() {
+  return <h1>ようこそReactの世界へ！</h1>;
 }
 \`\`\`
 
-このコードでは、Appという名前の関数を定義し、<div>Hello</div>という HTML のようなものを返しています。
+これは \`Welcome\` という名前のコンポーネントで、画面に挨拶メッセージを表示します。
 
-このようにJavaScriptでHTMLのような書き方をすることをJSXと呼びます。
+## JSX - JavaScriptの中でHTMLを書く魔法
 
-## React の入れ子構造
+上記のコードで、JavaScriptの中にHTMLのような記述があることに気づきましたか？
+これは **JSX（JavaScript XML）** という特別な記法です。
 
-Reactでは、HTMLでタグを入れ子にするように、小さな要素やコンポーネントを大きなパーツに埋め込むことができます。
+### JSXの基本ルール
 
 \`\`\`jsx
-function App() {
+function MyComponent() {
   return (
-    <main>
-      <div>ヘッダー</div>
-      <div>メインコンテンツ</div>
-      <div>フッター</div>
-    </main>
+    <div>
+      <h2>JSXの例</h2>
+      <p>これはJSXで書かれています</p>
+    </div>
   );
 }
 \`\`\`
 
-このコードでは、コンポーネントがmain要素の中にdiv要素を入れ子にして配置しています。
+JSXを使うことで、JavaScriptの中に直感的にUIの構造を記述できます。
 
-## コンポーネントにクラスを追加する
+## JSXを書く時の重要なルール
 
-HTMLでは、「クラス」を使ってWebページの見た目をきれいに整えます。
-React でも同じように、私たちが作るコンポーネントにクラスを追加して、見た目をオシャレにすることができます。
+### ルール1：すべてのタグは閉じる
 
-HTML ではclass属性を使いますが、JSX ではclassName（クラスネーム）属性を使います。
+HTMLでは省略できる閉じタグも、JSXでは必ず閉じる必要があります。
 
 \`\`\`jsx
-function App() {
+// ✅ 正しい
+<input type="text" />
+<br />
+<img src="photo.jpg" alt="写真" />
+
+// ❌ エラーになる
+<input type="text">
+<br>
+<img src="photo.jpg" alt="写真">
+\`\`\`
+
+### ルール2：複数の要素は1つの親要素で包む
+
+JSXでは、複数の要素を返す場合、必ず1つの親要素で包む必要があります。
+
+\`\`\`jsx
+// ❌ エラー：複数の要素が並んでいる
+function BadExample() {
   return (
-    <div className="hello">Hello</div>
+    <h1>見出し</h1>
+    <p>段落</p>
+  );
+}
+
+// ✅ 正しい：divで包んでいる
+function GoodExample() {
+  return (
+    <div>
+      <h1>見出し</h1>
+      <p>段落</p>
+    </div>
   );
 }
 \`\`\`
 
-クラスを追加する場合は、className = "クラス名" のように書きます。
+### ルール3：JavaScriptの予約語との衝突を避ける
 
-このようにクラスを追加することで、CSS を使ってスタイルを適用することができるようになります。
+HTMLの \`class\` 属性は、JSXでは \`className\` になります。
 
-**今回のレッスンはここまで！**`,
-  
+\`\`\`jsx
+// HTMLでの書き方
+// <div class="container">内容</div>
+
+// JSXでの書き方
+<div className="container">内容</div>
+\`\`\`
+
+これは \`class\` がJavaScriptの予約語（特別な意味を持つ言葉）だからです。
+
+## コンポーネントの階層構造
+
+Reactでは、コンポーネントを入れ子にして、より複雑な画面を構築できます。
+
+\`\`\`jsx
+function Page() {
+  return (
+    <div className="page">
+      <Header />
+      <MainContent />
+      <Footer />
+    </div>
+  );
+}
+
+function Header() {
+  return <header>ページのヘッダー</header>;
+}
+
+function MainContent() {
+  return <main>メインコンテンツ</main>;
+}
+
+function Footer() {
+  return <footer>ページのフッター</footer>;
+}
+\`\`\`
+
+このように、小さなコンポーネントを組み合わせて、ページ全体を構成していきます。
+
+## まとめ
+
+今回学んだこと：
+- Reactはコンポーネントベースのライブラリ
+- コンポーネントは関数として定義できる
+- JSXを使ってJavaScriptの中にHTMLのような記述ができる
+- JSXには守るべきルールがある
+
+次回は、コンポーネントに動きを加える方法を学びます！`,
+
   taskDescription: `
-# Reactに触れてみよう
+# Reactに触れてみよう - 実践編
 
-このレッスンでは、Reactの基本的な概念を学び、最初のReactコンポーネントを作成します。
-
-## 課題
-
-右側のエディタで \`App.jsx\` ファイルを編集し、以下の要件を満たすコンポーネントを作成してください：
-
-1. 「Hello, React!」というメッセージを表示する
-2. h1タグを使用してタイトルとして表示する
-3. pタグを使用して「これは私の最初のReactコンポーネントです！」というメッセージを追加する
-
+このレッスンでは、学んだ知識を使って実際にReactコンポーネントを作っていきます。
+少しずつステップを踏んで、最初のコンポーネントを完成させましょう！
   `,
 
-  initialFiles: {
-    'App.jsx': `function App() {
-  // TODO: ここのdivタグの中身を修正してください
-  // 1. 「Hello, React!」をh1タグで表示
-  // 2. 「これは私の最初のReactコンポーネントです！」をpタグで表示
-  return <div>ここを修正してください</div>
+  // 段階的な課題
+  steps: [
+    {
+      stepNumber: 1,
+      title: 'シンプルなコンポーネントを作ろう',
+      instruction: `まずは、最もシンプルなReactコンポーネントを作ってみましょう。
+「こんにちは」というテキストを表示するだけのコンポーネントです。`,
+      hint: 'divタグの中に「こんにちは」と書くだけでOKです',
+      initialCode: `function App() {
+  // ここにコードを書いてください
+  return <div>???</div>
 }
 
 export default App`,
-  },
+      solutionCode: `import './styles.css'
 
-  solutionFiles: {
-    'App.jsx': `function App() {
+function App() {
+  return <div>こんにちは</div>
+}
+
+export default App`,
+      validation: {
+        includes: ['こんにちは'],
+      },
+    },
+    {
+      stepNumber: 2,
+      title: '見出しタグを使ってみよう',
+      instruction: `次は、h1タグを使って「ようこそReactへ！」という見出しを作りましょう。
+h1タグは大きな見出しを表示するためのタグです。`,
+      hint: 'divタグの代わりにh1タグを使います',
+      initialCode: `function App() {
+  // h1タグを使って「ようこそReactへ！」と表示してください
+  return <div>???</div>
+}
+
+export default App`,
+      solutionCode: `import './styles.css'
+
+function App() {
+  return <h1>ようこそReactへ！</h1>
+}
+
+export default App`,
+      validation: {
+        includes: ['<h1>', 'ようこそReactへ', '</h1>'],
+      },
+    },
+    {
+      stepNumber: 3,
+      title: '複数の要素を表示しよう',
+      instruction: `JSXのルールを思い出してください。複数の要素を返すときは、必ず1つの親要素で包む必要があります。
+h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表示してみましょう。`,
+      hint: 'divタグで全体を包み、その中にh1とpタグを入れます',
+      initialCode: `function App() {
+  // 複数の要素を返すときは、divタグで包む必要があります
+  return (
+    // ここにコードを書いてください
+  )
+}
+
+export default App`,
+      solutionCode: `import './styles.css'
+
+function App() {
   return (
     <div>
-      <h1>Hello, React!</h1>
-      <p>これは私の最初のReactコンポーネントです！</p>
+      <h1>React App</h1>
+      <p>Reactの基本構造を学ぶ</p>
     </div>
   )
 }
 
 export default App`,
+      validation: {
+        includes: ['<div>', '<h1>', '<p>', '</div>'],
+      },
+    },
+    {
+      stepNumber: 4,
+      title: 'クラス名を追加してスタイリングの準備をしよう',
+      instruction: `最後に、classNameを使ってクラス名を追加してみましょう。
+divタグに「container」、h1タグに「title」、pタグに「description」というクラス名を追加してください。
+これでCSSでスタイルを適用する準備ができます！`,
+      hint: 'JSXではclassではなくclassNameを使います',
+      initialCode: `function App() {
+  return (
+    <div>
+      <h1>React App</h1>
+      <p>Reactの基本構造を学ぶ</p>
+    </div>
+  )
+}
+
+export default App`,
+      solutionCode: `import './styles.css'
+
+function App() {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+    </div>
+  )
+}
+
+export default App`,
+      validation: {
+        includes: ['className="container"', 'className="title"', 'className="description"'],
+      },
+    },
+    {
+      stepNumber: 5,
+      title: 'セルフクロージングタグを使ってみよう',
+      instruction: `JSXでは、すべてのタグを閉じる必要があります。
+画像を表示するimgタグを追加してみましょう。
+imgタグは「セルフクロージング」といって、最後に/を付けて閉じます。`,
+      hint: 'imgタグの最後に必ず/を付けてください',
+      initialCode: `function App() {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      {/* ここに画像タグを追加 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" */}
+    </div>
+  )
+}
+
+export default App`,
+      solutionCode: `import './styles.css'
+
+function App() {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
+    </div>
+  )
+}
+
+export default App`,
+      validation: {
+        includes: ['<img', '/>'],
+      },
+    },
+  ],
+
+  // 互換性のため、最終的な完成形も残す
+  initialFiles: {
+    'App.jsx': `function App() {
+  // このファイルは段階的に編集していきます
+  return <div>スタート</div>
+}
+
+export default App`,
+    'styles.css': `/* React学習用のスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container img:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+  }
+}`,
+  },
+
+  solutionFiles: {
+    'App.jsx': `import './styles.css'
+
+function App() {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
+    </div>
+  )
+}
+
+export default App`,
+    'styles.css': `/* React学習用のスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container img:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+  }
+}`,
   },
 
   nextLessonId: 'react-basic-02',

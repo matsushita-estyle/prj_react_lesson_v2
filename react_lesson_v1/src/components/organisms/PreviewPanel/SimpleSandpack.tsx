@@ -82,7 +82,8 @@ const SimpleSandpack: React.FC<SimpleSandpackProps> = ({ files, className = '' }
   // Sandpackに渡すファイル群
   const sandpackFiles: Record<string, string> = {
     ...normalizedFiles,
-    '/styles.css': styleOverride,
+    // styles.cssがレッスンファイルに含まれていない場合のみデフォルトを使用
+    ...(normalizedFiles['/styles.css'] ? {} : { '/styles.css': styleOverride }),
   }
 
   return (
