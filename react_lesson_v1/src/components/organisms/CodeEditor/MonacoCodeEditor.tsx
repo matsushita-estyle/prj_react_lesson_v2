@@ -75,7 +75,10 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     onActiveFileChange?.(fileName)
   }
 
-  const handleEditorDidMount = (editor: any, monaco: any) => {
+  const handleEditorDidMount = (
+    editor: import('monaco-editor').editor.IStandaloneCodeEditor,
+    monaco: typeof import('monaco-editor')
+  ) => {
     // カスタムダークテーマの設定
     monaco.editor.defineTheme('custom-dark', {
       base: 'vs-dark',
