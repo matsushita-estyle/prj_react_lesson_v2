@@ -4,6 +4,71 @@ export const reactBasic02: Lesson = {
   id: 'react-basic-02',
   title: 'ReactDOMを使ってHTMLにコンポーネントを表示する',
   lessonNumber: 2,
+  
+  material: `# ReactDOMとは
+
+ReactDOMは、ReactコンポーネントをブラウザのDOMに実際に表示するためのライブラリです。
+
+## なぜReactDOMが必要？
+
+Reactで作ったコンポーネントは、単なるJavaScriptの関数です。これをHTMLページに表示するには、ReactDOMが必要になります。
+
+## ReactDOMの役割
+
+ReactDOMは以下の重要な役割を持っています：
+
+1. **仮想DOMと実際のDOMのブリッジ**
+   - Reactのコンポーネントをブラウザが理解できるHTML要素に変換
+   
+2. **効率的な更新処理**
+   - 変更があった部分だけを効率的に更新
+
+## ReactDOM.createRoot
+
+React 18から導入された新しいAPIです。アプリケーションのルート（根っこ）を作成します。
+
+\`\`\`jsx
+import ReactDOM from 'react-dom/client'
+
+// HTMLのid="root"要素を取得してルートを作成
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+)
+\`\`\`
+
+## root.render
+
+作成したルートにReactコンポーネントをレンダリング（描画）します。
+
+\`\`\`jsx
+// Appコンポーネントをレンダリング
+root.render(<App />)
+\`\`\`
+
+## 完全な例
+
+\`\`\`jsx
+// main.jsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+
+// ルートを作成
+const root = ReactDOM.createRoot(
+  document.getElementById('root')
+)
+
+// Appコンポーネントをレンダリング
+root.render(<App />)
+\`\`\`
+
+## まとめ
+
+- **ReactDOM**: ReactコンポーネントをHTMLに変換するライブラリ
+- **createRoot**: アプリケーションのルートを作成
+- **render**: コンポーネントを実際に表示
+
+ReactDOMのおかげで、私たちが作ったReactコンポーネントがブラウザに表示されるようになります！`,
 
   taskDescription: `
 # ReactDOMを使ってHTMLにコンポーネントを表示する

@@ -5,6 +5,7 @@ export interface Lesson {
   
   // Content
   taskDescription: string
+  material?: string  // 教材コンテンツ
   
   // Code files
   initialFiles: Record<string, string>
