@@ -8,6 +8,8 @@ import PreviewPanel from '@/components/organisms/PreviewPanel'
 import Footer from '@/components/organisms/Footer'
 import LessonMaterialModal from '@/components/organisms/LessonMaterialModal'
 import ResizablePanel from '@/components/molecules/ResizablePanel'
+import SideMenu from '@/components/molecules/SideMenu'
+import { useSideMenu } from '@/hooks/useSideMenu'
 import { Lesson } from '@/lib/types/lesson'
 
 interface LessonTemplateProps {
@@ -28,6 +30,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
   const [files, setFiles] = useState(initialFiles)
   const [activeFile, setActiveFile] = useState(Object.keys(initialFiles)[0] || '')
   const [isMaterialModalOpen, setIsMaterialModalOpen] = useState(false)
+  const { isOpen: isSideMenuOpen, openSideMenu, closeSideMenu } = useSideMenu()
 
   const handleFileChange = (fileName: string, content: string) => {
     setFiles((prev) => ({
@@ -37,7 +40,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
   }
 
   const handleLessonList = () => {
-    console.log('レッスン一覧を表示')
+    openSideMenu()
   }
 
   const handleCheckMaterials = () => {
@@ -49,6 +52,19 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
   }
 
   const previewContent = <PreviewPanel code={files} />
+
+  const lessons = [
+    {
+      id: 'react-basic-01',
+      title: 'Reactに触れてみよう',
+      href: '/lessons/react-basic-01'
+    },
+    {
+      id: 'react-basic-02',
+      title: 'ReactDOMを使ってHTMLにコンポーネントを表示する',
+      href: '/lessons/react-basic-02'
+    }
+  ]
 
   return (
     <div className="flex h-screen flex-col bg-gray-50">
@@ -78,6 +94,13 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
         onLessonList={handleLessonList}
         onCheckMaterials={handleCheckMaterials}
         onShowAnswer={handleShowAnswer}
+      />
+
+      {/* サイドメニュー */}
+      <SideMenu
+        isOpen={isSideMenuOpen}
+        onClose={closeSideMenu}
+        lessons={lessons}
       />
 
       {/* 教材確認モーダル */}
