@@ -13,13 +13,13 @@ const lessons = {
 }
 
 interface LessonPageProps {
-  params: {
+  params: Promise<{
     lessonId: string
-  }
+  }>
 }
 
 export default function LessonPage({ params }: LessonPageProps) {
-  const { lessonId } = params
+  const { lessonId } = React.use(params)
   const lesson = lessons[lessonId as keyof typeof lessons]
 
   if (!lesson) {

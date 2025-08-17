@@ -21,7 +21,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
 }) => {
   const fileNames = Object.keys(files)
   const [openTabs, setOpenTabs] = useState<string[]>([activeFile])
-  const [isFileTreeOpen, setIsFileTreeOpen] = useState<boolean>(true)
+  const [isFileTreeOpen, setIsFileTreeOpen] = useState<boolean>(false)
 
   // ファイル拡張子から言語を判定
   const getLanguageFromFileName = (fileName: string): string => {
@@ -62,9 +62,9 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
   }
 
   const handleTabClose = (fileName: string) => {
-    const newTabs = openTabs.filter(tab => tab !== fileName)
+    const newTabs = openTabs.filter((tab) => tab !== fileName)
     setOpenTabs(newTabs)
-    
+
     // 閉じるタブがアクティブファイルの場合、別のタブをアクティブにする
     if (fileName === activeFile && newTabs.length > 0) {
       onActiveFileChange?.(newTabs[newTabs.length - 1])
@@ -137,22 +137,18 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
       {/* ファイルツリー */}
       {isFileTreeOpen && (
         <div className="w-64 border-r border-gray-300">
-          <FileTree
-            files={files}
-            activeFile={activeFile}
-            onFileSelect={handleFileSelect}
-          />
+          <FileTree files={files} activeFile={activeFile} onFileSelect={handleFileSelect} />
         </div>
       )}
 
       {/* エディター部分 */}
       <div className="flex flex-1 flex-col bg-white">
         {/* ファイルタブとトグルボタン */}
-        <div className="flex border-b border-gray-200 bg-gray-50 overflow-x-auto">
+        <div className="flex overflow-x-auto border-b border-gray-200 bg-gray-50">
           {/* ファイルツリートグルボタン */}
           <button
             onClick={() => setIsFileTreeOpen(!isFileTreeOpen)}
-            className="flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100 border-r border-gray-200"
+            className="flex items-center border-r border-gray-200 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-800"
             title={isFileTreeOpen ? 'ファイルツリーを閉じる' : 'ファイルツリーを開く'}
           >
             {isFileTreeOpen ? '◀' : '▶'}
@@ -160,9 +156,9 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
           {openTabs.map((fileName) => (
             <div
               key={fileName}
-              className={`flex items-center min-w-0 border-r border-gray-200 ${
+              className={`flex min-w-0 items-center border-r border-gray-200 ${
                 fileName === activeFile
-                  ? 'bg-white border-b-2 border-blue-500'
+                  ? 'border-b-2 border-blue-500 bg-white'
                   : 'hover:bg-gray-100'
               }`}
             >
@@ -170,10 +166,10 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
                 className="flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-800"
                 onClick={() => handleTabClick(fileName)}
               >
-                <span className="truncate max-w-32">{fileName}</span>
+                <span className="max-w-32 truncate">{fileName}</span>
               </button>
               <button
-                className="px-1 py-2 text-gray-400 hover:text-gray-600 hover:bg-gray-200 rounded"
+                className="rounded px-1 py-2 text-gray-400 hover:bg-gray-200 hover:text-gray-600"
                 onClick={() => handleTabClose(fileName)}
               >
                 ×

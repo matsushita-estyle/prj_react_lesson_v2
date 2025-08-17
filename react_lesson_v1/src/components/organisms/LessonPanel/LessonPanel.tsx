@@ -15,7 +15,7 @@ const LessonPanel: React.FC<LessonPanelProps> = ({
   const tabs = [
     {
       id: 'lesson',
-      label: '問題',
+      label: 'レッスン',
       content: <div className="p-6">{lessonContent}</div>,
     },
     {
