@@ -52,10 +52,7 @@ const SimpleSandpack: React.FC<SimpleSandpackProps> = ({ files, className = '' }
       normalized[normalizedKey] = value
     }
 
-    // App.jsxが存在する場合、App.jsとしても登録（Sandpackのデフォルトエントリー）
-    if (normalized['/App.jsx'] && !normalized['/App.js']) {
-      normalized['/App.js'] = normalized['/App.jsx']
-    }
+    // App.jsxをメインエントリーとして使用
 
     return normalized
   }
@@ -74,7 +71,7 @@ const SimpleSandpack: React.FC<SimpleSandpackProps> = ({ files, className = '' }
     Object.keys(files).length > 0
       ? normalizeFiles(files)
       : {
-          '/App.js': `export default function App() {
+          '/App.jsx': `export default function App() {
   return <div>コードエディタで編集してください</div>;
 }`,
         }
@@ -84,6 +81,17 @@ const SimpleSandpack: React.FC<SimpleSandpackProps> = ({ files, className = '' }
     ...normalizedFiles,
     // styles.cssがレッスンファイルに含まれていない場合のみデフォルトを使用
     ...(normalizedFiles['/styles.css'] ? {} : { '/styles.css': styleOverride }),
+    // App.jsxをエントリーポイントとして使用するためのindex.js
+    '/index.js': `import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.jsx';
+
+const root = createRoot(document.getElementById('root'));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);`,
   }
 
   return (

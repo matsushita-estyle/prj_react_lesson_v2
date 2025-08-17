@@ -194,8 +194,8 @@ export default function LessonContent({
                     {step.solutionCode && onApplyCode && (
                       <button
                         onClick={() => {
-                          // App.js または index.js のファイル名で反映
-                          const fileName = 'App.js'
+                          // App.jsx のファイル名で反映
+                          const fileName = 'App.jsx'
                           onApplyCode(fileName, step.solutionCode)
                         }}
                         className="absolute top-2 right-2 z-10 rounded bg-blue-500 px-3 py-2 text-xs text-white transition-colors hover:bg-blue-600"
