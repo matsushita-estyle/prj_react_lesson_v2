@@ -398,8 +398,13 @@ export default App`,
   // 互換性のため、最終的な完成形も残す
   initialFiles: {
     'App.jsx': `function App() {
-  // このファイルは段階的に編集していきます
-  return <div>スタート</div>
+  const userName = "太郎";
+  
+  return (
+    <div>
+      <h1>こんにちは、{userName}さん！</h1>
+    </div>
+  )
 }
 
 export default App`,
