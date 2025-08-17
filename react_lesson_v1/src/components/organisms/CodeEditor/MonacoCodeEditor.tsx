@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Editor } from '@monaco-editor/react'
+import FileTree from '../../molecules/FileTree/FileTree'
 
 interface MonacoCodeEditorProps {
   files: Record<string, string>
@@ -19,6 +20,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
   className = '',
 }) => {
   const fileNames = Object.keys(files)
+  const [openTabs, setOpenTabs] = useState<string[]>([activeFile])
 
   // ファイル拡張子から言語を判定
   const getLanguageFromFileName = (fileName: string): string => {
@@ -47,6 +49,29 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     if (value !== undefined) {
       onFileChange?.(activeFile, value)
     }
+  }
+
+  const handleFileSelect = (fileName: string) => {
+    // タブに追加（重複を避ける）
+    if (!openTabs.includes(fileName)) {
+      setOpenTabs([...openTabs, fileName])
+    }
+    // アクティブファイルを変更
+    onActiveFileChange?.(fileName)
+  }
+
+  const handleTabClose = (fileName: string) => {
+    const newTabs = openTabs.filter(tab => tab !== fileName)
+    setOpenTabs(newTabs)
+    
+    // 閉じるタブがアクティブファイルの場合、別のタブをアクティブにする
+    if (fileName === activeFile && newTabs.length > 0) {
+      onActiveFileChange?.(newTabs[newTabs.length - 1])
+    }
+  }
+
+  const handleTabClick = (fileName: string) => {
+    onActiveFileChange?.(fileName)
   }
 
   const handleEditorDidMount = (editor: any, monaco: any) => {
@@ -107,52 +132,74 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
   }
 
   return (
-    <div className={`flex h-full flex-col bg-white ${className}`}>
-      {/* ファイルタブ */}
-      <div className="flex border-b border-gray-200 bg-gray-50">
-        {fileNames.map((fileName) => (
-          <button
-            key={fileName}
-            className={`px-4 py-2 text-sm font-medium transition-colors ${
-              fileName === activeFile
-                ? 'border-b-2 border-blue-500 bg-white text-blue-600'
-                : 'text-gray-600 hover:bg-gray-100 hover:text-gray-800'
-            }`}
-            onClick={() => onActiveFileChange?.(fileName)}
-          >
-            {fileName}
-          </button>
-        ))}
+    <div className={`flex h-full ${className}`}>
+      {/* ファイルツリー */}
+      <div className="w-64 border-r border-gray-300">
+        <FileTree
+          files={files}
+          activeFile={activeFile}
+          onFileSelect={handleFileSelect}
+        />
       </div>
 
-      {/* Monaco Editor */}
-      <div className="flex-1">
-        <div
-          className="h-full"
-          style={{
-            backgroundColor: 'var(--editor-bg)',
-            border: '1px solid var(--editor-border)',
-          }}
-        >
-          <Editor
-            height="100%"
-            language={currentLanguage}
-            value={files[activeFile] || ''}
-            onChange={handleEditorChange}
-            onMount={handleEditorDidMount}
-            theme="custom-dark"
-            options={editorOptions}
-            loading={
-              <div className="flex h-full items-center justify-center text-white">
-                <div className="text-center">
-                  <div className="mb-2">Loading Monaco Editor...</div>
-                  <div className="h-1 w-48 overflow-hidden rounded-full bg-gray-700">
-                    <div className="h-full w-1/3 animate-pulse bg-blue-500"></div>
+      {/* エディター部分 */}
+      <div className="flex flex-1 flex-col bg-white">
+        {/* ファイルタブ */}
+        <div className="flex border-b border-gray-200 bg-gray-50 overflow-x-auto">
+          {openTabs.map((fileName) => (
+            <div
+              key={fileName}
+              className={`flex items-center min-w-0 border-r border-gray-200 ${
+                fileName === activeFile
+                  ? 'bg-white border-b-2 border-blue-500'
+                  : 'hover:bg-gray-100'
+              }`}
+            >
+              <button
+                className="flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-800"
+                onClick={() => handleTabClick(fileName)}
+              >
+                <span className="truncate max-w-32">{fileName}</span>
+              </button>
+              <button
+                className="px-1 py-2 text-gray-400 hover:text-gray-600 hover:bg-gray-200 rounded"
+                onClick={() => handleTabClose(fileName)}
+              >
+                ×
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Monaco Editor */}
+        <div className="flex-1">
+          <div
+            className="h-full"
+            style={{
+              backgroundColor: 'var(--editor-bg)',
+              border: '1px solid var(--editor-border)',
+            }}
+          >
+            <Editor
+              height="100%"
+              language={currentLanguage}
+              value={files[activeFile] || ''}
+              onChange={handleEditorChange}
+              onMount={handleEditorDidMount}
+              theme="custom-dark"
+              options={editorOptions}
+              loading={
+                <div className="flex h-full items-center justify-center text-white">
+                  <div className="text-center">
+                    <div className="mb-2">Loading Monaco Editor...</div>
+                    <div className="h-1 w-48 overflow-hidden rounded-full bg-gray-700">
+                      <div className="h-full w-1/3 animate-pulse bg-blue-500"></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            }
-          />
+              }
+            />
+          </div>
         </div>
       </div>
     </div>
