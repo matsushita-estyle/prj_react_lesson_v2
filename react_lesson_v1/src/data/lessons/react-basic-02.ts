@@ -3,11 +3,7 @@ import { Lesson } from '@/lib/types/lesson'
 export const reactBasic02: Lesson = {
   id: 'react-basic-02',
   title: 'ReactDOMを使ってHTMLにコンポーネントを表示する',
-  description: 'ReactDOMの役割と重要性を理解し、Reactアプリケーションの起動プロセスを学習します',
-  difficulty: 'beginner',
-  estimatedTime: 20,
   lessonNumber: 2,
-  courseId: 'react-basic',
 
   taskDescription: `
 # ReactDOMを使ってHTMLにコンポーネントを表示する
@@ -29,15 +25,6 @@ export const reactBasic02: Lesson = {
 - **render**: 作成したルートにコンポーネントをレンダリング
 
   `,
-
-  learningObjectives: [
-    'ReactDOMの役割を理解する',
-    'createRootとrenderの使い方を覚える',
-    'Reactアプリケーションの起動プロセスを把握する',
-    'React.StrictModeの概念を理解する',
-  ],
-
-  concepts: ['ReactDOM', 'createRoot', 'render', 'DOM', 'StrictMode', 'import/export'],
 
   initialFiles: {
     'App.jsx': `function App() {
@@ -80,17 +67,6 @@ import App from './App'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(<App />)`,
   },
-
-  hints: [
-    'App.jsxからAppコンポーネントをimportする必要があります',
-    'ReactDOM.createRoot()にはHTMLの要素を渡す必要があります',
-    'document.getElementById("root")でHTML要素を取得できます',
-    'createRootで作成したrootオブジェクトに対してrender()を呼び出します',
-    'React.StrictModeでAppコンポーネントをラップすると開発時に有用な警告が表示されます',
-  ],
-
-  showHints: true,
-  showSolution: true,
 
   previousLessonId: 'react-basic-01',
   nextLessonId: 'react-basic-03',

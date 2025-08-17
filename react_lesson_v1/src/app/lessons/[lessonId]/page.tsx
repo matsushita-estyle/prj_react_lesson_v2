@@ -124,60 +124,27 @@ export default function LessonPage({ params }: LessonPageProps) {
     <div className="prose max-w-none">
       <div>{renderMarkdownText(lesson.taskDescription)}</div>
 
-      {/* ファイル編集ガイド */}
-      {lesson.initialFiles && Object.keys(lesson.initialFiles).length > 0 && (
+      {/* 解答例 */}
+      {lesson.solutionFiles && Object.keys(lesson.solutionFiles).length > 0 && (
         <div className="mt-6">
-          <h3 className="mb-4 text-lg font-semibold text-gray-900">📝 編集するファイル</h3>
+          <h3 className="mb-4 text-lg font-semibold text-gray-900">✅ 解答例</h3>
           <div className="space-y-4">
-            {Object.entries(lesson.initialFiles).map(([fileName, fileContent]) => {
-              // コメント行を抽出して編集ポイントを特定
-              const lines = fileContent.split('\n')
-              const editPoints = lines
-                .map((line, index) => ({ line: line.trim(), lineNumber: index + 1 }))
-                .filter(
-                  ({ line }) =>
-                    line.startsWith('//') &&
-                    (line.includes('ここ') ||
-                      line.includes('追加') ||
-                      line.includes('修正') ||
-                      line.includes('記述') ||
-                      line.includes('TODO') ||
-                      line.includes('実装'))
-                )
-
-              return (
-                <div key={fileName} className="overflow-hidden rounded-lg border border-gray-200">
-                  <div className="bg-gray-800 px-4 py-2 font-mono text-sm text-white">
-                    {fileName}
-                  </div>
-                  {editPoints.length > 0 && (
-                    <div className="border-b border-blue-200 bg-blue-50 p-4">
-                      <p className="mb-2 text-sm font-medium text-blue-800">
-                        🎯 このファイルで編集する場所:
-                      </p>
-                      <ul className="space-y-1">
-                        {editPoints.map((point, index) => (
-                          <li key={index} className="flex items-start text-sm text-blue-700">
-                            <span className="mt-0.5 mr-2 rounded bg-blue-100 px-1 font-mono text-xs">
-                              {point.lineNumber}行目
-                            </span>
-                            <span>{point.line.replace(/^\/\/\s*/, '')}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  <div className="bg-gray-50 p-4">
-                    <pre className="overflow-x-auto text-xs text-gray-700">
-                      <code>{fileContent}</code>
-                    </pre>
-                  </div>
+            {Object.entries(lesson.solutionFiles).map(([fileName, fileContent]) => (
+              <div key={fileName} className="overflow-hidden rounded-lg border border-green-300">
+                <div className="bg-green-600 px-4 py-2 font-mono text-sm text-white">
+                  {fileName}
                 </div>
-              )
-            })}
+                <div className="bg-green-50 p-4">
+                  <pre className="overflow-x-auto text-xs text-gray-700">
+                    <code>{fileContent}</code>
+                  </pre>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
+
     </div>
   )
 

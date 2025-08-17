@@ -3,12 +3,7 @@ import { Lesson } from '@/lib/types/lesson'
 export const reactBasic01: Lesson = {
   id: 'react-basic-01',
   title: 'Reactに触れてみよう',
-  description: 'Reactの基本概念を理解し、最初のReactコンポーネントを作成します',
-  difficulty: 'beginner',
-  estimatedTime: 15,
   lessonNumber: 1,
-  courseId: 'react-basic',
-
   taskDescription: `
 # Reactに触れてみよう
 
@@ -23,14 +18,6 @@ export const reactBasic01: Lesson = {
 3. pタグを使用して「これは私の最初のReactコンポーネントです！」というメッセージを追加する
 
   `,
-
-  learningObjectives: [
-    'Reactコンポーネントの基本構造を理解する',
-    'JSXの基本的な書き方を覚える',
-    'Reactとは何かを理解する',
-  ],
-
-  concepts: ['React', 'コンポーネント', 'JSX', '関数コンポーネント'],
 
   initialFiles: {
     'App.jsx': `function App() {
@@ -55,16 +42,6 @@ export default App`,
 
 export default App`,
   },
-
-  hints: [
-    'Reactコンポーネントは必ず何かを return する必要があります',
-    'JSXでは、複数の要素を返す場合は一つの親要素（divなど）で囲みます',
-    'className属性を使ってCSSクラスを指定できます',
-    'JSXはHTMLに似ていますが、少し違いがあります（例：class → className）',
-  ],
-
-  showHints: true,
-  showSolution: true,
 
   nextLessonId: 'react-basic-02',
 }
