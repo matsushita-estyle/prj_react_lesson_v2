@@ -46,9 +46,6 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
     setIsMaterialModalOpen(true)
   }
 
-  const handleShowAnswer = () => {
-    console.log('答えを表示')
-  }
 
   const handleApplyCode = (fileName: string, code: string) => {
     setFiles((prev) => ({
@@ -111,7 +108,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
       <Footer
         onLessonList={handleLessonList}
         onCheckMaterials={handleCheckMaterials}
-        onShowAnswer={handleShowAnswer}
+        nextLessonId={lesson?.nextLessonId}
       />
 
       {/* サイドメニュー */}
