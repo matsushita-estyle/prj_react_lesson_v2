@@ -6,13 +6,16 @@ import LessonPanel from '@/components/organisms/LessonPanel'
 import CodeEditor from '@/components/organisms/CodeEditor'
 import PreviewPanel from '@/components/organisms/PreviewPanel'
 import Footer from '@/components/organisms/Footer'
+import LessonMaterialModal from '@/components/organisms/LessonMaterialModal'
 import ResizablePanel from '@/components/molecules/ResizablePanel'
+import { Lesson } from '@/lib/types/lesson'
 
 interface LessonTemplateProps {
   lessonTitle: string
   courseTitle: string
   lessonContent: React.ReactNode
   initialFiles: Record<string, string>
+  lesson?: Lesson
 }
 
 const LessonTemplate: React.FC<LessonTemplateProps> = ({
@@ -20,9 +23,11 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
   courseTitle,
   lessonContent,
   initialFiles,
+  lesson,
 }) => {
   const [files, setFiles] = useState(initialFiles)
   const [activeFile, setActiveFile] = useState(Object.keys(initialFiles)[0] || '')
+  const [isMaterialModalOpen, setIsMaterialModalOpen] = useState(false)
 
   const handleFileChange = (fileName: string, content: string) => {
     setFiles((prev) => ({
@@ -36,7 +41,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
   }
 
   const handleCheckMaterials = () => {
-    console.log('教材を確認')
+    setIsMaterialModalOpen(true)
   }
 
   const handleShowAnswer = () => {
@@ -73,6 +78,13 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
         onLessonList={handleLessonList}
         onCheckMaterials={handleCheckMaterials}
         onShowAnswer={handleShowAnswer}
+      />
+
+      {/* 教材確認モーダル */}
+      <LessonMaterialModal
+        isOpen={isMaterialModalOpen}
+        onClose={() => setIsMaterialModalOpen(false)}
+        lesson={lesson || null}
       />
     </div>
   )
