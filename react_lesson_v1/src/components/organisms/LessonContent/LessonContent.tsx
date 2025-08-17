@@ -8,6 +8,7 @@ interface LessonContentProps {
   solutionFiles?: Record<string, string>
   steps?: LessonStep[]
   onApplyCode?: (fileName: string, code: string) => void
+  nextLessonId?: string
 }
 
 export default function LessonContent({
@@ -15,6 +16,7 @@ export default function LessonContent({
   solutionFiles,
   steps,
   onApplyCode,
+  nextLessonId,
 }: LessonContentProps) {
   const [showHints, setShowHints] = useState<Record<number, boolean>>({})
   const [showSolutions, setShowSolutions] = useState<Record<number, boolean>>({})
@@ -212,10 +214,22 @@ export default function LessonContent({
         </div>
 
         {/* 完了メッセージ */}
-        <div className="mt-8 rounded-lg border-2 border-green-400 bg-green-50 p-6 text-center">
-          <p className="text-lg font-semibold text-green-800">
-            🎉 お疲れ様でした！全てのステップを確認してください。
-          </p>
+        <div className="mt-8 rounded-lg border-2 border-green-400 bg-green-50 px-8 py-3">
+          <div className="flex items-center justify-between">
+            <p className="text-lg font-semibold text-green-800">
+              🎉 お疲れ様でした！次のステップに進みましょう。
+            </p>
+            {nextLessonId ? (
+              <a
+                href={`/lessons/${nextLessonId}`}
+                className="rounded bg-blue-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-600"
+              >
+                次のステップに進む →
+              </a>
+            ) : (
+              <span className="text-gray-500">最後のレッスンです</span>
+            )}
+          </div>
         </div>
       </div>
     )

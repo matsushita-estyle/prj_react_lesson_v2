@@ -65,6 +65,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
       solutionFiles={lesson?.solutionFiles}
       steps={lesson?.steps}
       onApplyCode={handleApplyCode}
+      nextLessonId={lesson?.nextLessonId}
     />
   )
 
