@@ -46,7 +46,6 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
     setIsMaterialModalOpen(true)
   }
 
-
   const handleApplyCode = (fileName: string, code: string) => {
     setFiles((prev) => ({
       ...prev,
@@ -72,13 +71,13 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
     {
       id: 'react-basic-01',
       title: 'Reactに触れてみよう',
-      href: '/lessons/react-basic-01'
+      href: '/lessons/react-basic-01',
     },
     {
       id: 'react-basic-02',
-      title: 'ReactDOMを使ってHTMLにコンポーネントを表示する',
-      href: '/lessons/react-basic-02'
-    }
+      title: 'JSXの中にJavaScriptを埋め込む',
+      href: '/lessons/react-basic-02',
+    },
   ]
 
   return (
@@ -112,11 +111,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
       />
 
       {/* サイドメニュー */}
-      <SideMenu
-        isOpen={isSideMenuOpen}
-        onClose={closeSideMenu}
-        lessons={lessons}
-      />
+      <SideMenu isOpen={isSideMenuOpen} onClose={closeSideMenu} lessons={lessons} />
 
       {/* 教材確認モーダル */}
       <LessonMaterialModal
