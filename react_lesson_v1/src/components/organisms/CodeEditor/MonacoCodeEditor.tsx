@@ -19,7 +19,6 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
   onActiveFileChange,
   className = '',
 }) => {
-  const fileNames = Object.keys(files)
   const [openTabs, setOpenTabs] = useState<string[]>([activeFile])
   const [isFileTreeOpen, setIsFileTreeOpen] = useState<boolean>(false)
 
@@ -76,7 +75,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
   }
 
   const handleEditorDidMount = (
-    editor: import('monaco-editor').editor.IStandaloneCodeEditor,
+    _editor: import('monaco-editor').editor.IStandaloneCodeEditor,
     monaco: typeof import('monaco-editor')
   ) => {
     // カスタムダークテーマの設定

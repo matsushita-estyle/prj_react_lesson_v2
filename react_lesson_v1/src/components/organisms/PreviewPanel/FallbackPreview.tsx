@@ -15,7 +15,7 @@ const FallbackPreview: React.FC<FallbackPreviewProps> = ({ files, className = ''
   const extractJSXContent = (code: string) => {
     try {
       // returnの後の内容を取得（簡易版）
-      const returnMatch = code.match(/return\s*\(([\s\S]*?)\);/s)
+      const returnMatch = code.match(/return\s*\(([\s\S]*?)\);/)
       if (returnMatch) {
         return returnMatch[1].trim()
       }
@@ -25,7 +25,7 @@ const FallbackPreview: React.FC<FallbackPreviewProps> = ({ files, className = ''
     }
   }
 
-  const jsxContent = extractJSXContent(appCode)
+  extractJSXContent(appCode)
 
   return (
     <div className={`h-full ${className}`}>

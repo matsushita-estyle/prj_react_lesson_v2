@@ -10,7 +10,7 @@ interface PreviewPanelProps {
 }
 
 const PreviewPanel: React.FC<PreviewPanelProps> = ({ code, className = '' }) => {
-  const [showCode, setShowCode] = useState(false)
+  const [showCode] = useState(false)
 
   return (
     <div className={`flex h-full flex-col ${className}`}>

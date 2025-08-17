@@ -1,0 +1,35 @@
+# Project Guidelines
+
+## 必須チェック項目
+
+毎回、以下のコマンドを実行してエラーがないことを確認してください：
+
+1. **TypeScriptの型チェック**
+   ```bash
+   cd react_lesson_v1 && npm run typecheck
+   ```
+
+2. **Lintチェック**
+   ```bash
+   cd react_lesson_v1 && npm run lint
+   ```
+
+3. **ビルドチェック**
+   ```bash
+   cd react_lesson_v1 && npm run build
+   ```
+
+## プロジェクト構成
+
+- フレームワーク: Next.js + React + TypeScript
+- ビルドツール: Next.js (Turbopack)
+- スタイリング: Tailwind CSS
+- コードエディタ: Monaco Editor
+- プレビュー: Sandpack (CodeSandbox)
+
+## 開発時の注意事項
+
+- コード変更後は必ず上記のチェックを実行
+- エラーが出た場合は修正してからコミット
+- 型安全性を保つため、any型の使用は避ける
+- プロジェクトのルートは `react_lesson_v1/` ディレクトリ
