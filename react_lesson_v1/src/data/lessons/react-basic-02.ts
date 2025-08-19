@@ -4,7 +4,7 @@ export const reactBasic02: Lesson = {
   id: 'react-basic-02',
   title: 'JSXの中にJavaScriptを埋め込む',
   lessonNumber: 2,
-  
+
   material: `# JSXの中にJavaScriptを埋め込む
 
 このレッスンでは、JSXの中にJavaScriptの変数や式を埋め込む方法について学習します。
@@ -18,28 +18,28 @@ JSXでは、波括弧 \`{}\` を使ってJavaScriptの変数や式を埋め込�
 変数の値をJSXで表示する例を見てみましょう。
 
 \`\`\`jsx
-const WelcomeMessage = () => {
-  const userName = "太郎";
-  return <h1>こんにちは、{userName}さん！</h1>;
+const ProductCard = () => {
+  const productName = "スマートウォッチ";
+  return <h2>{productName}</h2>;
 }
-// 画面には "こんにちは、太郎さん！" と表示される
+// 画面には "スマートウォッチ" と表示される
 \`\`\`
 
-この例では、userNameという変数の値が波括弧を使ってJSX内に表示されています。
+この例では、productNameという変数の値が波括弧を使ってJSX内に表示されています。
 
 ## 計算式の埋め込み
 
 JSXの中では、変数だけでなく計算式も実行できます。
 
 \`\`\`jsx
-const Calculator = () => {
-  const price = 1000;
-  const taxRate = 0.1;
+const PriceCalculator = () => {
+  const price = 12000;
+  const discountRate = 0.20;
   
   return (
     <div>
-      <p>商品価格: {price}円</p>
-      <p>税込価格: {price + price * taxRate}円</p>
+      <p>定価: {price}円</p>
+      <p>割引価格: {price - price * discountRate}円</p>
     </div>
   );
 }
@@ -50,12 +50,12 @@ const Calculator = () => {
 JSXの中で関数を呼び出すこともできます。ただし、関数は画面に表示可能な値（文字列、数値、JSX要素など）を返す必要があります。
 
 \`\`\`jsx
-const getCurrentTime = () => {
-  return new Date().toLocaleTimeString();
+const getStarRating = (rating) => {
+  return '⭐'.repeat(rating);
 }
 
-const Clock = () => {
-  return <p>現在時刻: {getCurrentTime()}</p>;
+const ProductRating = () => {
+  return <p>評価: {getStarRating(4)}</p>;
 }
 \`\`\`
 
@@ -64,9 +64,9 @@ const Clock = () => {
 HTML要素の属性にも変数を使用できます。
 
 \`\`\`jsx
-const ProfileImage = () => {
-  const imageUrl = "/images/profile.jpg";
-  const altText = "プロフィール画像";
+const ProductImage = () => {
+  const imageUrl = "/images/smartwatch.jpg";
+  const altText = "スマートウォッチの画像";
   
   return <img src={imageUrl} alt={altText} />;
 }
@@ -89,8 +89,8 @@ JSXで直接表示できるのは以下の値です：
 \`\`\`jsx
 // ❌ エラーになる例
 const BadExample = () => {
-  const user = { name: "田中", age: 25 };
-  return <h1>{user}</h1>; // エラー！
+  const product = { name: "スマートウォッチ", price: 12000 };
+  return <h2>{product}</h2>; // エラー！
 }
 \`\`\`
 
@@ -99,11 +99,11 @@ const BadExample = () => {
 \`\`\`jsx
 // ✅ 正しい例
 const GoodExample = () => {
-  const user = { name: "田中", age: 25 };
+  const product = { name: "スマートウォッチ", price: 12000 };
   return (
     <div>
-      <h1>名前: {user.name}</h1>
-      <p>年齢: {user.age}歳</p>
+      <h2>商品名: {product.name}</h2>
+      <p>価格: {product.price}円</p>
     </div>
   );
 }
@@ -120,333 +120,536 @@ const GoodExample = () => {
 # JSXの中にJavaScriptを埋め込む
 
 このレッスンでは、学んだ知識を使って実際にJSXの中でJavaScriptを使ってみましょう。
-段階的にステップを踏んで、動的なコンテンツを表示するコンポーネントを完成させます！
+段階的にステップを踏んで、動的な商品カードコンポーネントを完成させます！
   `,
 
   // 段階的な課題
   steps: [
     {
       stepNumber: 1,
-      title: '変数をJSXで表示してみよう',
-      instruction: `まずは、シンプルな変数をJSXで表示してみましょう。
-「userName」という変数を定義し、あなたの名前を代入して、画面に「こんにちは、{名前}さん！」と表示してください。`,
+      title: '商品名を表示してみよう',
+      instruction: `まずは、商品名をJSXで表示してみましょう。
+「productName」という変数に「スマートウォッチ」を代入して、h1タグで表示してください。
+CSSを適用するため、必ずファイルの先頭に「import './styles.css'」を追加してくださいね！`,
       hint: '波括弧{}を使って変数を埋め込みます',
-      initialCode: `const App = () => {
-  // ここに変数を定義してください
-  const userName = "???";
+      initialCode: `import './styles.css'
+
+const App = () => {
+  // ここに商品名の変数を定義してください
+  const productName = "???";
   
   return (
-    <div>
-      <h1>こんにちは、{/* ここに変数を入れてください */}さん！</h1>
+    <div className="product-card">
+      <h1>{/* ここに商品名を表示 */}</h1>
     </div>
   )
 }
 
 export default App`,
-      solutionCode: `const App = () => {
-  const userName = "太郎";
+      solutionCode: `import './styles.css'
+
+const App = () => {
+  const productName = "スマートウォッチ";
   
   return (
-    <div>
-      <h1>こんにちは、{userName}さん！</h1>
+    <div className="product-card">
+      <h1>{productName}</h1>
     </div>
   )
 }
 
 export default App`,
       validation: {
-        includes: ['{userName}'],
+        includes: ['{productName}', 'import \'./styles.css\''],
       },
     },
     {
       stepNumber: 2,
-      title: '数値の計算を表示してみよう',
-      instruction: `次は、数値の計算をJSXで表示してみましょう。
-「price」変数に1000を代入し、「tax」変数に0.1（10%）を代入して、
-「商品価格: 1000円」と「税込価格: 1100円」を表示してください。`,
-      hint: '計算式は {price + price * tax} のように書けます',
-      initialCode: `const App = () => {
-  const userName = "太郎";
-  // ここに価格と税率の変数を追加してください
+      title: '価格と割引を計算しよう',
+      instruction: `次は、商品の価格と割引を計算して表示しましょう。
+「price」変数に12000を代入し、「discountRate」変数に0.20（20%割引）を代入して、
+「定価: 12000円」と「割引価格: 9600円」を表示してください。
+忘れずにインポート文も追加してくださいね！`,
+      hint: '割引価格の計算は {price - price * discountRate} のように書けます',
+      initialCode: `import './styles.css'
+
+const App = () => {
+  const productName = "スマートウォッチ";
+  // ここに価格と割引率の変数を追加してください
   
   return (
-    <div>
-      <h1>こんにちは、{userName}さん！</h1>
-      <p>商品価格: {/* 価格を表示 */}円</p>
-      <p>税込価格: {/* 税込価格を計算して表示 */}円</p>
+    <div className="product-card">
+      <h1>{productName}</h1>
+      <p className="price">定価: {/* 定価を表示 */}円</p>
+      <p className="discount-price">割引価格: {/* 割引価格を計算して表示 */}円</p>
     </div>
   )
 }
 
 export default App`,
-      solutionCode: `const App = () => {
-  const userName = "太郎";
-  const price = 1000;
-  const tax = 0.1;
+      solutionCode: `import './styles.css'
+
+const App = () => {
+  const productName = "スマートウォッチ";
+  const price = 12000;
+  const discountRate = 0.20;
   
   return (
-    <div>
-      <h1>こんにちは、{userName}さん！</h1>
-      <p>商品価格: {price}円</p>
-      <p>税込価格: {price + price * tax}円</p>
+    <div className="product-card">
+      <h1>{productName}</h1>
+      <p className="price">定価: {price}円</p>
+      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
     </div>
   )
 }
 
 export default App`,
       validation: {
-        includes: ['{price}', '{price + price * tax}'],
+        includes: ['{price}', '{price - price * discountRate}', 'import \'./styles.css\''],
       },
     },
     {
       stepNumber: 3,
-      title: '関数を作って使ってみよう',
-      instruction: `今度は、関数を作って使ってみましょう。
-「getCurrentTime」という関数を定義し、現在の時刻を返すようにしてください。
-そして、「現在時刻: {時刻}」を表示してください。`,
-      hint: 'new Date().toLocaleTimeString()で現在時刻を取得できます',
-      initialCode: `const App = () => {
-  const userName = "太郎";
-  const price = 1000;
-  const tax = 0.1;
+      title: '星評価の関数を作ろう',
+      instruction: `今度は、商品の評価を星で表示する関数を作ってみましょう。
+「getStarRating」という関数を定義し、引数で受け取った数だけ星（⭐）を返すようにしてください。
+そして、評価4つ星を表示してください。
+忘れずにインポート文も追加してくださいね！`,
+      hint: '文字列の.repeat()メソッドを使うと文字を繰り返せます',
+      initialCode: `import './styles.css'
+
+const App = () => {
+  const productName = "スマートウォッチ";
+  const price = 12000;
+  const discountRate = 0.20;
   
-  // ここに時刻を取得する関数を作ってください
+  // ここに星評価を返す関数を作ってください
   
   return (
-    <div>
-      <h1>こんにちは、{userName}さん！</h1>
-      <p>商品価格: {price}円</p>
-      <p>税込価格: {price + price * tax}円</p>
-      <p>現在時刻: {/* 関数を呼び出してください */}</p>
+    <div className="product-card">
+      <h1>{productName}</h1>
+      <p className="price">定価: {price}円</p>
+      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
+      <p className="rating">評価: {/* 星評価関数を呼び出してください */}</p>
     </div>
   )
 }
 
 export default App`,
-      solutionCode: `const App = () => {
-  const userName = "太郎";
-  const price = 1000;
-  const tax = 0.1;
+      solutionCode: `import './styles.css'
+
+const App = () => {
+  const productName = "スマートウォッチ";
+  const price = 12000;
+  const discountRate = 0.20;
   
-  const getCurrentTime = () => {
-    return new Date().toLocaleTimeString();
+  const getStarRating = (rating) => {
+    return '⭐'.repeat(rating);
   }
   
   return (
-    <div>
-      <h1>こんにちは、{userName}さん！</h1>
-      <p>商品価格: {price}円</p>
-      <p>税込価格: {price + price * tax}円</p>
-      <p>現在時刻: {getCurrentTime()}</p>
+    <div className="product-card">
+      <h1>{productName}</h1>
+      <p className="price">定価: {price}円</p>
+      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
+      <p className="rating">評価: {getStarRating(4)}</p>
     </div>
   )
 }
 
 export default App`,
       validation: {
-        includes: ['{getCurrentTime()}'],
+        includes: ['{getStarRating(4)}', 'import \'./styles.css\''],
       },
     },
     {
       stepNumber: 4,
-      title: '属性に変数を使ってみよう',
+      title: '商品画像を表示しよう',
       instruction: `HTML要素の属性にも変数を使うことができます。
-「imageUrl」変数に画像のURLを代入し、「altText」変数にalt属性の内容を代入して、
-img要素で画像を表示してください。`,
+「imageUrl」変数に商品画像のURLを代入し、「altText」変数にalt属性の内容を代入して、
+商品カードに画像を表示してください。
+忘れずにインポート文も追加してくださいね！`,
       hint: 'src={imageUrl} alt={altText} のように属性に変数を設定します',
-      initialCode: `const App = () => {
-  const userName = "太郎";
-  const price = 1000;
-  const tax = 0.1;
+      initialCode: `import './styles.css'
+
+const App = () => {
+  const productName = "スマートウォッチ";
+  const price = 12000;
+  const discountRate = 0.20;
   
-  const getCurrentTime = () => {
-    return new Date().toLocaleTimeString();
+  const getStarRating = (rating) => {
+    return '⭐'.repeat(rating);
   }
   
   // ここに画像URLとalt属性の変数を追加してください
   
   return (
-    <div>
-      <h1>こんにちは、{userName}さん！</h1>
-      <p>商品価格: {price}円</p>
-      <p>税込価格: {price + price * tax}円</p>
-      <p>現在時刻: {getCurrentTime()}</p>
+    <div className="product-card">
       <img 
+        className="product-image"
         src={/* 画像URLを設定 */}
         alt={/* alt属性を設定 */}
-        width="200"
       />
+      <h1>{productName}</h1>
+      <p className="price">定価: {price}円</p>
+      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
+      <p className="rating">評価: {getStarRating(4)}</p>
     </div>
   )
 }
 
 export default App`,
-      solutionCode: `const App = () => {
-  const userName = "太郎";
-  const price = 1000;
-  const tax = 0.1;
+      solutionCode: `import './styles.css'
+
+const App = () => {
+  const productName = "スマートウォッチ";
+  const price = 12000;
+  const discountRate = 0.20;
   
-  const getCurrentTime = () => {
-    return new Date().toLocaleTimeString();
+  const getStarRating = (rating) => {
+    return '⭐'.repeat(rating);
   }
   
-  const imageUrl = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=150&fit=crop&crop=center";
-  const altText = "美しい山と湖の風景";
+  const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center";
+  const altText = "スマートウォッチの商品画像";
   
   return (
-    <div>
-      <h1>こんにちは、{userName}さん！</h1>
-      <p>商品価格: {price}円</p>
-      <p>税込価格: {price + price * tax}円</p>
-      <p>現在時刻: {getCurrentTime()}</p>
+    <div className="product-card">
       <img 
+        className="product-image"
         src={imageUrl}
         alt={altText}
-        width="200"
       />
+      <h1>{productName}</h1>
+      <p className="price">定価: {price}円</p>
+      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
+      <p className="rating">評価: {getStarRating(4)}</p>
     </div>
   )
 }
 
 export default App`,
       validation: {
-        includes: ['src={imageUrl}', 'alt={altText}'],
+        includes: ['src={imageUrl}', 'alt={altText}', 'import \'./styles.css\''],
       },
     },
     {
       stepNumber: 5,
-      title: 'オブジェクトのプロパティを表示してみよう',
-      instruction: `最後に、オブジェクトのプロパティを表示してみましょう。
-「user」オブジェクトを作成し、nameとageプロパティを持たせてください。
-そして、「ユーザー名: {名前}」と「年齢: {年齢}歳」を表示してください。`,
-      hint: 'オブジェクトのプロパティは user.name や user.age でアクセスできます',
-      initialCode: `const App = () => {
-  const userName = "太郎";
-  const price = 1000;
-  const tax = 0.1;
-  
-  const getCurrentTime = () => {
-    return new Date().toLocaleTimeString();
+      title: '商品オブジェクトを完成させよう',
+      instruction: `最後に、すべての商品情報を1つのオブジェクトにまとめてみましょう。
+「product」オブジェクトを作成し、name、price、discountRate、rating、imageUrl、altTextプロパティを持たせてください。
+そして、すべてのプロパティを使って商品カードを表示してください。
+忘れずにインポート文も追加してくださいね！`,
+      hint: 'オブジェクトのプロパティは product.name や product.price でアクセスできます',
+      initialCode: `import './styles.css'
+
+const App = () => {
+  const getStarRating = (rating) => {
+    return '⭐'.repeat(rating);
   }
   
-  const imageUrl = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=150&fit=crop&crop=center";
-  const altText = "美しい山と湖の風景";
-  
-  // ここにuserオブジェクトを作成してください
+  // ここにproductオブジェクトを作成してください
   
   return (
-    <div>
-      <h1>こんにちは、{userName}さん！</h1>
-      <p>商品価格: {price}円</p>
-      <p>税込価格: {price + price * tax}円</p>
-      <p>現在時刻: {getCurrentTime()}</p>
+    <div className="product-card">
       <img 
-        src={imageUrl}
-        alt={altText}
-        width="200"
+        className="product-image"
+        src={/* product.imageUrl */}
+        alt={/* product.altText */}
       />
-      <hr />
-      <p>ユーザー名: {/* user.nameを表示 */}</p>
-      <p>年齢: {/* user.ageを表示 */}歳</p>
+      <h1>{/* product.name */}</h1>
+      <p className="price">定価: {/* product.price */}円</p>
+      <p className="discount-price">割引価格: {/* 計算式 */}円</p>
+      <p className="rating">評価: {/* getStarRating(product.rating) */}</p>
     </div>
   )
 }
 
 export default App`,
-      solutionCode: `const App = () => {
-  const userName = "太郎";
-  const price = 1000;
-  const tax = 0.1;
-  
-  const getCurrentTime = () => {
-    return new Date().toLocaleTimeString();
+      solutionCode: `import './styles.css'
+
+const App = () => {
+  const getStarRating = (rating) => {
+    return '⭐'.repeat(rating);
   }
   
-  const imageUrl = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=150&fit=crop&crop=center";
-  const altText = "美しい山と湖の風景";
-  
-  const user = {
-    name: "田中花子",
-    age: 25
+  const product = {
+    name: "スマートウォッチ",
+    price: 12000,
+    discountRate: 0.20,
+    rating: 4,
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+    altText: "スマートウォッチの商品画像"
   };
   
   return (
-    <div>
-      <h1>こんにちは、{userName}さん！</h1>
-      <p>商品価格: {price}円</p>
-      <p>税込価格: {price + price * tax}円</p>
-      <p>現在時刻: {getCurrentTime()}</p>
+    <div className="product-card">
       <img 
-        src={imageUrl}
-        alt={altText}
-        width="200"
+        className="product-image"
+        src={product.imageUrl}
+        alt={product.altText}
       />
-      <hr />
-      <p>ユーザー名: {user.name}</p>
-      <p>年齢: {user.age}歳</p>
+      <h1>{product.name}</h1>
+      <p className="price">定価: {product.price}円</p>
+      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
+      <p className="rating">評価: {getStarRating(product.rating)}</p>
     </div>
   )
 }
 
 export default App`,
       validation: {
-        includes: ['{user.name}', '{user.age}'],
+        includes: ['{product.name}', '{product.price}', '{getStarRating(product.rating)}', 'import \'./styles.css\''],
       },
     },
   ],
 
   // 互換性のため、最終的な完成形も残す
   initialFiles: {
-    'App.jsx': `const App = () => {
-  const userName = "太郎";
+    'App.jsx': `import './styles.css'
+
+const App = () => {
+  const productName = "スマートウォッチ";
   
   return (
-    <div>
-      <h1>こんにちは、{userName}さん！</h1>
+    <div className="product-card">
+      <h1>{productName}</h1>
     </div>
   )
 }
 
 export default App`,
+    'styles.css': `/* 商品カード用のスタイル */
+.product-card {
+  max-width: 420px;
+  margin: 2rem auto;
+  padding: 0;
+  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  border-radius: 20px;
+  border: none;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 0;
+  margin-bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.product-card h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 1.5rem 1.5rem 1rem 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.price {
+  font-size: 1rem;
+  color: #a0aec0;
+  margin: 0.5rem 1.5rem;
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.discount-price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0.5rem 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.rating {
+  font-size: 1.2rem;
+  color: #4a5568;
+  margin: 1rem 1.5rem 1.5rem 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rating::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+  border-radius: 50%;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .product-card {
+    margin: 1rem;
+    max-width: 90%;
+  }
+  
+  .product-card h1 {
+    font-size: 1.5rem;
+    margin: 1.25rem 1.25rem 0.75rem 1.25rem;
+  }
+  
+  .price, .discount-price, .rating {
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+  
+  .discount-price {
+    font-size: 1.3rem;
+  }
+  
+  .product-image {
+    height: 240px;
+  }
+}`,
   },
 
   solutionFiles: {
-    'App.jsx': `const App = () => {
-  const userName = "太郎";
-  const price = 1000;
-  const tax = 0.1;
-  
-  const getCurrentTime = () => {
-    return new Date().toLocaleTimeString();
+    'App.jsx': `import './styles.css'
+
+const App = () => {
+  const getStarRating = (rating) => {
+    return '⭐'.repeat(rating);
   }
   
-  const imageUrl = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=150&fit=crop&crop=center";
-  const altText = "美しい山と湖の風景";
-  
-  const user = {
-    name: "田中花子",
-    age: 25
+  const product = {
+    name: "スマートウォッチ",
+    price: 12000,
+    discountRate: 0.20,
+    rating: 4,
+    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
+    altText: "スマートウォッチの商品画像"
   };
   
   return (
-    <div>
-      <h1>こんにちは、{userName}さん！</h1>
-      <p>商品価格: {price}円</p>
-      <p>税込価格: {price + price * tax}円</p>
-      <p>現在時刻: {getCurrentTime()}</p>
+    <div className="product-card">
       <img 
-        src={imageUrl}
-        alt={altText}
-        width="200"
+        className="product-image"
+        src={product.imageUrl}
+        alt={product.altText}
       />
-      <hr />
-      <p>ユーザー名: {user.name}</p>
-      <p>年齢: {user.age}歳</p>
+      <h1>{product.name}</h1>
+      <p className="price">定価: {product.price}円</p>
+      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
+      <p className="rating">評価: {getStarRating(product.rating)}</p>
     </div>
   )
 }
 
 export default App`,
+    'styles.css': `/* 商品カード用のスタイル */
+.product-card {
+  max-width: 420px;
+  margin: 2rem auto;
+  padding: 0;
+  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  border-radius: 20px;
+  border: none;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    0 1px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 0;
+  margin-bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.product-card h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 1.5rem 1.5rem 1rem 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.price {
+  font-size: 1rem;
+  color: #a0aec0;
+  margin: 0.5rem 1.5rem;
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+.discount-price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0.5rem 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.rating {
+  font-size: 1.2rem;
+  color: #4a5568;
+  margin: 1rem 1.5rem 1.5rem 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rating::before {
+  content: '';
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+  border-radius: 50%;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .product-card {
+    margin: 1rem;
+    max-width: 90%;
+  }
+  
+  .product-card h1 {
+    font-size: 1.5rem;
+    margin: 1.25rem 1.25rem 0.75rem 1.25rem;
+  }
+  
+  .price, .discount-price, .rating {
+    margin-left: 1.25rem;
+    margin-right: 1.25rem;
+  }
+  
+  .discount-price {
+    font-size: 1.3rem;
+  }
+  
+  .product-image {
+    height: 240px;
+  }
+}`,
   },
 
   previousLessonId: 'react-basic-01',
