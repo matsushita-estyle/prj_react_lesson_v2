@@ -129,8 +129,7 @@ const GoodExample = () => {
       stepNumber: 1,
       title: '商品名を表示してみよう',
       instruction: `まずは、商品名をJSXで表示してみましょう。
-「productName」という変数に「スマートウォッチ」を代入して、h1タグで表示してください。
-CSSを適用するため、必ずファイルの先頭に「import './styles.css'」を追加してくださいね！`,
+「productName」という変数に「スマートウォッチ」を代入して、h1タグで表示してください。`,
       hint: '波括弧{}を使って変数を埋め込みます',
       initialCode: `import './styles.css'
 
@@ -168,8 +167,7 @@ export default App`,
       title: '価格と割引を計算しよう',
       instruction: `次は、商品の価格と割引を計算して表示しましょう。
 「price」変数に12000を代入し、「discountRate」変数に0.20（20%割引）を代入して、
-「定価: 12000円」と「割引価格: 9600円」を表示してください。
-忘れずにインポート文も追加してくださいね！`,
+「定価: 12000円」と「割引価格: 9600円」を表示してください。`,
       hint: '割引価格の計算は {price - price * discountRate} のように書けます',
       initialCode: `import './styles.css'
 
@@ -213,8 +211,7 @@ export default App`,
       title: '星評価の関数を作ろう',
       instruction: `今度は、商品の評価を星で表示する関数を作ってみましょう。
 「getStarRating」という関数を定義し、引数で受け取った数だけ星（⭐）を返すようにしてください。
-そして、評価4つ星を表示してください。
-忘れずにインポート文も追加してくださいね！`,
+そして、評価4つ星を表示してください。`,
       hint: '文字列の.repeat()メソッドを使うと文字を繰り返せます',
       initialCode: `import './styles.css'
 
@@ -267,8 +264,7 @@ export default App`,
       title: '商品画像を表示しよう',
       instruction: `HTML要素の属性にも変数を使うことができます。
 「imageUrl」変数に商品画像のURLを代入し、「altText」変数にalt属性の内容を代入して、
-商品カードに画像を表示してください。
-忘れずにインポート文も追加してくださいね！`,
+商品カードに画像を表示してください。`,
       hint: 'src={imageUrl} alt={altText} のように属性に変数を設定します',
       initialCode: `import './styles.css'
 
@@ -338,8 +334,7 @@ export default App`,
       title: '商品オブジェクトを完成させよう',
       instruction: `最後に、すべての商品情報を1つのオブジェクトにまとめてみましょう。
 「product」オブジェクトを作成し、name、price、discountRate、rating、imageUrl、altTextプロパティを持たせてください。
-そして、すべてのプロパティを使って商品カードを表示してください。
-忘れずにインポート文も追加してくださいね！`,
+そして、すべてのプロパティを使って商品カードを表示してください。`,
       hint: 'オブジェクトのプロパティは product.name や product.price でアクセスできます',
       initialCode: `import './styles.css'
 
