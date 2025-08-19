@@ -174,11 +174,12 @@ const Footer = () => {
 「こんにちは」というテキストを表示するだけのコンポーネントです。`,
       hint: 'divタグの中に「こんにちは」と書くだけでOKです',
       initialCode: `const App = () => {
-  // ここにコードを書いてください
-  return <div>???</div>
+  // このファイルは段階的に編集していきます
+  return <div>スタート</div>
 }
 
 export default App`,
+      copyableCode: `<div>こんにちは</div>`,
       solutionCode: `const App = () => {
   return <div>こんにちは</div>
 }
@@ -195,11 +196,11 @@ export default App`,
 h1タグは大きな見出しを表示するためのタグです。`,
       hint: 'divタグの代わりにh1タグを使います',
       initialCode: `const App = () => {
-  // h1タグを使って「ようこそReactへ！」と表示してください
-  return <div>???</div>
+  return <div>こんにちは</div>
 }
 
 export default App`,
+      copyableCode: `<h1>ようこそReactへ！</h1>`,
       solutionCode: `const App = () => {
   return <h1>ようこそReactへ！</h1>
 }
@@ -216,13 +217,12 @@ export default App`,
 h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表示してみましょう。`,
       hint: 'divタグで全体を包み、その中にh1とpタグを入れます',
       initialCode: `const App = () => {
-  // 複数の要素を返すときは、divタグで包む必要があります
-  return (
-    // ここにコードを書いてください
-  )
+  return <h1>ようこそReactへ！</h1>
 }
 
 export default App`,
+      copyableCode: `<h1>React App</h1>
+<p>Reactの基本構造を学ぶ</p>`,
       solutionCode: `const App = () => {
   return (
     <div>
@@ -256,6 +256,13 @@ divタグに「container」、h1タグに「title」、pタグに「description�
 }
 
 export default App`,
+      copyableCode: [
+        `import './styles.css'`,
+        `<div className="container">
+  <h1 className="title">React App</h1>
+  <p className="description">Reactの基本構造を学ぶ</p>
+</div>`
+      ],
       solutionCode: `import './styles.css'
 
 const App = () => {
@@ -281,17 +288,19 @@ imgタグは「セルフクロージング」といって、最後に/を付け�
 
 **忘れずに、ファイルの先頭に \`import './styles.css'\` も追加してくださいね！**`,
       hint: 'imgタグの最後に必ず/を付けてください。import文も忘れずに！',
-      initialCode: `const App = () => {
+      initialCode: `import './styles.css'
+
+const App = () => {
   return (
     <div className="container">
       <h1 className="title">React App</h1>
       <p className="description">Reactの基本構造を学ぶ</p>
-      {/* ここに画像タグを追加 src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" */}
     </div>
   )
 }
 
 export default App`,
+      copyableCode: `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />`,
       solutionCode: `import './styles.css'
 
 const App = () => {
@@ -314,8 +323,8 @@ export default App`,
   // 互換性のため、最終的な完成形も残す
   initialFiles: {
     'App.jsx': `const App = () => {
-  // このファイルは段階的に編集していきます
-  return <div>スタート</div>
+  // ここにコードを書いてください
+  return <div>???</div>
 }
 
 export default App`,

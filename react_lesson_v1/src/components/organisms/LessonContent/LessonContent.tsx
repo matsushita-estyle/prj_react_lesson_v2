@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { LessonStep } from '@/lib/types/lesson'
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 
 interface LessonContentProps {
   taskDescription?: string
@@ -18,12 +19,7 @@ export default function LessonContent({
   onApplyCode,
   nextLessonId,
 }: LessonContentProps) {
-  const [showHints, setShowHints] = useState<Record<number, boolean>>({})
   const [showSolutions, setShowSolutions] = useState<Record<number, boolean>>({})
-
-  const toggleHint = (stepIndex: number) => {
-    setShowHints((prev) => ({ ...prev, [stepIndex]: !prev[stepIndex] }))
-  }
 
   const toggleSolution = (stepIndex: number) => {
     setShowSolutions((prev) => ({ ...prev, [stepIndex]: !prev[stepIndex] }))
@@ -155,21 +151,57 @@ export default function LessonContent({
                       </pre>
                     </div>
                   </div>
+                  
+                  {/* コピー可能なコードスニペット */}
+                  {step.copyableCode && (
+                    <div className="mt-2">
+                      {Array.isArray(step.copyableCode) ? (
+                        <div className="space-y-1">
+                          {step.copyableCode.map((code, idx) => (
+                            <div 
+                              key={idx}
+                              className="cursor-pointer rounded border border-yellow-200 bg-yellow-50 p-2 transition-colors hover:bg-yellow-100"
+                              onClick={() => {
+                                navigator.clipboard.writeText(code)
+                              }}
+                              title="クリックでコピー"
+                            >
+                              <div className="flex items-center gap-2">
+                                <ContentCopyIcon className="text-gray-600" fontSize="small" />
+                                <div className="flex-1">
+                                  <pre className="overflow-x-auto text-xs text-gray-700 whitespace-pre-wrap break-all">
+                                    <code>{code}</code>
+                                  </pre>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div 
+                          className="cursor-pointer rounded border border-yellow-200 bg-yellow-50 p-2 transition-colors hover:bg-yellow-100"
+                          onClick={() => {
+                            navigator.clipboard.writeText(step.copyableCode as string)
+                          }}
+                          title="クリックでコピー"
+                        >
+                          <div className="flex items-center gap-2">
+                            <ContentCopyIcon className="text-gray-600" fontSize="small" />
+                            <div className="flex-1">
+                              <pre className="overflow-x-auto text-xs text-gray-700 whitespace-pre-wrap break-all">
+                                <code>{step.copyableCode}</code>
+                              </pre>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               )}
 
               {/* ボタンエリア */}
               <div className="flex gap-3">
-                {/* ヒントボタン */}
-                {step.hint && (
-                  <button
-                    onClick={() => toggleHint(index)}
-                    className="rounded bg-yellow-500 px-4 py-2 text-sm text-white transition-colors hover:bg-yellow-600"
-                  >
-                    {showHints[index] ? 'ヒントを隠す' : 'ヒントを見る'} 💡
-                  </button>
-                )}
-
                 {/* 解答例ボタン */}
                 <button
                   onClick={() => toggleSolution(index)}
@@ -179,12 +211,6 @@ export default function LessonContent({
                 </button>
               </div>
 
-              {/* ヒント表示 */}
-              {step.hint && showHints[index] && (
-                <div className="mt-4 rounded-lg border-l-4 border-yellow-400 bg-yellow-50 p-4">
-                  <p className="text-gray-700">{step.hint}</p>
-                </div>
-              )}
 
               {/* 解答例表示 */}
               {showSolutions[index] && (
