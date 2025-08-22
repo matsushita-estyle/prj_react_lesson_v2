@@ -315,8 +315,7 @@ styles.cssに .container img のスタイルを追加してください：
 
 - 最大幅100%（max-width: 100%）
 - 高さ自動調整（height: auto）
-- 角丸にする（border-radius: 15px）
-- 影を追加（box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2)）`,
+- 角丸にする（border-radius: 15px）`,
       hint: 'border-radiusで角を丸くできます。数値が大きいほど丸くなります',
       initialCode: `/* Step 1: 基本的なスタイル */
 .container {
@@ -442,11 +441,11 @@ export default App`,
 - 美しい影（box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1)）
 - システムフォント（font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif）
 
-画像にホバーエフェクトを追加：
-- .container img:hover で、マウスを乗せた時の動作を設定
-- 少し上に移動させて拡大（transform: translateY(-5px) scale(1.02)）
-- アニメーション（transition: transform 0.3s ease）`,
-      hint: 'linear-gradientでグラデーション、:hoverでマウスホバー時のスタイルを設定できます',
+画像に回転アニメーションを追加：
+- .container img に、ゆっくり回転するアニメーション（animation: rotate 8s linear infinite）
+- @keyframes rotate でアニメーションを定義
+- 0度から360度まで8秒かけて回転`,
+      hint: 'linear-gradientでグラデーション、@keyframes rotateでアニメーションを定義できます',
       initialCode: `/* Step 1: 基本的なスタイル */
 .container {
   max-width: 600px;
@@ -484,7 +483,7 @@ export default App`,
 
 /* Step 5: 高度なスタイリングをここに追加 */
 /* .containerを更新してグラデーションや角丸を追加 */
-/* .container img:hoverでホバーエフェクトを追加 */`,
+/* .container imgに回転アニメーションを追加 */`,
       solutionCode: `.container {
   max-width: 600px;
   margin: 2rem auto;
@@ -516,12 +515,16 @@ export default App`,
   max-width: 100%;
   height: auto;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
+  animation: rotate 8s linear infinite;
 }
 
-.container img:hover {
-  transform: translateY(-5px) scale(1.02);
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }`,
       solutionTargetFile: 'styles.css',
       initialFiles: {
@@ -562,7 +565,7 @@ export default App`,
 
 /* Step 5: 高度なスタイリングをここに追加 */
 /* .containerを更新してグラデーションや角丸を追加 */
-/* .container img:hoverでホバーエフェクトを追加 */`,
+/* .container imgに回転アニメーションを追加 */`,
         'App.jsx': `import './styles.css'
 
 const App = () => {
@@ -650,13 +653,16 @@ export default App`,
   max-width: 100%;
   height: auto;
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: rotate 8s linear infinite;
 }
 
-.container img:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* レスポンシブ対応 */
