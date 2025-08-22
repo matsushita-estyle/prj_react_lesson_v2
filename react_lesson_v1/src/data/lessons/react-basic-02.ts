@@ -1,4 +1,4 @@
-import { Lesson } from '@/lib/types/lesson'
+import { Lesson } from '@/lib/types/lesson';
 
 export const reactBasic02: Lesson = {
   id: 'react-basic-02',
@@ -203,7 +203,11 @@ const App = () => {
 
 export default App`,
       validation: {
-        includes: ['{price}', '{price - price * discountRate}', "import './styles.css'"],
+        includes: [
+          '{price}',
+          '{price - price * discountRate}',
+          "import './styles.css'",
+        ],
       },
     },
     {
@@ -491,32 +495,7 @@ export default App`,
   background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
   border-radius: 50%;
 }
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-  .product-card {
-    margin: 1rem;
-    max-width: 90%;
-  }
-  
-  .product-card h1 {
-    font-size: 1.5rem;
-    margin: 1.25rem 1.25rem 0.75rem 1.25rem;
-  }
-  
-  .price, .discount-price, .rating {
-    margin-left: 1.25rem;
-    margin-right: 1.25rem;
-  }
-  
-  .discount-price {
-    font-size: 1.3rem;
-  }
-  
-  .product-image {
-    height: 240px;
-  }
-}`,
+`,
   },
 
   solutionFiles: {
@@ -654,4 +633,4 @@ export default App`,
 
   previousLessonId: 'react-basic-01',
   nextLessonId: 'react-basic-03',
-}
+};

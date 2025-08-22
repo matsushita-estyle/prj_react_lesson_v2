@@ -400,26 +400,7 @@ export default App`,
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.container img:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
-  .container {
-    margin: 1rem;
-    padding: 1.5rem;
-  }
-  
-  .title {
-    font-size: 2rem;
-  }
-  
-  .description {
-    font-size: 1rem;
-  }
-}`,
+`,
   },
 
   solutionFiles: {
