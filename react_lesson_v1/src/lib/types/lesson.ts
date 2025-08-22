@@ -5,6 +5,7 @@ export interface LessonStep {
   hint?: string
   initialCode?: string
   solutionCode: string
+  solutionTargetFile?: string  // solutionCodeの貼り付け先ファイルを指定
   copyableCode?: string | string[] | { label: string; code: string }[]  // コピー可能なコードスニペット
   initialFiles?: Record<string, string>  // ステップごとの初期ファイル
   defaultFile?: string  // ステップで最初に表示するファイル

@@ -101,19 +101,15 @@ styles.cssに以下のCSSを追加してみましょう：
 - 白いテキスト色（color: white）`,
       hint: 'CSSでは .クラス名 { プロパティ: 値; } の形で書きます',
       initialCode: `/* ここにCSSを書いていきます */`,
-      solutionCode: `import './styles.css'
-
-const App = () => {
-  return (
-    <div className="container">
-      <h1 className="title">React App</h1>
-      <p className="description">Reactの基本構造を学ぶ</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
-    </div>
-  )
-}
-
-export default App`,
+      solutionCode: `.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #4c51bf;
+  text-align: center;
+  color: white;
+}`,
+      solutionTargetFile: 'styles.css',
       initialFiles: {
         'styles.css': `/* ここにCSSを書いていきます */`,
         'App.jsx': `import './styles.css'
@@ -157,19 +153,22 @@ styles.cssに .title のスタイルを追加してください：
 }
 
 /* Step 2: タイトルのスタイルをここに追加 */`,
-      solutionCode: `import './styles.css'
-
-const App = () => {
-  return (
-    <div className="container">
-      <h1 className="title">React App</h1>
-      <p className="description">Reactの基本構造を学ぶ</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
-    </div>
-  )
+      solutionCode: `.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #4c51bf;
+  text-align: center;
+  color: white;
 }
 
-export default App`,
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}`,
+      solutionTargetFile: 'styles.css',
       initialFiles: {
         'styles.css': `/* Step 1: 基本的なスタイル */
 .container {
@@ -238,19 +237,30 @@ styles.cssに .description のスタイルを追加してください：
 }
 
 /* Step 3: 説明文のスタイルをここに追加 */`,
-      solutionCode: `import './styles.css'
-
-const App = () => {
-  return (
-    <div className="container">
-      <h1 className="title">React App</h1>
-      <p className="description">Reactの基本構造を学ぶ</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
-    </div>
-  )
+      solutionCode: `.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #4c51bf;
+  text-align: center;
+  color: white;
 }
 
-export default App`,
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}`,
+      solutionTargetFile: 'styles.css',
       initialFiles: {
         'styles.css': `/* Step 1: 基本的なスタイル */
 .container {
@@ -336,19 +346,37 @@ styles.cssに .container img のスタイルを追加してください：
 }
 
 /* Step 4: 画像のスタイルをここに追加 */`,
-      solutionCode: `import './styles.css'
-
-const App = () => {
-  return (
-    <div className="container">
-      <h1 className="title">React App</h1>
-      <p className="description">Reactの基本構造を学ぶ</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
-    </div>
-  )
+      solutionCode: `.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #4c51bf;
+  text-align: center;
+  color: white;
 }
 
-export default App`,
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}`,
+      solutionTargetFile: 'styles.css',
       initialFiles: {
         'styles.css': `/* Step 1: 基本的なスタイル */
 .container {
@@ -457,19 +485,45 @@ export default App`,
 /* Step 5: 高度なスタイリングをここに追加 */
 /* .containerを更新してグラデーションや角丸を追加 */
 /* .container img:hoverでホバーエフェクトを追加 */`,
-      solutionCode: `import './styles.css'
-
-const App = () => {
-  return (
-    <div className="container">
-      <h1 className="title">React App</h1>
-      <p className="description">Reactの基本構造を学ぶ</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
-    </div>
-  )
+      solutionCode: `.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
-export default App`,
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.container img:hover {
+  transform: translateY(-5px) scale(1.02);
+}`,
+      solutionTargetFile: 'styles.css',
       initialFiles: {
         'styles.css': `/* Step 1: 基本的なスタイル */
 .container {
