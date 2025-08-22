@@ -1,4 +1,4 @@
-import { Lesson } from '@/lib/types/lesson'
+import { Lesson } from '@/lib/types/lesson';
 
 export const reactBasic01: Lesson = {
   id: 'react-basic-01',
@@ -178,7 +178,12 @@ Appコンポーネントの中で「こんにちは」というテキストを�
 }
 
 export default App`,
-      copyableCode: `<div>こんにちは</div>`,
+      copyableCode: [
+        {
+          label: 'こんにちはのテキスト表示',
+          code: `<div>こんにちは</div>`,
+        },
+      ],
       solutionCode: `const App = () => {
   return <div>こんにちは</div>
 }
@@ -199,7 +204,12 @@ h1タグは大きな見出しを表示するためのタグです。`,
 }
 
 export default App`,
-      copyableCode: `<h1>ようこそReactへ！</h1>`,
+      copyableCode: [
+        {
+          label: 'h1タグで見出しを表示',
+          code: `<h1>ようこそReactへ！</h1>`,
+        },
+      ],
       solutionCode: `const App = () => {
   return <h1>ようこそReactへ！</h1>
 }
@@ -220,12 +230,20 @@ h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表
 }
 
 export default App`,
-      copyableCode: `return (
+      copyableCode: [
+        {
+          label: 'return文で親要素のdivを返す',
+          code: `return (
   <div>
-    <h1>React App</h1>
-    <p>Reactの基本構造を学ぶ</p>
   </div>
 )`,
+        },
+        {
+          label: 'h1とpタグで見出しと説明文を表示',
+          code: `    <h1>React App</h1>
+    <p>Reactの基本構造を学ぶ</p>`,
+        },
+      ],
       solutionCode: `const App = () => {
   return (
     <div>
@@ -260,11 +278,17 @@ divタグに「container」、h1タグに「title」、pタグに「description�
 
 export default App`,
       copyableCode: [
-        `import './styles.css'`,
-        `<div className="container">
+        {
+          label: 'CSSファイルをインポート',
+          code: `import './styles.css'`,
+        },
+        {
+          label: 'classNameでスタイルを適用したJSX',
+          code: `<div className="container">
   <h1 className="title">React App</h1>
   <p className="description">Reactの基本構造を学ぶ</p>
 </div>`,
+        },
       ],
       solutionCode: `import './styles.css'
 
@@ -279,7 +303,11 @@ const App = () => {
 
 export default App`,
       validation: {
-        includes: ['className="container"', 'className="title"', 'className="description"'],
+        includes: [
+          'className="container"',
+          'className="title"',
+          'className="description"',
+        ],
       },
     },
     {
@@ -303,7 +331,12 @@ const App = () => {
 }
 
 export default App`,
-      copyableCode: `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />`,
+      copyableCode: [
+        {
+          label: 'React学習画像の表示',
+          code: `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />`,
+        },
+      ],
       solutionCode: `import './styles.css'
 
 const App = () => {
@@ -463,4 +496,4 @@ export default App`,
   },
 
   nextLessonId: 'react-basic-02',
-}
+};

@@ -157,25 +157,34 @@ export default function LessonContent({
                     <div className="mt-2">
                       {Array.isArray(step.copyableCode) ? (
                         <div className="space-y-1">
-                          {step.copyableCode.map((code, idx) => (
-                            <div 
-                              key={idx}
-                              className="cursor-pointer rounded border border-yellow-200 bg-yellow-50 p-2 transition-colors hover:bg-yellow-100"
-                              onClick={() => {
-                                navigator.clipboard.writeText(code)
-                              }}
-                              title="クリックでコピー"
-                            >
-                              <div className="flex items-center gap-2">
-                                <ContentCopyIcon className="text-gray-600" fontSize="small" />
-                                <div className="flex-1">
-                                  <pre className="overflow-x-auto text-xs text-gray-700 whitespace-pre-wrap break-all">
-                                    <code>{code}</code>
-                                  </pre>
+                          {step.copyableCode.map((code, idx) => {
+                            const isObject = typeof code === 'object' && 'label' in code
+                            const codeText = isObject ? code.code : code
+                            const label = isObject ? code.label : undefined
+                            
+                            return (
+                              <div 
+                                key={idx}
+                                className="cursor-pointer rounded border border-yellow-200 bg-yellow-50 p-2 transition-colors hover:bg-yellow-100"
+                                onClick={() => {
+                                  navigator.clipboard.writeText(codeText)
+                                }}
+                                title="クリックでコピー"
+                              >
+                                <div className="flex items-center gap-2">
+                                  <ContentCopyIcon className="text-gray-600" fontSize="small" />
+                                  <div className="flex-1">
+                                    {label && (
+                                      <div className="text-xs text-gray-500 mb-1">{label}</div>
+                                    )}
+                                    <pre className="overflow-x-auto text-xs text-gray-700 whitespace-pre-wrap break-all">
+                                      <code>{codeText}</code>
+                                    </pre>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          ))}
+                            )
+                          })}
                         </div>
                       ) : (
                         <div 

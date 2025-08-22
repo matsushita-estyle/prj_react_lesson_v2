@@ -5,7 +5,7 @@ export interface LessonStep {
   hint?: string
   initialCode?: string
   solutionCode: string
-  copyableCode?: string | string[]  // コピー可能なコードスニペット（文字列または配列）
+  copyableCode?: string | string[] | { label: string; code: string }[]  // コピー可能なコードスニペット
   validation?: {
     includes?: string[]
     excludes?: string[]

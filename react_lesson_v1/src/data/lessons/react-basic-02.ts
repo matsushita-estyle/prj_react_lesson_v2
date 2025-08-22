@@ -159,7 +159,7 @@ const App = () => {
 
 export default App`,
       validation: {
-        includes: ['{productName}', 'import \'./styles.css\''],
+        includes: ['{productName}', "import './styles.css'"],
       },
     },
     {
@@ -203,7 +203,7 @@ const App = () => {
 
 export default App`,
       validation: {
-        includes: ['{price}', '{price - price * discountRate}', 'import \'./styles.css\''],
+        includes: ['{price}', '{price - price * discountRate}', "import './styles.css'"],
       },
     },
     {
@@ -256,7 +256,7 @@ const App = () => {
 
 export default App`,
       validation: {
-        includes: ['{getStarRating(4)}', 'import \'./styles.css\''],
+        includes: ['{getStarRating(4)}', "import './styles.css'"],
       },
     },
     {
@@ -326,7 +326,7 @@ const App = () => {
 
 export default App`,
       validation: {
-        includes: ['src={imageUrl}', 'alt={altText}', 'import \'./styles.css\''],
+        includes: ['src={imageUrl}', 'alt={altText}', "import './styles.css'"],
       },
     },
     {
@@ -394,7 +394,12 @@ const App = () => {
 
 export default App`,
       validation: {
-        includes: ['{product.name}', '{product.price}', '{getStarRating(product.rating)}', 'import \'./styles.css\''],
+        includes: [
+          '{product.name}',
+          '{product.price}',
+          '{getStarRating(product.rating)}',
+          "import './styles.css'",
+        ],
       },
     },
   ],
