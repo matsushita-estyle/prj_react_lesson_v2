@@ -160,6 +160,7 @@ const App = () => {
 }
 
 export default App`,
+      solutionTargetFile: 'App.jsx',
       validation: {
         includes: ['{productName}', "import './styles.css'"],
       },
@@ -206,6 +207,7 @@ const App = () => {
 }
 
 export default App`,
+      solutionTargetFile: 'App.jsx',
       validation: {
         includes: [
           '{price}',
@@ -265,6 +267,7 @@ const App = () => {
 }
 
 export default App`,
+      solutionTargetFile: 'App.jsx',
       validation: {
         includes: ['{getStarRating(4)}', "import './styles.css'"],
       },
@@ -337,6 +340,7 @@ const App = () => {
 }
 
 export default App`,
+      solutionTargetFile: 'App.jsx',
       validation: {
         includes: ['src={imageUrl}', 'alt={altText}', "import './styles.css'"],
       },
@@ -407,6 +411,7 @@ const App = () => {
 }
 
 export default App`,
+      solutionTargetFile: 'App.jsx',
       validation: {
         includes: [
           '{product.name}',

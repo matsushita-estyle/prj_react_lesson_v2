@@ -191,6 +191,7 @@ export default App`
 }
 
 export default App`,
+      solutionTargetFile: 'App.jsx',
       validation: {
         includes: ['こんにちは'],
       },
@@ -219,6 +220,7 @@ export default App`
 }
 
 export default App`,
+      solutionTargetFile: 'App.jsx',
       validation: {
         includes: ['<h1>', 'ようこそReactへ', '</h1>'],
       },
@@ -260,6 +262,7 @@ export default App`
 }
 
 export default App`,
+      solutionTargetFile: 'App.jsx',
       validation: {
         includes: ['<div>', '<h1>', '<p>', '</div>'],
       },
@@ -310,6 +313,7 @@ const App = () => {
 }
 
 export default App`,
+      solutionTargetFile: 'App.jsx',
       validation: {
         includes: [
           'className="container"',
@@ -360,6 +364,7 @@ const App = () => {
 }
 
 export default App`,
+      solutionTargetFile: 'App.jsx',
       validation: {
         includes: ['<img', '/>'],
       },
