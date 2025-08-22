@@ -170,12 +170,11 @@ const Footer = () => {
     {
       stepNumber: 1,
       title: 'シンプルなコンポーネントを作ろう',
-      instruction: `まずは、最もシンプルなReactコンポーネントを作ってみましょう。
-「こんにちは」というテキストを表示するだけのコンポーネントです。`,
+      instruction: `Reactの第一歩として、シンプルなテキスト表示から始めましょう。
+Appコンポーネントの中で「こんにちは」というテキストを表示してみます。`,
       hint: 'divタグの中に「こんにちは」と書くだけでOKです',
       initialCode: `const App = () => {
-  // このファイルは段階的に編集していきます
-  return <div>スタート</div>
+  return <div>{/* ここにコードを書いてください */}</div>
 }
 
 export default App`,
@@ -213,7 +212,7 @@ export default App`,
     {
       stepNumber: 3,
       title: '複数の要素を表示しよう',
-      instruction: `JSXのルールを思い出してください。複数の要素を返すときは、必ず1つの親要素で包む必要があります。
+      instruction: `複数の要素を返すときは、必ず1つの親要素で包む必要があります。
 h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表示してみましょう。`,
       hint: 'divタグで全体を包み、その中にh1とpタグを入れます',
       initialCode: `const App = () => {
@@ -221,8 +220,12 @@ h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表
 }
 
 export default App`,
-      copyableCode: `<h1>React App</h1>
-<p>Reactの基本構造を学ぶ</p>`,
+      copyableCode: `return (
+  <div>
+    <h1>React App</h1>
+    <p>Reactの基本構造を学ぶ</p>
+  </div>
+)`,
       solutionCode: `const App = () => {
   return (
     <div>
@@ -243,7 +246,7 @@ export default App`,
       instruction: `最後に、classNameを使ってクラス名を追加してみましょう。
 divタグに「container」、h1タグに「title」、pタグに「description」というクラス名を追加してください。
 
-**今度は、CSSを適用するためのインポート文も追加する必要があります！**
+今度は、CSSを適用するためのインポート文も追加する必要があります！
 ファイルの先頭に \`import './styles.css'\` を追加してスタイルを読み込みましょう。`,
       hint: 'JSXではclassではなくclassNameを使います。また、ファイルの先頭にimport文も忘れずに！',
       initialCode: `const App = () => {
@@ -261,7 +264,7 @@ export default App`,
         `<div className="container">
   <h1 className="title">React App</h1>
   <p className="description">Reactの基本構造を学ぶ</p>
-</div>`
+</div>`,
       ],
       solutionCode: `import './styles.css'
 
@@ -323,8 +326,7 @@ export default App`,
   // 互換性のため、最終的な完成形も残す
   initialFiles: {
     'App.jsx': `const App = () => {
-  // ここにコードを書いてください
-  return <div>???</div>
+  return <div>{/* ここにコードを書いてください */}</div>
 }
 
 export default App`,
