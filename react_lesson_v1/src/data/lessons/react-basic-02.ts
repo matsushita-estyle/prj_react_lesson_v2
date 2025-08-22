@@ -100,7 +100,9 @@ styles.cssに以下のCSSを追加してみましょう：
 - テキストを中央寄せ（text-align: center）
 - 白いテキスト色（color: white）`,
       hint: 'CSSでは .クラス名 { プロパティ: 値; } の形で書きます',
-      initialCode: `/* ここにCSSを書いていきます */`,
+      initialCode: `.container {
+/* ここにCSSを書いていきます */
+}`,
       solutionCode: `.container {
   max-width: 600px;
   margin: 2rem auto;
@@ -111,7 +113,9 @@ styles.cssに以下のCSSを追加してみましょう：
 }`,
       solutionTargetFile: 'styles.css',
       initialFiles: {
-        'styles.css': `/* ここにCSSを書いていきます */`,
+        'styles.css': `.container {
+/* ここにCSSを書いていきます */
+}`,
         'App.jsx': `import './styles.css'
 
 const App = () => {
@@ -152,7 +156,10 @@ styles.cssに .title のスタイルを追加してください：
   color: white;
 }
 
-/* Step 2: タイトルのスタイルをここに追加 */`,
+/* Step 2: タイトルのスタイル */
+.title {
+/* ここにCSSを書いていきます */
+}`,
       solutionCode: `.container {
   max-width: 600px;
   margin: 2rem auto;
@@ -182,10 +189,7 @@ styles.cssに .title のスタイルを追加してください：
 
 /* Step 2: タイトルのスタイル */
 .title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin: 0 0 1rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+/* ここにCSSを書いていきます */
 }`,
         'App.jsx': `import './styles.css'
 
@@ -236,7 +240,10 @@ styles.cssに .description のスタイルを追加してください：
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Step 3: 説明文のスタイルをここに追加 */`,
+/* Step 3: 説明文のスタイル */
+.description {
+/* ここにCSSを書いていきます */
+}`,
       solutionCode: `.container {
   max-width: 600px;
   margin: 2rem auto;
@@ -282,11 +289,7 @@ styles.cssに .description のスタイルを追加してください：
 
 /* Step 3: 説明文のスタイル */
 .description {
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin: 0 0 2rem 0;
-  opacity: 0.9;
-  line-height: 1.6;
+/* ここにCSSを書いていきます */
 }`,
         'App.jsx': `import './styles.css'
 
@@ -344,7 +347,10 @@ styles.cssに .container img のスタイルを追加してください：
   line-height: 1.6;
 }
 
-/* Step 4: 画像のスタイルをここに追加 */`,
+/* Step 4: 画像のスタイル */
+.container img {
+/* ここにCSSを書いていきます */
+}`,
       solutionCode: `.container {
   max-width: 600px;
   margin: 2rem auto;
@@ -406,10 +412,7 @@ styles.cssに .container img のスタイルを追加してください：
 
 /* Step 4: 画像のスタイル */
 .container img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+/* ここにCSSを書いていきます */
 }`,
         'App.jsx': `import './styles.css'
 
@@ -481,9 +484,16 @@ export default App`,
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Step 5: 高度なスタイリングをここに追加 */
+/* Step 5: 高度なスタイリング */
 /* .containerを更新してグラデーションや角丸を追加 */
-/* .container imgに回転アニメーションを追加 */`,
+.container {
+/* ここにCSSを書いていきます */
+}
+
+/* .container imgに回転アニメーションを追加 */
+.container img {
+/* ここにCSSを書いていきます */
+}`,
       solutionCode: `.container {
   max-width: 600px;
   margin: 2rem auto;
@@ -563,9 +573,16 @@ export default App`,
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Step 5: 高度なスタイリングをここに追加 */
+/* Step 5: 高度なスタイリング */
 /* .containerを更新してグラデーションや角丸を追加 */
-/* .container imgに回転アニメーションを追加 */`,
+.container {
+/* ここにCSSを書いていきます */
+}
+
+/* .container imgに回転アニメーションを追加 */
+.container img {
+/* ここにCSSを書いていきます */
+}`,
         'App.jsx': `import './styles.css'
 
 const App = () => {
@@ -588,7 +605,9 @@ export default App`,
   ],
 
   initialFiles: {
-    'styles.css': `/* ここにCSSを書いていきます */`,
+    'styles.css': `.container {
+/* ここにCSSを書いていきます */
+}`,
     'App.jsx': `import './styles.css'
 
 const App = () => {
