@@ -173,11 +173,13 @@ const Footer = () => {
       instruction: `Reactの第一歩として、シンプルなテキスト表示から始めましょう。
 Appコンポーネントの中で「こんにちは」というテキストを表示してみます。`,
       hint: 'divタグの中に「こんにちは」と書くだけでOKです',
-      initialCode: `const App = () => {
+      initialFiles: {
+        'App.jsx': `const App = () => {
   return <div>{/* ここにコードを書いてください */}</div>
 }
 
-export default App`,
+export default App`
+      },
       copyableCode: [
         {
           label: 'こんにちはのテキスト表示',
@@ -199,11 +201,13 @@ export default App`,
       instruction: `次は、h1タグを使って「ようこそReactへ！」という見出しを作りましょう。
 h1タグは大きな見出しを表示するためのタグです。`,
       hint: 'divタグの代わりにh1タグを使います',
-      initialCode: `const App = () => {
+      initialFiles: {
+        'App.jsx': `const App = () => {
   return <div>こんにちは</div>
 }
 
-export default App`,
+export default App`
+      },
       copyableCode: [
         {
           label: 'h1タグで見出しを表示',
@@ -225,11 +229,13 @@ export default App`,
       instruction: `複数の要素を返すときは、必ず1つの親要素で包む必要があります。
 h1タグで「React App」、pタグで「Reactの基本構造を学ぶ」と表示してみましょう。`,
       hint: 'divタグで全体を包み、その中にh1とpタグを入れます',
-      initialCode: `const App = () => {
+      initialFiles: {
+        'App.jsx': `const App = () => {
   return <h1>ようこそReactへ！</h1>
 }
 
-export default App`,
+export default App`
+      },
       copyableCode: [
         {
           label: 'return文で親要素のdivを返す',
@@ -267,7 +273,8 @@ divタグに「container」、h1タグに「title」、pタグに「description�
 今度は、CSSを適用するためのインポート文も追加する必要があります！
 ファイルの先頭に \`import './styles.css'\` を追加してスタイルを読み込みましょう。`,
       hint: 'JSXではclassではなくclassNameを使います。また、ファイルの先頭にimport文も忘れずに！',
-      initialCode: `const App = () => {
+      initialFiles: {
+        'App.jsx': `const App = () => {
   return (
     <div>
       <h1>React App</h1>
@@ -276,7 +283,8 @@ divタグに「container」、h1タグに「title」、pタグに「description�
   )
 }
 
-export default App`,
+export default App`
+      },
       copyableCode: [
         {
           label: 'CSSファイルをインポート',
@@ -319,7 +327,8 @@ imgタグは「セルフクロージング」といって、最後に/を付け�
 
 **忘れずに、ファイルの先頭に \`import './styles.css'\` も追加してくださいね！**`,
       hint: 'imgタグの最後に必ず/を付けてください。import文も忘れずに！',
-      initialCode: `import './styles.css'
+      initialFiles: {
+        'App.jsx': `import './styles.css'
 
 const App = () => {
   return (
@@ -330,7 +339,8 @@ const App = () => {
   )
 }
 
-export default App`,
+export default App`
+      },
       copyableCode: [
         {
           label: 'React学習画像の表示',

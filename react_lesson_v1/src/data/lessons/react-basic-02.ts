@@ -2,631 +2,622 @@ import { Lesson } from '@/lib/types/lesson';
 
 export const reactBasic02: Lesson = {
   id: 'react-basic-02',
-  title: 'JSXの中にJavaScriptを埋め込む',
+  title: 'CSSでスタイルを適用してみよう',
   lessonNumber: 2,
 
-  material: `# JSXの中にJavaScriptを埋め込む
+  material: `# CSSでスタイルを適用してみよう
 
-このレッスンでは、JSXの中にJavaScriptの変数や式を埋め込む方法について学習します。
+前のレッスンでReactの基本構造とJSXの書き方を学びました。
+今度は、CSSを使って見た目を美しくしていきましょう！
 
-## JSX式の基本
+## CSSとは？
 
-JSXでは、波括弧 \`{}\` を使ってJavaScriptの変数や式を埋め込むことができます。これによって、動的なコンテンツを表示することが可能になります。
+CSS（Cascading Style Sheets）は、ウェブページの見た目やデザインを指定するための言語です。
+HTMLが「構造」を担当するのに対し、CSSは「装飾」を担当します。
 
-## 変数の埋め込み
+## ReactでCSSを使う方法
 
-変数の値をJSXで表示する例を見てみましょう。
+ReactでCSSを適用する主な方法は以下の通りです：
+
+### 1. 外部CSSファイルを読み込む
 
 \`\`\`jsx
-const ProductCard = () => {
-  const productName = "スマートウォッチ";
-  return <h2>{productName}</h2>;
-}
-// 画面には "スマートウォッチ" と表示される
+import './styles.css'
 \`\`\`
 
-この例では、productNameという変数の値が波括弧を使ってJSX内に表示されています。
+### 2. classNameでクラスを指定する
 
-## 計算式の埋め込み
-
-JSXの中では、変数だけでなく計算式も実行できます。
+HTMLでは \`class\` 属性を使いますが、ReactのJSXでは \`className\` を使います。
 
 \`\`\`jsx
-const PriceCalculator = () => {
-  const price = 12000;
-  const discountRate = 0.20;
-  
-  return (
-    <div>
-      <p>定価: {price}円</p>
-      <p>割引価格: {price - price * discountRate}円</p>
-    </div>
-  );
-}
+<div className="container">
+  <h1 className="title">タイトル</h1>
+</div>
 \`\`\`
 
-## 関数の実行
+## CSSの基本的な書き方
 
-JSXの中で関数を呼び出すこともできます。ただし、関数は画面に表示可能な値（文字列、数値、JSX要素など）を返す必要があります。
+CSSは「セレクタ」と「プロパティ」で構成されます。
 
-\`\`\`jsx
-const getStarRating = (rating) => {
-  return '⭐'.repeat(rating);
-}
-
-const ProductRating = () => {
-  return <p>評価: {getStarRating(4)}</p>;
+\`\`\`css
+.container {  /* セレクタ（クラス名） */
+  background-color: blue;  /* プロパティ: 値; */
+  padding: 20px;
+  margin: 10px;
 }
 \`\`\`
 
-## 属性での変数使用
+## よく使うCSSプロパティ
 
-HTML要素の属性にも変数を使用できます。
+### レイアウト関連
+- \`margin\`: 外側の余白
+- \`padding\`: 内側の余白  
+- \`width\`: 幅
+- \`height\`: 高さ
+- \`text-align\`: テキストの配置
 
-\`\`\`jsx
-const ProductImage = () => {
-  const imageUrl = "/images/smartwatch.jpg";
-  const altText = "スマートウォッチの画像";
-  
-  return <img src={imageUrl} alt={altText} />;
-}
-\`\`\`
+### 色とフォント関連
+- \`color\`: 文字色
+- \`background-color\`: 背景色
+- \`font-size\`: フォントサイズ
+- \`font-weight\`: フォントの太さ
 
-## 重要な注意点
+### 装飾関連
+- \`border-radius\`: 角丸
+- \`box-shadow\`: 影
+- \`border\`: 枠線
 
-### 表示できる値の種類
+## 段階的にスタイルを適用しよう
 
-JSXで直接表示できるのは以下の値です：
-- 文字列
-- 数値  
-- boolean値（ただし画面には表示されない）
-- JSX要素
+このレッスンでは、以下の順序でスタイルを追加していきます：
 
-### オブジェクトの扱い
+1. **基本的なレイアウト**: 背景色、余白、中央寄せ
+2. **タイトルのスタイリング**: フォントサイズ、太さ、影
+3. **説明文のスタイリング**: フォントサイズ、行間、透明度
+4. **画像のスタイリング**: サイズ調整、角丸、影
+5. **高度なスタイリング**: グラデーション、ホバーエフェクト
 
-オブジェクトを直接表示しようとするとエラーになります。
-
-\`\`\`jsx
-// ❌ エラーになる例
-const BadExample = () => {
-  const product = { name: "スマートウォッチ", price: 12000 };
-  return <h2>{product}</h2>; // エラー！
-}
-\`\`\`
-
-オブジェクトの値を表示したい場合は、具体的なプロパティにアクセスする必要があります。
-
-\`\`\`jsx
-// ✅ 正しい例
-const GoodExample = () => {
-  const product = { name: "スマートウォッチ", price: 12000 };
-  return (
-    <div>
-      <h2>商品名: {product.name}</h2>
-      <p>価格: {product.price}円</p>
-    </div>
-  );
-}
-\`\`\`
-
-## まとめ
-
-- 波括弧 \`{}\` でJavaScriptの式をJSXに埋め込める
-- 変数、計算式、関数の戻り値を表示できる
-- HTML要素の属性にも変数を使用可能
-- オブジェクトは直接表示できないため、プロパティを指定する`,
+各ステップで見た目がどのように変化するかを確認しながら、CSSの効果を実感してみましょう！`,
 
   taskDescription: `
-# JSXの中にJavaScriptを埋め込む
+# CSSでスタイルを適用してみよう
 
-このレッスンでは、学んだ知識を使って実際にJSXの中でJavaScriptを使ってみましょう。
-段階的にステップを踏んで、動的な商品カードコンポーネントを完成させます！
+前のレッスンで作成したReactアプリに、段階的にCSSスタイルを適用していきます。
+styles.cssファイルにCSSを書きながら、見た目がどのように変化するかを確認しましょう！
   `,
 
-  // 段階的な課題
   steps: [
     {
       stepNumber: 1,
-      title: '商品名を表示してみよう',
-      instruction: `まずは、商品名をJSXで表示してみましょう。
-「productName」という変数に「スマートウォッチ」を代入して、h1タグで表示してください。`,
-      hint: '波括弧{}を使って変数を埋め込みます',
-      initialCode: `import './styles.css'
+      title: '基本的なレイアウトを作ろう',
+      instruction: `最初に、コンテナの基本的なスタイルを設定しましょう。
+背景色、余白、中央寄せ、テキスト色を追加してください。
 
-const App = () => {
-  // ここに商品名の変数を定義してください
-  const productName = "???";
-  
-  return (
-    <div className="product-card">
-      <h1>{/* ここに商品名を表示 */}</h1>
-    </div>
-  )
-}
-
-export default App`,
+styles.cssに以下のCSSを追加してみましょう：
+- .container に背景色（#4c51bf）を設定
+- 最大幅600px、中央寄せ（margin: 2rem auto）
+- 内側の余白（padding: 2rem）
+- テキストを中央寄せ（text-align: center）
+- 白いテキスト色（color: white）`,
+      hint: 'CSSでは .クラス名 { プロパティ: 値; } の形で書きます',
+      initialCode: `/* ここにCSSを書いていきます */`,
       solutionCode: `import './styles.css'
 
 const App = () => {
-  const productName = "スマートウォッチ";
-  
   return (
-    <div className="product-card">
-      <h1>{productName}</h1>
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
     </div>
   )
 }
 
 export default App`,
+      initialFiles: {
+        'styles.css': `/* ここにCSSを書いていきます */`,
+        'App.jsx': `import './styles.css'
+
+const App = () => {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
+    </div>
+  )
+}
+
+export default App`,
+      },
+      defaultFile: 'styles.css',
       validation: {
-        includes: ['{productName}', "import './styles.css'"],
+        includes: ["import './styles.css'", 'className="container"'],
       },
     },
     {
       stepNumber: 2,
-      title: '価格と割引を計算しよう',
-      instruction: `次は、商品の価格と割引を計算して表示しましょう。
-「price」変数に12000を代入し、「discountRate」変数に0.20（20%割引）を代入して、
-「定価: 12000円」と「割引価格: 9600円」を表示してください。`,
-      hint: '割引価格の計算は {price - price * discountRate} のように書けます',
-      initialCode: `import './styles.css'
+      title: 'タイトルを目立たせよう',
+      instruction: `次に、タイトルのスタイルを設定します。
+styles.cssに .title のスタイルを追加してください：
 
-const App = () => {
-  const productName = "スマートウォッチ";
-  // ここに価格と割引率の変数を追加してください
-  
-  return (
-    <div className="product-card">
-      <h1>{productName}</h1>
-      <p className="price">定価: {/* 定価を表示 */}円</p>
-      <p className="discount-price">割引価格: {/* 割引価格を計算して表示 */}円</p>
-    </div>
-  )
+- フォントサイズを大きく（font-size: 3rem）
+- フォントを太く（font-weight: 800） 
+- 下に余白を追加（margin: 0 0 1rem 0）
+- テキストに影を追加（text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3)）`,
+      hint: 'remは相対単位で、1rem = 16px程度です',
+      initialCode: `/* Step 1: 基本的なスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #4c51bf;
+  text-align: center;
+  color: white;
 }
 
-export default App`,
+/* Step 2: タイトルのスタイルをここに追加 */`,
       solutionCode: `import './styles.css'
 
 const App = () => {
-  const productName = "スマートウォッチ";
-  const price = 12000;
-  const discountRate = 0.20;
-  
   return (
-    <div className="product-card">
-      <h1>{productName}</h1>
-      <p className="price">定価: {price}円</p>
-      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
     </div>
   )
 }
 
 export default App`,
+      initialFiles: {
+        'styles.css': `/* Step 1: 基本的なスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #4c51bf;
+  text-align: center;
+  color: white;
+}
+
+/* Step 2: タイトルのスタイル */
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}`,
+        'App.jsx': `import './styles.css'
+
+const App = () => {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
+    </div>
+  )
+}
+
+export default App`,
+      },
+      defaultFile: 'styles.css',
       validation: {
-        includes: [
-          '{price}',
-          '{price - price * discountRate}',
-          "import './styles.css'",
-        ],
+        includes: ['className="title"', "import './styles.css'"],
       },
     },
     {
       stepNumber: 3,
-      title: '星評価の関数を作ろう',
-      instruction: `今度は、商品の評価を星で表示する関数を作ってみましょう。
-「getStarRating」という関数を定義し、引数で受け取った数だけ星（⭐）を返すようにしてください。
-そして、評価4つ星を表示してください。`,
-      hint: '文字列の.repeat()メソッドを使うと文字を繰り返せます',
-      initialCode: `import './styles.css'
+      title: '説明文を読みやすくしよう',
+      instruction: `説明文のスタイルを追加して、読みやすくしましょう。
+styles.cssに .description のスタイルを追加してください：
 
-const App = () => {
-  const productName = "スマートウォッチ";
-  const price = 12000;
-  const discountRate = 0.20;
-  
-  // ここに星評価を返す関数を作ってください
-  
-  return (
-    <div className="product-card">
-      <h1>{productName}</h1>
-      <p className="price">定価: {price}円</p>
-      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
-      <p className="rating">評価: {/* 星評価関数を呼び出してください */}</p>
-    </div>
-  )
+- フォントサイズを調整（font-size: 1.2rem）
+- フォントを細く（font-weight: 300）
+- 下に余白を追加（margin: 0 0 2rem 0）
+- 少し透明に（opacity: 0.9）
+- 行間を広く（line-height: 1.6）`,
+      hint: 'opacityは0〜1の値で、1が完全不透明、0が完全透明です',
+      initialCode: `/* Step 1: 基本的なスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #4c51bf;
+  text-align: center;
+  color: white;
 }
 
-export default App`,
+/* Step 2: タイトルのスタイル */
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Step 3: 説明文のスタイルをここに追加 */`,
       solutionCode: `import './styles.css'
 
 const App = () => {
-  const productName = "スマートウォッチ";
-  const price = 12000;
-  const discountRate = 0.20;
-  
-  const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
-  }
-  
   return (
-    <div className="product-card">
-      <h1>{productName}</h1>
-      <p className="price">定価: {price}円</p>
-      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
-      <p className="rating">評価: {getStarRating(4)}</p>
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
     </div>
   )
 }
 
 export default App`,
+      initialFiles: {
+        'styles.css': `/* Step 1: 基本的なスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #4c51bf;
+  text-align: center;
+  color: white;
+}
+
+/* Step 2: タイトルのスタイル */
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Step 3: 説明文のスタイル */
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}`,
+        'App.jsx': `import './styles.css'
+
+const App = () => {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
+    </div>
+  )
+}
+
+export default App`,
+      },
+      defaultFile: 'styles.css',
       validation: {
-        includes: ['{getStarRating(4)}', "import './styles.css'"],
+        includes: ['className="description"', "import './styles.css'"],
       },
     },
     {
       stepNumber: 4,
-      title: '商品画像を表示しよう',
-      instruction: `HTML要素の属性にも変数を使うことができます。
-「imageUrl」変数に商品画像のURLを代入し、「altText」変数にalt属性の内容を代入して、
-商品カードに画像を表示してください。`,
-      hint: 'src={imageUrl} alt={altText} のように属性に変数を設定します',
-      initialCode: `import './styles.css'
+      title: '画像を美しくしよう',
+      instruction: `画像のスタイルを設定して、見た目を改善しましょう。
+styles.cssに .container img のスタイルを追加してください：
 
-const App = () => {
-  const productName = "スマートウォッチ";
-  const price = 12000;
-  const discountRate = 0.20;
-  
-  const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
-  }
-  
-  // ここに画像URLとalt属性の変数を追加してください
-  
-  return (
-    <div className="product-card">
-      <img 
-        className="product-image"
-        src={/* 画像URLを設定 */}
-        alt={/* alt属性を設定 */}
-      />
-      <h1>{productName}</h1>
-      <p className="price">定価: {price}円</p>
-      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
-      <p className="rating">評価: {getStarRating(4)}</p>
-    </div>
-  )
+- 最大幅100%（max-width: 100%）
+- 高さ自動調整（height: auto）
+- 角丸にする（border-radius: 15px）
+- 影を追加（box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2)）`,
+      hint: 'border-radiusで角を丸くできます。数値が大きいほど丸くなります',
+      initialCode: `/* Step 1: 基本的なスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #4c51bf;
+  text-align: center;
+  color: white;
 }
 
-export default App`,
+/* Step 2: タイトルのスタイル */
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Step 3: 説明文のスタイル */
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* Step 4: 画像のスタイルをここに追加 */`,
       solutionCode: `import './styles.css'
 
 const App = () => {
-  const productName = "スマートウォッチ";
-  const price = 12000;
-  const discountRate = 0.20;
-  
-  const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
-  }
-  
-  const imageUrl = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center";
-  const altText = "スマートウォッチの商品画像";
-  
   return (
-    <div className="product-card">
-      <img 
-        className="product-image"
-        src={imageUrl}
-        alt={altText}
-      />
-      <h1>{productName}</h1>
-      <p className="price">定価: {price}円</p>
-      <p className="discount-price">割引価格: {price - price * discountRate}円</p>
-      <p className="rating">評価: {getStarRating(4)}</p>
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
     </div>
   )
 }
 
 export default App`,
+      initialFiles: {
+        'styles.css': `/* Step 1: 基本的なスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #4c51bf;
+  text-align: center;
+  color: white;
+}
+
+/* Step 2: タイトルのスタイル */
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Step 3: 説明文のスタイル */
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* Step 4: 画像のスタイル */
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}`,
+        'App.jsx': `import './styles.css'
+
+const App = () => {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
+    </div>
+  )
+}
+
+export default App`,
+      },
+      defaultFile: 'styles.css',
       validation: {
-        includes: ['src={imageUrl}', 'alt={altText}', "import './styles.css'"],
+        includes: ['<img', "import './styles.css'"],
       },
     },
     {
       stepNumber: 5,
-      title: '商品オブジェクトを完成させよう',
-      instruction: `最後に、すべての商品情報を1つのオブジェクトにまとめてみましょう。
-「product」オブジェクトを作成し、name、price、discountRate、rating、imageUrl、altTextプロパティを持たせてください。
-そして、すべてのプロパティを使って商品カードを表示してください。`,
-      hint: 'オブジェクトのプロパティは product.name や product.price でアクセスできます',
-      initialCode: `import './styles.css'
+      title: '高度なスタイリングで完成させよう',
+      instruction: `最後に、より高度なスタイリングを追加して完成させましょう。
 
-const App = () => {
-  const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
-  }
-  
-  // ここにproductオブジェクトを作成してください
-  
-  return (
-    <div className="product-card">
-      <img 
-        className="product-image"
-        src={/* product.imageUrl */}
-        alt={/* product.altText */}
-      />
-      <h1>{/* product.name */}</h1>
-      <p className="price">定価: {/* product.price */}円</p>
-      <p className="discount-price">割引価格: {/* 計算式 */}円</p>
-      <p className="rating">評価: {/* getStarRating(product.rating) */}</p>
-    </div>
-  )
+.containerを更新：
+- グラデーション背景（background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)）
+- 角丸（border-radius: 20px）
+- 美しい影（box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1)）
+- システムフォント（font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif）
+
+画像にホバーエフェクトを追加：
+- .container img:hover で、マウスを乗せた時の動作を設定
+- 少し上に移動させて拡大（transform: translateY(-5px) scale(1.02)）
+- アニメーション（transition: transform 0.3s ease）`,
+      hint: 'linear-gradientでグラデーション、:hoverでマウスホバー時のスタイルを設定できます',
+      initialCode: `/* Step 1: 基本的なスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #4c51bf;
+  text-align: center;
+  color: white;
 }
 
-export default App`,
+/* Step 2: タイトルのスタイル */
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Step 3: 説明文のスタイル */
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* Step 4: 画像のスタイル */
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Step 5: 高度なスタイリングをここに追加 */
+/* .containerを更新してグラデーションや角丸を追加 */
+/* .container img:hoverでホバーエフェクトを追加 */`,
       solutionCode: `import './styles.css'
 
 const App = () => {
-  const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
-  }
-  
-  const product = {
-    name: "スマートウォッチ",
-    price: 12000,
-    discountRate: 0.20,
-    rating: 4,
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
-    altText: "スマートウォッチの商品画像"
-  };
-  
   return (
-    <div className="product-card">
-      <img 
-        className="product-image"
-        src={product.imageUrl}
-        alt={product.altText}
-      />
-      <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
     </div>
   )
 }
 
 export default App`,
+      initialFiles: {
+        'styles.css': `/* Step 1: 基本的なスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #4c51bf;
+  text-align: center;
+  color: white;
+}
+
+/* Step 2: タイトルのスタイル */
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Step 3: 説明文のスタイル */
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* Step 4: 画像のスタイル */
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Step 5: 高度なスタイリングをここに追加 */
+/* .containerを更新してグラデーションや角丸を追加 */
+/* .container img:hoverでホバーエフェクトを追加 */`,
+        'App.jsx': `import './styles.css'
+
+const App = () => {
+  return (
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
+    </div>
+  )
+}
+
+export default App`,
+      },
+      defaultFile: 'styles.css',
       validation: {
-        includes: [
-          '{product.name}',
-          '{product.price}',
-          '{getStarRating(product.rating)}',
-          "import './styles.css'",
-        ],
+        includes: ["import './styles.css'", 'className="container"'],
       },
     },
   ],
 
-  // 互換性のため、最終的な完成形も残す
   initialFiles: {
+    'styles.css': `/* ここにCSSを書いていきます */`,
     'App.jsx': `import './styles.css'
 
 const App = () => {
-  const productName = "スマートウォッチ";
-  
   return (
-    <div className="product-card">
-      <h1>{productName}</h1>
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
     </div>
   )
 }
 
 export default App`,
-    'styles.css': `/* 商品カード用のスタイル */
-.product-card {
-  max-width: 420px;
-  margin: 2rem auto;
-  padding: 0;
-  background: linear-gradient(145deg, #ffffff, #f8fafc);
-  border-radius: 20px;
-  border: none;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.1),
-    0 1px 8px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  overflow: hidden;
-}
-
-.product-image {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 0;
-  margin-bottom: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.product-card h1 {
-  font-size: 1.75rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 1.5rem 1.5rem 1rem 1.5rem;
-  letter-spacing: -0.02em;
-}
-
-.price {
-  font-size: 1rem;
-  color: #a0aec0;
-  margin: 0.5rem 1.5rem;
-  text-decoration: line-through;
-  font-weight: 500;
-}
-
-.discount-price {
-  font-size: 1.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 0.5rem 1.5rem;
-  letter-spacing: -0.01em;
-}
-
-.rating {
-  font-size: 1.2rem;
-  color: #4a5568;
-  margin: 1rem 1.5rem 1.5rem 1.5rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.rating::before {
-  content: '';
-  width: 4px;
-  height: 4px;
-  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
-  border-radius: 50%;
-}
-`,
   },
+
+  defaultFile: 'styles.css',
 
   solutionFiles: {
     'App.jsx': `import './styles.css'
 
 const App = () => {
-  const getStarRating = (rating) => {
-    return '⭐'.repeat(rating);
-  }
-  
-  const product = {
-    name: "スマートウォッチ",
-    price: 12000,
-    discountRate: 0.20,
-    rating: 4,
-    imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
-    altText: "スマートウォッチの商品画像"
-  };
-  
   return (
-    <div className="product-card">
-      <img 
-        className="product-image"
-        src={product.imageUrl}
-        alt={product.altText}
-      />
-      <h1>{product.name}</h1>
-      <p className="price">定価: {product.price}円</p>
-      <p className="discount-price">割引価格: {product.price - product.price * product.discountRate}円</p>
-      <p className="rating">評価: {getStarRating(product.rating)}</p>
+    <div className="container">
+      <h1 className="title">React App</h1>
+      <p className="description">Reactの基本構造を学ぶ</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
     </div>
   )
 }
 
 export default App`,
-    'styles.css': `/* 商品カード用のスタイル */
-.product-card {
-  max-width: 420px;
+    'styles.css': `/* React学習用のスタイル */
+.container {
+  max-width: 600px;
   margin: 2rem auto;
-  padding: 0;
-  background: linear-gradient(145deg, #ffffff, #f8fafc);
-  border-radius: 20px;
-  border: none;
-  box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.1),
-    0 1px 8px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  overflow: hidden;
-}
-
-.product-image {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 0;
-  margin-bottom: 0;
+  padding: 2rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
-.product-card h1 {
-  font-size: 1.75rem;
+.title {
+  font-size: 3rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 1.5rem 1.5rem 1rem 1.5rem;
-  letter-spacing: -0.02em;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: white;
 }
 
-.price {
-  font-size: 1rem;
-  color: #a0aec0;
-  margin: 0.5rem 1.5rem;
-  text-decoration: line-through;
-  font-weight: 500;
-}
-
-.discount-price {
-  font-size: 1.5rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 0.5rem 1.5rem;
-  letter-spacing: -0.01em;
-}
-
-.rating {
+.description {
   font-size: 1.2rem;
-  color: #4a5568;
-  margin: 1rem 1.5rem 1.5rem 1.5rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
 }
 
-.rating::before {
-  content: '';
-  width: 4px;
-  height: 4px;
-  background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
-  border-radius: 50%;
+.container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container img:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
-  .product-card {
+  .container {
     margin: 1rem;
-    max-width: 90%;
+    padding: 1.5rem;
   }
   
-  .product-card h1 {
-    font-size: 1.5rem;
-    margin: 1.25rem 1.25rem 0.75rem 1.25rem;
+  .title {
+    font-size: 2rem;
   }
   
-  .price, .discount-price, .rating {
-    margin-left: 1.25rem;
-    margin-right: 1.25rem;
-  }
-  
-  .discount-price {
-    font-size: 1.3rem;
-  }
-  
-  .product-image {
-    height: 240px;
+  .description {
+    font-size: 1rem;
   }
 }`,
   },

@@ -6,6 +6,8 @@ export interface LessonStep {
   initialCode?: string
   solutionCode: string
   copyableCode?: string | string[] | { label: string; code: string }[]  // コピー可能なコードスニペット
+  initialFiles?: Record<string, string>  // ステップごとの初期ファイル
+  defaultFile?: string  // ステップで最初に表示するファイル
   validation?: {
     includes?: string[]
     excludes?: string[]
@@ -28,6 +30,7 @@ export interface Lesson {
   // Code files - 従来の構造（互換性のため残す）
   initialFiles?: Record<string, string>
   solutionFiles?: Record<string, string>
+  defaultFile?: string  // デフォルトで表示するファイル名
   
   // Navigation
   previousLessonId?: string

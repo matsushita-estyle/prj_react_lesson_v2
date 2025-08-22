@@ -27,7 +27,11 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
   lesson,
 }) => {
   const [files, setFiles] = useState(initialFiles)
-  const [activeFile, setActiveFile] = useState(Object.keys(initialFiles)[0] || '')
+  const [activeFile, setActiveFile] = useState(
+    lesson?.defaultFile && lesson.defaultFile in initialFiles 
+      ? lesson.defaultFile 
+      : Object.keys(initialFiles)[0] || ''
+  )
   const [isMaterialModalOpen, setIsMaterialModalOpen] = useState(false)
   const { isOpen: isSideMenuOpen, openSideMenu, closeSideMenu } = useSideMenu()
 
@@ -55,6 +59,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
     setActiveFile(fileName)
   }
 
+
   const lessonContent = (
     <LessonContent
       taskDescription={lesson?.taskDescription}
@@ -75,8 +80,13 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
     },
     {
       id: 'react-basic-02',
-      title: 'JSXの中にJavaScriptを埋め込む',
+      title: 'CSSでスタイルを適用してみよう',
       href: '/lessons/react-basic-02',
+    },
+    {
+      id: 'react-basic-03',
+      title: 'JSXの中にJavaScriptを埋め込む',
+      href: '/lessons/react-basic-03',
     },
   ]
 

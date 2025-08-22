@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react'
-import { LessonStep } from '@/lib/types/lesson'
-import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+import React, { useState } from 'react';
+import { LessonStep } from '@/lib/types/lesson';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 interface LessonContentProps {
-  taskDescription?: string
-  solutionFiles?: Record<string, string>
-  steps?: LessonStep[]
-  onApplyCode?: (fileName: string, code: string) => void
-  nextLessonId?: string
+  taskDescription?: string;
+  solutionFiles?: Record<string, string>;
+  steps?: LessonStep[];
+  onApplyCode?: (fileName: string, code: string) => void;
+  nextLessonId?: string;
 }
 
 export default function LessonContent({
@@ -19,56 +19,67 @@ export default function LessonContent({
   onApplyCode,
   nextLessonId,
 }: LessonContentProps) {
-  const [showSolutions, setShowSolutions] = useState<Record<number, boolean>>({})
+  const [showSolutions, setShowSolutions] = useState<Record<number, boolean>>(
+    {}
+  );
 
   const toggleSolution = (stepIndex: number) => {
-    setShowSolutions((prev) => ({ ...prev, [stepIndex]: !prev[stepIndex] }))
-  }
+    setShowSolutions((prev) => ({ ...prev, [stepIndex]: !prev[stepIndex] }));
+  };
 
   const renderMarkdownText = (text: string) => {
-    const lines = text.trim().split('\n')
-    const elements: React.ReactNode[] = []
+    const lines = text.trim().split('\n');
+    const elements: React.ReactNode[] = [];
 
     for (let i = 0; i < lines.length; i++) {
-      const line = lines[i]
+      const line = lines[i];
 
       if (line.startsWith('# ')) {
         elements.push(
           <h1 key={i} className="mt-6 mb-4 text-2xl font-bold text-gray-900">
             {line.slice(2)}
           </h1>
-        )
+        );
       } else if (line.startsWith('## ')) {
-        const title = line.slice(3)
+        const title = line.slice(3);
         if (title.includes('ハンズオンタスク') || title.includes('課題')) {
           elements.push(
-            <h2 key={i} className="mt-5 mb-3 text-xl font-semibold text-green-700">
+            <h2
+              key={i}
+              className="mt-5 mb-3 text-xl font-semibold text-green-700"
+            >
               🎯 {title}
             </h2>
-          )
+          );
         } else {
           elements.push(
-            <h2 key={i} className="mt-5 mb-3 text-xl font-semibold text-gray-800">
+            <h2
+              key={i}
+              className="mt-5 mb-3 text-xl font-semibold text-gray-800"
+            >
               {title}
             </h2>
-          )
+          );
         }
       } else if (line.startsWith('### ')) {
         elements.push(
           <h3 key={i} className="mt-4 mb-2 text-lg font-medium text-gray-700">
             {line.slice(4)}
           </h3>
-        )
+        );
       } else if (line.match(/^\d+\./)) {
-        const listItems = []
-        let j = i
+        const listItems = [];
+        let j = i;
         while (j < lines.length && lines[j].match(/^\d+\./)) {
-          listItems.push(lines[j].replace(/^\d+\.\s*/, ''))
-          j++
+          listItems.push(lines[j].replace(/^\d+\.\s*/, ''));
+          j++;
         }
 
         elements.push(
-          <div key={i} className="mb-4 border-l-4 border-green-400 bg-green-50 p-4">
+          <div
+            key={i}
+            className="mb-4 border-l-4 border-green-400 bg-green-50 p-4"
+          >
             <h4 className="mb-2 font-medium text-green-800">実装タスク</h4>
             <ol className="space-y-2">
               {listItems.map((item, idx) => (
@@ -79,14 +90,14 @@ export default function LessonContent({
               ))}
             </ol>
           </div>
-        )
-        i = j - 1
+        );
+        i = j - 1;
       } else if (line.startsWith('- ')) {
-        const listItems = []
-        let j = i
+        const listItems = [];
+        let j = i;
         while (j < lines.length && lines[j].startsWith('- ')) {
-          listItems.push(lines[j].slice(2))
-          j++
+          listItems.push(lines[j].slice(2));
+          j++;
         }
 
         elements.push(
@@ -97,28 +108,30 @@ export default function LessonContent({
               </li>
             ))}
           </ul>
-        )
-        i = j - 1
+        );
+        i = j - 1;
       } else if (line.trim() === '') {
-        continue
+        continue;
       } else {
         elements.push(
           <p key={i} className="mb-3 leading-relaxed text-gray-700">
             {line}
           </p>
-        )
+        );
       }
     }
 
-    return elements
-  }
+    return elements;
+  };
 
   // stepsが存在する場合は段階的な課題表示（縦スクロール）
   if (steps && steps.length > 0) {
     return (
       <div className="prose max-w-none">
         {/* 全体の説明 */}
-        {taskDescription && <div className="mb-8">{renderMarkdownText(taskDescription)}</div>}
+        {taskDescription && (
+          <div className="mb-8">{renderMarkdownText(taskDescription)}</div>
+        )}
 
         {/* 全ステップを縦に表示 */}
         <div className="space-y-8">
@@ -132,50 +145,69 @@ export default function LessonContent({
                 <div className="mr-3 flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 font-bold text-white">
                   {step.stepNumber}
                 </div>
-                <h2 className="text-xl font-bold text-gray-900">{step.title}</h2>
+                <h2 className="text-xl font-bold text-gray-900">
+                  {step.title}
+                </h2>
               </div>
 
               {/* 課題内容 */}
               <div className="mb-4 rounded-lg border-l-4 border-blue-400 bg-blue-50 p-4">
-                <p className="whitespace-pre-line text-gray-700">{step.instruction}</p>
+                <p className="whitespace-pre-line text-gray-700">
+                  {step.instruction}
+                </p>
               </div>
 
               {/* 初期コード（あれば） */}
-              {step.initialCode && (
+              {(step.initialCode || step.initialFiles) && (
                 <div className="mb-4">
-                  <h3 className="mb-2 text-sm font-semibold text-gray-600">初期コード：</h3>
-                  <div className="overflow-hidden rounded-lg border border-gray-300">
-                    <div className="bg-gray-100 p-4">
-                      <pre className="overflow-x-auto text-xs text-gray-700">
-                        <code>{step.initialCode}</code>
-                      </pre>
-                    </div>
-                  </div>
-                  
+                  {step.initialFiles &&
+                    Object.entries(step.initialFiles).map(
+                      ([fileName, fileContent]) => (
+                        <div key={fileName} className="mb-2">
+                          <h4 className="mb-1 text-xs font-semibold text-gray-500">
+                            {fileName}
+                          </h4>
+                          <div className="overflow-hidden rounded-lg border border-gray-300">
+                            <div className="bg-gray-100 p-4">
+                              <pre className="overflow-x-auto text-xs text-gray-700">
+                                <code>{fileContent}</code>
+                              </pre>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    )}
+
                   {/* コピー可能なコードスニペット */}
                   {step.copyableCode && (
                     <div className="mt-2">
                       {Array.isArray(step.copyableCode) ? (
                         <div className="space-y-1">
                           {step.copyableCode.map((code, idx) => {
-                            const isObject = typeof code === 'object' && 'label' in code
-                            const codeText = isObject ? code.code : code
-                            const label = isObject ? code.label : undefined
-                            
+                            const isObject =
+                              typeof code === 'object' && 'label' in code;
+                            const codeText = isObject ? code.code : code;
+                            const label = isObject ? code.label : undefined;
+
                             return (
-                              <div 
+                              <div
                                 key={idx}
                                 className="cursor-pointer rounded border border-yellow-200 bg-yellow-50 p-2 transition-colors hover:bg-yellow-100"
                                 onClick={() => {
-                                  navigator.clipboard.writeText(codeText)
+                                  navigator.clipboard.writeText(codeText);
                                 }}
                                 title="クリックでコピー"
                               >
                                 <div className="flex items-center gap-2">
-                                  <ContentCopyIcon className="text-gray-600" fontSize="small" />
+                                  <ContentCopyIcon
+                                    className="text-gray-600"
+                                    fontSize="small"
+                                  />
                                   <div className="flex-1">
                                     {label && (
-                                      <div className="text-xs text-gray-500 mb-1">{label}</div>
+                                      <div className="text-xs text-gray-500 mb-1">
+                                        {label}
+                                      </div>
                                     )}
                                     <pre className="overflow-x-auto text-xs text-gray-700 whitespace-pre-wrap break-all">
                                       <code>{codeText}</code>
@@ -183,19 +215,24 @@ export default function LessonContent({
                                   </div>
                                 </div>
                               </div>
-                            )
+                            );
                           })}
                         </div>
                       ) : (
-                        <div 
+                        <div
                           className="cursor-pointer rounded border border-yellow-200 bg-yellow-50 p-2 transition-colors hover:bg-yellow-100"
                           onClick={() => {
-                            navigator.clipboard.writeText(step.copyableCode as string)
+                            navigator.clipboard.writeText(
+                              step.copyableCode as string
+                            );
                           }}
                           title="クリックでコピー"
                         >
                           <div className="flex items-center gap-2">
-                            <ContentCopyIcon className="text-gray-600" fontSize="small" />
+                            <ContentCopyIcon
+                              className="text-gray-600"
+                              fontSize="small"
+                            />
                             <div className="flex-1">
                               <pre className="overflow-x-auto text-xs text-gray-700 whitespace-pre-wrap break-all">
                                 <code>{step.copyableCode}</code>
@@ -220,18 +257,19 @@ export default function LessonContent({
                 </button>
               </div>
 
-
               {/* 解答例表示 */}
               {showSolutions[index] && (
                 <div className="mt-4 overflow-hidden rounded-lg border border-green-300">
-                  <div className="bg-green-600 px-4 py-2 font-mono text-sm text-white">解答例</div>
+                  <div className="bg-green-600 px-4 py-2 font-mono text-sm text-white">
+                    解答例
+                  </div>
                   <div className="relative bg-green-50 p-4">
                     {step.solutionCode && onApplyCode && (
                       <button
                         onClick={() => {
                           // App.jsx のファイル名で反映
-                          const fileName = 'App.jsx'
-                          onApplyCode(fileName, step.solutionCode)
+                          const fileName = 'App.jsx';
+                          onApplyCode(fileName, step.solutionCode);
                         }}
                         className="absolute top-2 right-2 z-10 rounded bg-blue-500 px-3 py-2 text-xs text-white transition-colors hover:bg-blue-600"
                       >
@@ -267,7 +305,7 @@ export default function LessonContent({
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   // 従来の表示方法（stepsがない場合）
@@ -277,10 +315,15 @@ export default function LessonContent({
 
       {solutionFiles && Object.keys(solutionFiles).length > 0 && (
         <div className="mt-6">
-          <h3 className="mb-4 text-lg font-semibold text-gray-900">✅ 解答例</h3>
+          <h3 className="mb-4 text-lg font-semibold text-gray-900">
+            ✅ 解答例
+          </h3>
           <div className="space-y-4">
             {Object.entries(solutionFiles).map(([fileName, fileContent]) => (
-              <div key={fileName} className="overflow-hidden rounded-lg border border-green-300">
+              <div
+                key={fileName}
+                className="overflow-hidden rounded-lg border border-green-300"
+              >
                 <div className="bg-green-600 px-4 py-2 font-mono text-sm text-white">
                   {fileName}
                 </div>
@@ -303,5 +346,5 @@ export default function LessonContent({
         </div>
       )}
     </div>
-  )
+  );
 }
