@@ -105,14 +105,14 @@ styles.cssファイルにCSSを書きながら、見た目がどのように変�
       hint: '複数のクラスを同時にスタイリングできます。フォントのサイズや太さで見た目が大きく変わります。',
       copyableCode: [
         {
-          label: 'タイトルのスタイル設定',
+          label: '📝 .titleクラスの中身をコピー（大きく太い見出しにする）',
           code: `font-size: 3rem;
 font-weight: 800;
 margin: 0 0 1rem 0;
 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);`,
         },
         {
-          label: '説明文のスタイル設定',
+          label: '📄 .descriptionクラスの中身をコピー（読みやすい説明文にする）',
           code: `font-size: 1.2rem;
 font-weight: 300;
 margin: 0 0 2rem 0;
@@ -191,14 +191,14 @@ export default App`,
       hint: 'linear-gradientでグラデーション背景を作ることができます。数値が大きいほど影が大きくなります。',
       copyableCode: [
         {
-          label: 'コンテナクラスの定義',
+          label: '🎨 まず.containerクラスの枠組みをコピー',
           code: `/* コンテナのスタイル */
 .container {
 /* ここにCSSを書いていきます */
 }`,
         },
         {
-          label: 'コンテナのレイアウトと装飾',
+          label: '💎 .containerクラスの中身をコピー（美しいグラデーション背景）',
           code: `max-width: 600px;
 margin: 2rem auto;
 padding: 2rem;
@@ -315,19 +315,19 @@ export default App`,
       hint: '@keyframesでアニメーションを定義できます。linearは一定速度、infiniteは無限ループを意味します。',
       copyableCode: [
         {
-          label: '画像クラスの定義',
+          label: '🖼️ まず.container imgクラスの枠組みをコピー',
           code: `.container img {
 /* ここにCSSを書いていきます */
 }`,
         },
         {
-          label: '画像のスタイル設定',
+          label: '✨ .container imgクラスの中身をコピー（回転アニメーション付き）',
           code: `max-width: 100%;
 height: auto;
 animation: rotate 8s linear infinite;`,
         },
         {
-          label: '回転アニメーションの定義',
+          label: '🔄 @keyframesをコピー（360度回転の動きを定義）',
           code: `@keyframes rotate {
   from {
     transform: rotate(0deg);

@@ -22,6 +22,7 @@ export default function LessonContent({
   const [showSolutions, setShowSolutions] = useState<Record<number, boolean>>(
     {}
   );
+  const [copiedIndex, setCopiedIndex] = useState<string | null>(null);
 
   const toggleSolution = (stepIndex: number) => {
     setShowSolutions((prev) => ({ ...prev, [stepIndex]: !prev[stepIndex] }));
@@ -189,18 +190,28 @@ export default function LessonContent({
                             const codeText = isObject ? code.code : code;
                             const label = isObject ? code.label : undefined;
 
+                            const copyId = `${index}-${idx}`;
+                            const isCopied = copiedIndex === copyId;
+                            
                             return (
                               <div
                                 key={idx}
-                                className="cursor-pointer rounded border border-yellow-200 bg-yellow-50 p-2 transition-colors hover:bg-yellow-100"
+                                className="relative cursor-pointer rounded border border-yellow-200 bg-yellow-50 p-2 transition-colors hover:bg-yellow-100"
                                 onClick={() => {
                                   navigator.clipboard.writeText(codeText);
+                                  setCopiedIndex(copyId);
+                                  setTimeout(() => setCopiedIndex(null), 2000);
                                 }}
                                 title="クリックでコピー"
                               >
+                                {isCopied && (
+                                  <div className="absolute top-2 right-2 z-10 rounded bg-green-500 px-2 py-1 text-xs text-white shadow-md animate-pulse">
+                                    ✓ コピーしました！
+                                  </div>
+                                )}
                                 <div className="flex items-center gap-2">
                                   <ContentCopyIcon
-                                    className="text-gray-600"
+                                    className={isCopied ? "text-green-500" : "text-gray-600"}
                                     fontSize="small"
                                   />
                                   <div className="flex-1">
@@ -220,17 +231,24 @@ export default function LessonContent({
                         </div>
                       ) : (
                         <div
-                          className="cursor-pointer rounded border border-yellow-200 bg-yellow-50 p-2 transition-colors hover:bg-yellow-100"
+                          className="relative cursor-pointer rounded border border-yellow-200 bg-yellow-50 p-2 transition-colors hover:bg-yellow-100"
                           onClick={() => {
                             navigator.clipboard.writeText(
                               step.copyableCode as string
                             );
+                            setCopiedIndex(`${index}-single`);
+                            setTimeout(() => setCopiedIndex(null), 2000);
                           }}
                           title="クリックでコピー"
                         >
+                          {copiedIndex === `${index}-single` && (
+                            <div className="absolute top-2 right-2 z-10 rounded bg-green-500 px-2 py-1 text-xs text-white shadow-md animate-pulse">
+                              ✓ コピーしました！
+                            </div>
+                          )}
                           <div className="flex items-center gap-2">
                             <ContentCopyIcon
-                              className="text-gray-600"
+                              className={copiedIndex === `${index}-single` ? "text-green-500" : "text-gray-600"}
                               fontSize="small"
                             />
                             <div className="flex-1">
