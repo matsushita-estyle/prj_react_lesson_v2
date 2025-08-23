@@ -20,28 +20,28 @@ const Footer: React.FC<FooterProps> = ({
       {prevLessonId && (
         <a
           href={`/lessons/${prevLessonId}`}
-          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border border-green-500 bg-black hover:bg-green-500 text-green-500 hover:text-black focus:ring-green-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
+          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-green-500 bg-black hover:bg-green-500 text-green-500 hover:text-black focus:ring-green-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
         >
           Previous
         </a>
       )}
       <button
         onClick={onCheckMaterials}
-        className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border border-white bg-transparent hover:bg-white hover:text-black text-white focus:ring-white px-4 py-1.5 text-base cursor-pointer w-32"
+        className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-white bg-transparent hover:bg-white hover:text-black text-white focus:ring-white px-4 py-1.5 text-base cursor-pointer w-32"
       >
         Text Book
       </button>
       {nextLessonId ? (
         <a
           href={`/lessons/${nextLessonId}`}
-          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border border-cyan-500 bg-black hover:bg-cyan-500 text-cyan-500 hover:text-black focus:ring-cyan-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
+          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-cyan-500 bg-black hover:bg-cyan-500 text-cyan-500 hover:text-black focus:ring-cyan-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
         >
           Next
         </a>
       ) : (
         <a
           href={`/`}
-          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border border-cyan-500 bg-black hover:bg-cyan-500 text-cyan-500 hover:text-black focus:ring-cyan-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
+          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-cyan-500 bg-black hover:bg-cyan-500 text-cyan-500 hover:text-black focus:ring-cyan-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
         >
           Back Home
         </a>
