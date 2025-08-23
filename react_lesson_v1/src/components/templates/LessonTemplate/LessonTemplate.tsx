@@ -98,7 +98,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
   return (
     <div className="flex h-screen flex-col bg-gray-50">
       {/* ヘッダー */}
-      <Header lessonTitle={lessonTitle} courseTitle={courseTitle} />
+      <Header lessonTitle={lessonTitle} courseTitle={courseTitle} lessons={lessons} />
 
       {/* メインコンテンツ */}
       <ResizablePanel
