@@ -119,6 +119,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
       <Footer
         onCheckMaterials={handleCheckMaterials}
         nextLessonId={lesson?.nextLessonId}
+        prevLessonId={lesson?.previousLessonId}
       />
 
       {/* サイドメニュー */}
