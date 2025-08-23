@@ -5,6 +5,7 @@
 毎回、以下のコマンドを実行してエラーがないことを確認してください：
 
 1. **TypeScriptの型チェック**
+
    ```bash
    cd react_lesson_v1 && npm run typecheck
    ```
@@ -12,11 +13,6 @@
 2. **Lintチェック**
    ```bash
    cd react_lesson_v1 && npm run lint
-   ```
-
-3. **ビルドチェック**
-   ```bash
-   cd react_lesson_v1 && npm run build
    ```
 
 ## プロジェクト構成
@@ -39,11 +35,13 @@
 **React研修プラットフォーム** - MosyaReactを模倣したNext.js/TypeScriptアプリケーション
 
 ### 主要機能
+
 - 左側：問題/プレビュータブ切り替え
 - 右側：Monaco Editorでコード編集
 - リアルタイムSandpackプレビュー
 
 ### 技術スタック
+
 - Next.js 14+ (App Router)
 - TypeScript
 - Monaco Editor
@@ -56,7 +54,7 @@
 ✅ **基本レイアウト** - 左右分割、タブ切り替え  
 ✅ **Monaco Editor** - VSCode風エディタ、複数ファイル対応  
 ✅ **Sandpack統合** - SSR/ハイドレーション問題解決済み  
-✅ **CSS設計** - Tailwind + CSS Variables の組み合わせ  
+✅ **CSS設計** - Tailwind + CSS Variables の組み合わせ
 
 ## 解決済みの技術的課題
 
@@ -67,6 +65,7 @@
 ## ドキュメント構成
 
 ### docs/ ディレクトリ
+
 - `PROJECT_PLAN.md`: プロジェクト全体の設計書・実装進捗
 - `LESSON_PLAN.md`: React学習カリキュラム（10レッスン構成）
 
