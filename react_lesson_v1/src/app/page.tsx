@@ -14,7 +14,7 @@ export default function Home() {
 
           <div className="grid gap-4">
             <Link
-              href="/lessons/react-basic-01"
+              href="/lessons/chapter1-lesson1"
               className="block rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
             >
               <div className="flex items-center justify-between">
@@ -35,7 +35,7 @@ export default function Home() {
             </Link>
 
             <Link
-              href="/lessons/react-basic-02"
+              href="/lessons/chapter1-lesson2"
               className="block rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
             >
               <div className="flex items-center justify-between">

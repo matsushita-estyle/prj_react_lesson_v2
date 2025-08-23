@@ -1,7 +1,7 @@
 import { Lesson } from '@/lib/types/lesson';
 
-export const reactBasic03: Lesson = {
-  id: 'react-basic-03',
+export const chapter1Lesson3: Lesson = {
+  id: 'chapter1-lesson3',
   title: 'JSXの中にJavaScriptを埋め込む',
   lessonNumber: 3,
 
@@ -739,6 +739,5 @@ export default App`,
 }`,
   },
 
-  previousLessonId: 'react-basic-02',
-  nextLessonId: 'react-basic-04',
+  previousLessonId: 'chapter1-lesson2',
 };

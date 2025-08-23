@@ -41,7 +41,7 @@ function App() {
 export default App
 ```
 
-**実装ファイル:** `src/data/lessons/react-basic-01.ts`
+**実装ファイル:** `src/data/lessons/chapter1/lesson1.ts`
 
 ---
 
@@ -71,7 +71,7 @@ import ReactDOM from 'react-dom/client'
 // ここにcreateRootとrenderのコードを記述してください
 ```
 
-**実装ファイル:** `src/data/lessons/react-basic-02.ts`
+**実装ファイル:** `src/data/lessons/chapter1/lesson2.ts`
 
 ---
 
@@ -111,7 +111,7 @@ function App() {
 export default App
 ```
 
-**実装予定ファイル:** `src/data/lessons/react-basic-03.ts`
+**実装ファイル:** `src/data/lessons/chapter1/lesson3.ts`
 
 ---
 
@@ -451,7 +451,7 @@ export default App
 
 ### 実装状況
 
-- ✅ **lesson 1-2**: 実装済み（react-basic-01.ts, react-basic-02.ts）
+- ✅ **lesson 1-3**: 実装済み（chapter1/lesson1.ts, chapter1/lesson2.ts, chapter1/lesson3.ts）
 - 🚧 **lesson 3-10**: 実装予定（同じ形式で順次作成）
 
 ### 各レッスンの構成要素

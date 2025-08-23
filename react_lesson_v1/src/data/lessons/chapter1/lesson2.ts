@@ -1,7 +1,7 @@
 import { Lesson } from '@/lib/types/lesson';
 
-export const reactBasic02: Lesson = {
-  id: 'react-basic-02',
+export const chapter1Lesson2: Lesson = {
+  id: 'chapter1-lesson2',
   title: 'CSSでスタイルを適用してみよう',
   lessonNumber: 2,
 
@@ -570,6 +570,6 @@ export default App`,
 }`,
   },
 
-  previousLessonId: 'react-basic-01',
-  nextLessonId: 'react-basic-03',
+  previousLessonId: 'chapter1-lesson1',
+  nextLessonId: 'chapter1-lesson3',
 };

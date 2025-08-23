@@ -3,18 +3,18 @@
 import React from 'react'
 import { notFound } from 'next/navigation'
 import LessonDetailPage from '@/components/pages/LessonDetailPage'
-import { reactBasic01 } from '@/data/lessons/react-basic-01'
-import { reactBasic02 } from '@/data/lessons/react-basic-02'
-import { reactBasic03 } from '@/data/lessons/react-basic-03'
+import { chapter1Lesson1 } from '@/data/lessons/chapter1/lesson1'
+import { chapter1Lesson2 } from '@/data/lessons/chapter1/lesson2'
+import { chapter1Lesson3 } from '@/data/lessons/chapter1/lesson3'
 
 const getLessonData = (lessonId: string) => {
   switch (lessonId) {
-    case 'react-basic-01':
-      return reactBasic01
-    case 'react-basic-02':
-      return reactBasic02
-    case 'react-basic-03':
-      return reactBasic03
+    case 'chapter1-lesson1':
+      return chapter1Lesson1
+    case 'chapter1-lesson2':
+      return chapter1Lesson2
+    case 'chapter1-lesson3':
+      return chapter1Lesson3
     default:
       return null
   }

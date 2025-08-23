@@ -1,7 +1,7 @@
 import { Lesson } from '@/lib/types/lesson';
 
-export const reactBasic01: Lesson = {
-  id: 'react-basic-01',
+export const chapter1Lesson1: Lesson = {
+  id: 'chapter1-lesson1',
   title: 'Reactに触れてみよう',
   lessonNumber: 1,
 
@@ -491,5 +491,5 @@ export default App`,
 }`,
   },
 
-  nextLessonId: 'react-basic-02',
+  nextLessonId: 'chapter1-lesson2',
 };
