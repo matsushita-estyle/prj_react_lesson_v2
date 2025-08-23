@@ -103,6 +103,23 @@ styles.cssファイルにCSSを書きながら、見た目がどのように変�
 - 少し透明に（opacity: 0.9）
 - 行間を広く（line-height: 1.6）`,
       hint: '複数のクラスを同時にスタイリングできます。フォントのサイズや太さで見た目が大きく変わります。',
+      copyableCode: [
+        {
+          label: 'タイトルのスタイル設定',
+          code: `font-size: 3rem;
+font-weight: 800;
+margin: 0 0 1rem 0;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);`,
+        },
+        {
+          label: '説明文のスタイル設定',
+          code: `font-size: 1.2rem;
+font-weight: 300;
+margin: 0 0 2rem 0;
+opacity: 0.9;
+line-height: 1.6;`,
+        },
+      ],
       initialCode: `/* タイトルのスタイル */
 .title {
 /* ここにCSSを書いていきます */
@@ -172,6 +189,27 @@ export default App`,
 - 白いテキスト色（color: white）
 - システムフォント（font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif）`,
       hint: 'linear-gradientでグラデーション背景を作ることができます。数値が大きいほど影が大きくなります。',
+      copyableCode: [
+        {
+          label: 'コンテナクラスの定義',
+          code: `/* コンテナのスタイル */
+.container {
+/* ここにCSSを書いていきます */
+}`,
+        },
+        {
+          label: 'コンテナのレイアウトと装飾',
+          code: `max-width: 600px;
+margin: 2rem auto;
+padding: 2rem;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+border-radius: 20px;
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+text-align: center;
+color: white;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;`,
+        },
+      ],
       initialCode: `/* タイトルのスタイル */
 .title {
   font-size: 3rem;
@@ -275,6 +313,31 @@ export default App`,
 - from：transform: rotate(0deg)
 - to：transform: rotate(360deg)`,
       hint: '@keyframesでアニメーションを定義できます。linearは一定速度、infiniteは無限ループを意味します。',
+      copyableCode: [
+        {
+          label: '画像クラスの定義',
+          code: `.container img {
+/* ここにCSSを書いていきます */
+}`,
+        },
+        {
+          label: '画像のスタイル設定',
+          code: `max-width: 100%;
+height: auto;
+animation: rotate 8s linear infinite;`,
+        },
+        {
+          label: '回転アニメーションの定義',
+          code: `@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}`,
+        },
+      ],
       initialCode: `/* タイトルのスタイル */
 .title {
   font-size: 3rem;
