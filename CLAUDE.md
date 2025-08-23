@@ -4,19 +4,15 @@
 
 毎回、以下のコマンドを実行してエラーがないことを確認してください：
 
-1. **TypeScriptの型チェック**
+1. **TypeScript の型チェック**
+
    ```bash
    cd react_lesson_v1 && npm run typecheck
    ```
 
-2. **Lintチェック**
+2. **Lint チェック**
    ```bash
    cd react_lesson_v1 && npm run lint
-   ```
-
-3. **ビルドチェック**
-   ```bash
-   cd react_lesson_v1 && npm run build
    ```
 
 ## プロジェクト構成
@@ -31,5 +27,5 @@
 
 - コード変更後は必ず上記のチェックを実行
 - エラーが出た場合は修正してからコミット
-- 型安全性を保つため、any型の使用は避ける
+- 型安全性を保つため、any 型の使用は避ける
 - プロジェクトのルートは `react_lesson_v1/` ディレクトリ
