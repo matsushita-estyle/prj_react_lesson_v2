@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '@/components/atoms/Button';
 
 interface FooterProps {
   onCheckMaterials?: () => void;
@@ -30,9 +29,12 @@ const Footer: React.FC<FooterProps> = ({
           Next Lesson
         </a>
       ) : (
-        <Button variant="primary" disabled>
-          最後のレッスンです
-        </Button>
+        <a
+          href={`/`}
+          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 bg-cyan-100 hover:bg-cyan-200 text-black focus:ring-cyan-500 px-4 py-2 text-base text-center cursor-pointer"
+        >
+          Back Home
+        </a>
       )}
     </footer>
   );
