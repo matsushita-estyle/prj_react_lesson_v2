@@ -33,7 +33,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
       : Object.keys(initialFiles)[0] || ''
   )
   const [isMaterialModalOpen, setIsMaterialModalOpen] = useState(false)
-  const { isOpen: isSideMenuOpen, openSideMenu, closeSideMenu } = useSideMenu()
+  const { isOpen: isSideMenuOpen, closeSideMenu } = useSideMenu()
 
   const handleFileChange = (fileName: string, content: string) => {
     setFiles((prev) => ({
@@ -42,9 +42,6 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
     }))
   }
 
-  const handleLessonList = () => {
-    openSideMenu()
-  }
 
   const handleCheckMaterials = () => {
     setIsMaterialModalOpen(true)
@@ -120,7 +117,6 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
 
       {/* フッター */}
       <Footer
-        onLessonList={handleLessonList}
         onCheckMaterials={handleCheckMaterials}
         nextLessonId={lesson?.nextLessonId}
       />
