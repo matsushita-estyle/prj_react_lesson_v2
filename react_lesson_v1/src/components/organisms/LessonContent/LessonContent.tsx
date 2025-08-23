@@ -277,27 +277,59 @@ export default function LessonContent({
 
               {/* 解答例表示 */}
               {showSolutions[index] && (
-                <div className="mt-4 overflow-hidden rounded-lg border border-green-300">
-                  <div className="bg-green-600 px-4 py-2 font-mono text-sm text-white">
-                    解答例
-                  </div>
-                  <div className="relative bg-green-50 p-4">
-                    {step.solutionCode && onApplyCode && (
-                      <button
-                        onClick={() => {
-                          // solutionTargetFileが指定されていればそれを使用、なければApp.jsx
-                          const fileName = step.solutionTargetFile || 'App.jsx';
-                          onApplyCode(fileName, step.solutionCode);
-                        }}
-                        className="absolute top-2 right-2 z-10 rounded bg-blue-500 px-3 py-2 text-xs text-white transition-colors hover:bg-blue-600"
-                      >
-                        コードに反映 📝
-                      </button>
-                    )}
-                    <pre className="overflow-x-auto text-xs text-gray-700">
-                      <code>{step.solutionCode}</code>
-                    </pre>
-                  </div>
+                <div className="mt-4">
+                  {/* 複数のsolutionCodesがある場合 */}
+                  {step.solutionCodes && step.solutionCodes.length > 0 ? (
+                    <div className="space-y-3">
+                      {step.solutionCodes.map((solution, solutionIdx) => (
+                        <div key={solutionIdx} className="overflow-hidden rounded-lg border border-green-300">
+                          <div className="bg-green-600 px-4 py-2 font-mono text-sm text-white">
+                            {solution.label || `解答例 ${solutionIdx + 1}`}
+                          </div>
+                          <div className="relative bg-green-50 p-4">
+                            {onApplyCode && (
+                              <button
+                                onClick={() => {
+                                  onApplyCode(solution.targetFile, solution.code);
+                                }}
+                                className="absolute top-2 right-2 z-10 rounded bg-blue-500 px-3 py-2 text-xs text-white transition-colors hover:bg-blue-600"
+                              >
+                                {solution.targetFile}に反映 📝
+                              </button>
+                            )}
+                            <pre className="overflow-x-auto text-xs text-gray-700">
+                              <code>{solution.code}</code>
+                            </pre>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    /* 従来の単一solutionCodeの場合（後方互換性） */
+                    step.solutionCode && (
+                      <div className="overflow-hidden rounded-lg border border-green-300">
+                        <div className="bg-green-600 px-4 py-2 font-mono text-sm text-white">
+                          解答例
+                        </div>
+                        <div className="relative bg-green-50 p-4">
+                          {onApplyCode && (
+                            <button
+                              onClick={() => {
+                                const fileName = step.solutionTargetFile || 'App.jsx';
+                                onApplyCode(fileName, step.solutionCode!);
+                              }}
+                              className="absolute top-2 right-2 z-10 rounded bg-blue-500 px-3 py-2 text-xs text-white transition-colors hover:bg-blue-600"
+                            >
+                              コードに反映 📝
+                            </button>
+                          )}
+                          <pre className="overflow-x-auto text-xs text-gray-700">
+                            <code>{step.solutionCode}</code>
+                          </pre>
+                        </div>
+                      </div>
+                    )
+                  )}
                 </div>
               )}
             </div>

@@ -88,6 +88,11 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
           title: '03. JSXの中にJavaScriptを埋め込む',
           href: '/lessons/chapter1-lesson3',
         },
+        {
+          id: 'chapter1-lesson4',
+          title: '04. コンポーネントを分割して再利用しよう',
+          href: '/lessons/chapter1-lesson4',
+        },
       ],
     },
   ]

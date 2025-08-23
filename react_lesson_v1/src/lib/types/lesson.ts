@@ -1,11 +1,18 @@
+export interface SolutionCode {
+  code: string
+  targetFile: string  // このコードを適用するファイル
+  label?: string  // オプション: ソリューションの説明ラベル
+}
+
 export interface LessonStep {
   stepNumber: number
   title: string
   instruction: string
   hint?: string
   initialCode?: string
-  solutionCode: string
-  solutionTargetFile?: string  // solutionCodeの貼り付け先ファイルを指定
+  solutionCode?: string  // 後方互換性のため残す（単一ソリューション）
+  solutionCodes?: SolutionCode[]  // 複数のソリューションコード
+  solutionTargetFile?: string  // solutionCodeの貼り付け先ファイル（後方互換性）
   copyableCode?: string | string[] | { label: string; code: string }[]  // コピー可能なコードスニペット
   initialFiles?: Record<string, string>  // ステップごとの初期ファイル
   defaultFile?: string  // ステップで最初に表示するファイル
