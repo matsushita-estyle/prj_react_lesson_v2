@@ -74,19 +74,24 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
 
   const lessons = [
     {
-      id: 'chapter1-lesson1',
-      title: 'Reactに触れてみよう',
-      href: '/lessons/chapter1-lesson1',
-    },
-    {
-      id: 'chapter1-lesson2',
-      title: 'CSSでスタイルを適用してみよう',
-      href: '/lessons/chapter1-lesson2',
-    },
-    {
-      id: 'chapter1-lesson3',
-      title: 'JSXの中にJavaScriptを埋め込む',
-      href: '/lessons/chapter1-lesson3',
+      chapterTitle: 'チャプター１',
+      chapterLessons: [
+        {
+          id: 'chapter1-lesson1',
+          title: '01. Reactに触れてみよう',
+          href: '/lessons/chapter1-lesson1',
+        },
+        {
+          id: 'chapter1-lesson2',
+          title: '02. CSSでスタイルを適用してみよう',
+          href: '/lessons/chapter1-lesson2',
+        },
+        {
+          id: 'chapter1-lesson3',
+          title: '03. JSXの中にJavaScriptを埋め込む',
+          href: '/lessons/chapter1-lesson3',
+        },
+      ],
     },
   ]
 

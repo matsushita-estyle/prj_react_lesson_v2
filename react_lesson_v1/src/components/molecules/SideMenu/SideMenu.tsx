@@ -1,20 +1,32 @@
-import React from 'react'
-import { X } from 'lucide-react'
+import React, { useState } from 'react'
+import { X, ChevronDown, ChevronRight } from 'lucide-react'
 
 interface SideMenuProps {
   isOpen: boolean
   onClose: () => void
   lessons: Array<{
-    id: string
-    title: string
-    href: string
+    chapterTitle: string
+    chapterLessons: Array<{
+      id: string
+      title: string
+      href: string
+    }>
   }>
 }
 
 const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, lessons }) => {
+  const [expandedChapters, setExpandedChapters] = useState<Record<number, boolean>>({})
+
   const handleLessonClick = (href: string) => {
     window.location.href = href
     onClose()
+  }
+
+  const toggleChapter = (chapterIndex: number) => {
+    setExpandedChapters(prev => ({
+      ...prev,
+      [chapterIndex]: !prev[chapterIndex]
+    }))
   }
 
   if (!isOpen) return null
@@ -38,14 +50,33 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, lessons }) => {
         </div>
 
         <div className="space-y-2 p-4">
-          {lessons.map((lesson) => (
-            <button
-              key={lesson.id}
-              onClick={() => handleLessonClick(lesson.href)}
-              className="w-full rounded-md bg-gray-800 p-3 text-left text-white transition-colors hover:bg-gray-700"
-            >
-              {lesson.title}
-            </button>
+          {lessons.map((chapter, chapterIndex) => (
+            <div key={chapterIndex} className="space-y-1">
+              <button
+                onClick={() => toggleChapter(chapterIndex)}
+                className="flex w-full items-center justify-between rounded-md bg-gray-800 p-3 text-left text-sm text-white transition-colors hover:bg-gray-700"
+              >
+                <span className="font-semibold">{chapter.chapterTitle}</span>
+                {expandedChapters[chapterIndex] ? (
+                  <ChevronDown size={20} />
+                ) : (
+                  <ChevronRight size={20} />
+                )}
+              </button>
+              {expandedChapters[chapterIndex] && (
+                <div className="space-y-1">
+                  {chapter.chapterLessons.map((lesson) => (
+                    <button
+                      key={lesson.id}
+                      onClick={() => handleLessonClick(lesson.href)}
+                      className="w-full rounded-md bg-gray-800 p-3 text-left text-sm text-white transition-colors hover:bg-gray-700"
+                    >
+                      {lesson.title}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </div>
