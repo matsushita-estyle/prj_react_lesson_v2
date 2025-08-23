@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { X, ChevronDown, ChevronRight } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 interface SideMenuProps {
   isOpen: boolean
@@ -15,7 +16,22 @@ interface SideMenuProps {
 }
 
 const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, lessons }) => {
+  const pathname = usePathname()
   const [expandedChapters, setExpandedChapters] = useState<Record<number, boolean>>({})
+
+  // 現在のレッスンがあるチャプターを見つけて自動で開く
+  useEffect(() => {
+    const currentChapterIndex = lessons.findIndex(chapter => 
+      chapter.chapterLessons.some(lesson => lesson.href === pathname)
+    )
+    
+    if (currentChapterIndex !== -1) {
+      setExpandedChapters(prev => ({
+        ...prev,
+        [currentChapterIndex]: true
+      }))
+    }
+  }, [lessons, pathname])
 
   const handleLessonClick = (href: string) => {
     window.location.href = href
@@ -65,15 +81,22 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, lessons }) => {
               </button>
               {expandedChapters[chapterIndex] && (
                 <div className="space-y-1">
-                  {chapter.chapterLessons.map((lesson) => (
-                    <button
-                      key={lesson.id}
-                      onClick={() => handleLessonClick(lesson.href)}
-                      className="w-full rounded-md bg-gray-800 p-3 text-left text-sm text-white transition-colors hover:bg-gray-700"
-                    >
-                      {lesson.title}
-                    </button>
-                  ))}
+                  {chapter.chapterLessons.map((lesson) => {
+                    const isCurrentLesson = lesson.href === pathname
+                    return (
+                      <button
+                        key={lesson.id}
+                        onClick={() => handleLessonClick(lesson.href)}
+                        className={`w-full rounded-md p-3 text-left text-sm transition-colors ${
+                          isCurrentLesson
+                            ? 'bg-blue-600 text-white font-semibold'
+                            : 'bg-gray-800 text-white hover:bg-gray-700'
+                        }`}
+                      >
+                        {lesson.title}
+                      </button>
+                    )
+                  })}
                 </div>
               )}
             </div>
