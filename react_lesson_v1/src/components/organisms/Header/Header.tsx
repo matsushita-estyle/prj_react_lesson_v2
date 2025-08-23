@@ -45,9 +45,9 @@ const Header: React.FC<HeaderProps> = ({
             </h1>
           </div>
         </div>
-        <div className="text-sm text-gray-400">React Training Platform</div>
+        <div className="text-s text-gray-400">React Training Platform</div>
       </div>
-      
+
       <SideMenu
         isOpen={isSideMenuOpen}
         onClose={() => setIsSideMenuOpen(false)}
