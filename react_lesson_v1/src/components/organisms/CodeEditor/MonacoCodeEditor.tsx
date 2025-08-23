@@ -21,6 +21,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
 }) => {
   const [openTabs, setOpenTabs] = useState<string[]>([activeFile]);
   const [isFileTreeOpen, setIsFileTreeOpen] = useState<boolean>(false);
+  const [editorInstance, setEditorInstance] = useState<import('monaco-editor').editor.IStandaloneCodeEditor | null>(null);
 
   // ファイル拡張子から言語を判定
   const getLanguageFromFileName = (fileName: string): string => {
@@ -77,10 +78,17 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     onActiveFileChange?.(fileName);
   };
 
+  const handleFormatCode = () => {
+    if (editorInstance) {
+      editorInstance.getAction('editor.action.formatDocument')?.run();
+    }
+  };
+
   const handleEditorDidMount = (
-    _editor: import('monaco-editor').editor.IStandaloneCodeEditor,
+    editor: import('monaco-editor').editor.IStandaloneCodeEditor,
     monaco: typeof import('monaco-editor')
   ) => {
+    setEditorInstance(editor);
     // カスタムダークテーマの設定
     monaco.editor.defineTheme('custom-dark', {
       base: 'vs-dark',
@@ -124,7 +132,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     lineHeight: 1.5,
     minimap: { enabled: false },
     scrollBeyondLastLine: false,
-    wordWrap: 'on' as const,
+    wordWrap: 'off' as const,
     automaticLayout: true,
     tabSize: 2,
     insertSpaces: true,
@@ -136,6 +144,10 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     readOnly: false,
     cursorStyle: 'line' as const,
     cursorBlinking: 'blink' as const,
+    scrollbar: {
+      horizontal: 'visible' as const,
+      vertical: 'visible' as const,
+    },
   };
 
   return (
@@ -154,7 +166,8 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
       {/* エディター部分 */}
       <div className="flex flex-1 flex-col bg-white">
         {/* ファイルタブとトグルボタン */}
-        <div className="flex overflow-x-auto border-b border-gray-200 bg-gray-50">
+        <div className="flex items-center justify-between overflow-x-auto border-b border-gray-200 bg-gray-50">
+          <div className="flex overflow-x-auto">
           {/* ファイルツリートグルボタン */}
           <button
             onClick={() => setIsFileTreeOpen(!isFileTreeOpen)}
@@ -188,6 +201,17 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
               </button>
             </div>
           ))}
+          </div>
+          {/* フォーマットボタン */}
+          <div className="flex-shrink-0 border-l border-gray-200 px-2">
+            <button
+              onClick={handleFormatCode}
+              className="rounded px-3 py-1 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+              title="コードを整形 (Alt+Shift+F)"
+            >
+              Format
+            </button>
+          </div>
         </div>
 
         {/* Monaco Editor */}
