@@ -15,6 +15,8 @@
    cd react_lesson_v1 && npm run lint
    ```
 
+注意: npm run build は時間がかかるため、毎回実行する必要はありません。重要な変更時のみ実行してください。
+
 ## プロジェクト構成
 
 - フレームワーク: Next.js + React + TypeScript
