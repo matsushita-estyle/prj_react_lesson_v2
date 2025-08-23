@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import React, { useMemo, useState } from 'react'
-import { Editor } from '@monaco-editor/react'
-import FileTree from '../../molecules/FileTree/FileTree'
+import React, { useMemo, useState } from 'react';
+import { Editor } from '@monaco-editor/react';
+import FileTree from '../../molecules/FileTree/FileTree';
 
 interface MonacoCodeEditorProps {
-  files: Record<string, string>
-  activeFile: string
-  onFileChange?: (fileName: string, content: string) => void
-  onActiveFileChange?: (fileName: string) => void
-  className?: string
+  files: Record<string, string>;
+  activeFile: string;
+  onFileChange?: (fileName: string, content: string) => void;
+  onActiveFileChange?: (fileName: string) => void;
+  className?: string;
 }
 
 const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
@@ -19,60 +19,63 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
   onActiveFileChange,
   className = '',
 }) => {
-  const [openTabs, setOpenTabs] = useState<string[]>([activeFile])
-  const [isFileTreeOpen, setIsFileTreeOpen] = useState<boolean>(false)
+  const [openTabs, setOpenTabs] = useState<string[]>([activeFile]);
+  const [isFileTreeOpen, setIsFileTreeOpen] = useState<boolean>(false);
 
   // ファイル拡張子から言語を判定
   const getLanguageFromFileName = (fileName: string): string => {
-    const extension = fileName.split('.').pop()?.toLowerCase()
+    const extension = fileName.split('.').pop()?.toLowerCase();
     switch (extension) {
       case 'js':
       case 'jsx':
-        return 'javascript'
+        return 'javascript';
       case 'ts':
       case 'tsx':
-        return 'typescript'
+        return 'typescript';
       case 'css':
-        return 'css'
+        return 'css';
       case 'html':
-        return 'html'
+        return 'html';
       case 'json':
-        return 'json'
+        return 'json';
       default:
-        return 'javascript'
+        return 'javascript';
     }
-  }
+  };
 
-  const currentLanguage = useMemo(() => getLanguageFromFileName(activeFile), [activeFile])
+  const currentLanguage = useMemo(
+    () => getLanguageFromFileName(activeFile),
+    [activeFile]
+  );
 
   const handleEditorChange = (value: string | undefined) => {
     if (value !== undefined) {
-      onFileChange?.(activeFile, value)
+      onFileChange?.(activeFile, value);
     }
-  }
+  };
 
   const handleFileSelect = (fileName: string) => {
     // タブに追加（重複を避ける）
     if (!openTabs.includes(fileName)) {
-      setOpenTabs([...openTabs, fileName])
+      setOpenTabs([...openTabs, fileName]);
     }
     // アクティブファイルを変更
-    onActiveFileChange?.(fileName)
-  }
+    onActiveFileChange?.(fileName);
+  };
 
   const handleTabClose = (fileName: string) => {
-    const newTabs = openTabs.filter((tab) => tab !== fileName)
-    setOpenTabs(newTabs)
+    const newTabs = openTabs.filter((tab) => tab !== fileName);
+    setOpenTabs(newTabs);
 
     // 閉じるタブがアクティブファイルの場合、別のタブをアクティブにする
     if (fileName === activeFile && newTabs.length > 0) {
-      onActiveFileChange?.(newTabs[newTabs.length - 1])
+      onActiveFileChange?.(newTabs[newTabs.length - 1]);
     }
-  }
+  };
 
   const handleTabClick = (fileName: string) => {
-    onActiveFileChange?.(fileName)
-  }
+    onActiveFileChange?.(fileName);
+  };
 
   const handleEditorDidMount = (
     _editor: import('monaco-editor').editor.IStandaloneCodeEditor,
@@ -99,9 +102,9 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
         'editorCursor.foreground': '#aeafad',
         'editor.lineHighlightBackground': '#2d2d30',
       },
-    })
+    });
 
-    monaco.editor.setTheme('custom-dark')
+    monaco.editor.setTheme('custom-dark');
 
     // JSX/TSX用の基本設定
     if (monaco.languages?.typescript?.javascriptDefaults) {
@@ -110,13 +113,14 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
         allowNonTsExtensions: true,
         jsx: monaco.languages.typescript.JsxEmit.React,
         allowJs: true,
-      })
+      });
     }
-  }
+  };
 
   const editorOptions = {
     fontSize: 14,
-    fontFamily: 'var(--editor-font, "Consolas", "Monaco", "Courier New", monospace)',
+    fontFamily:
+      'var(--editor-font, "Consolas", "Monaco", "Courier New", monospace)',
     lineHeight: 1.5,
     minimap: { enabled: false },
     scrollBeyondLastLine: false,
@@ -132,14 +136,18 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     readOnly: false,
     cursorStyle: 'line' as const,
     cursorBlinking: 'blink' as const,
-  }
+  };
 
   return (
     <div className={`flex h-full ${className}`}>
       {/* ファイルツリー */}
       {isFileTreeOpen && (
-        <div className="w-64 border-r border-gray-300">
-          <FileTree files={files} activeFile={activeFile} onFileSelect={handleFileSelect} />
+        <div className="w-100 border-r border-gray-300">
+          <FileTree
+            files={files}
+            activeFile={activeFile}
+            onFileSelect={handleFileSelect}
+          />
         </div>
       )}
 
@@ -151,9 +159,11 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
           <button
             onClick={() => setIsFileTreeOpen(!isFileTreeOpen)}
             className="flex items-center border-r border-gray-200 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-800"
-            title={isFileTreeOpen ? 'ファイルツリーを閉じる' : 'ファイルツリーを開く'}
+            title={
+              isFileTreeOpen ? 'ファイルツリーを閉じる' : 'ファイルツリーを開く'
+            }
           >
-            {isFileTreeOpen ? '◀' : '▶'}
+            {isFileTreeOpen ? '<' : '>'}
           </button>
           {openTabs.map((fileName) => (
             <div
@@ -212,7 +222,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MonacoCodeEditor
+export default MonacoCodeEditor;
