@@ -71,49 +71,70 @@ CSSは「セレクタ」と「プロパティ」で構成されます。
 
 このレッスンでは、以下の順序でスタイルを追加していきます：
 
-1. **基本的なレイアウト**: 背景色、余白、中央寄せ
-2. **タイトルのスタイリング**: フォントサイズ、太さ、影
-3. **説明文のスタイリング**: フォントサイズ、行間、透明度
-4. **画像のスタイリング**: サイズ調整、角丸、影
-5. **高度なスタイリング**: グラデーション、ホバーエフェクト
+1. **タイトルと説明文のスタイリング**: フォントサイズ、太さ、余白、影
+2. **コンテナのレイアウト**: 背景色、グラデーション、角丸、影
+3. **画像のスタイリング**: サイズ調整、角丸、アニメーション
 
 各ステップで見た目がどのように変化するかを確認しながら、CSSの効果を実感してみましょう！`,
 
   taskDescription: `
 # CSSでスタイルを適用してみよう
 
-前のレッスンで作成したReactアプリに、段階的にCSSスタイルを適用していきます。
+Reactアプリに、段階的にCSSスタイルを適用していきます。
 styles.cssファイルにCSSを書きながら、見た目がどのように変化するかを確認しましょう！
   `,
 
   steps: [
     {
       stepNumber: 1,
-      title: '基本的なレイアウトを作ろう',
-      instruction: `最初に、コンテナの基本的なスタイルを設定しましょう。
-背景色、余白、中央寄せ、テキスト色を追加してください。
+      title: 'タイトルと説明文をスタイリングしよう',
+      instruction: `最初に、タイトルと説明文のスタイルを設定しましょう。
 
-styles.cssに以下のCSSを追加してみましょう：
-- .container に背景色（#4c51bf）を設定
-- 最大幅600px、中央寄せ（margin: 2rem auto）
-- 内側の余白（padding: 2rem）
-- テキストを中央寄せ（text-align: center）
-- 白いテキスト色（color: white）`,
-      hint: 'CSSでは .クラス名 { プロパティ: 値; } の形で書きます',
-      initialCode: `.container {
+.titleのスタイルを追加してください：
+- フォントサイズを大きく（font-size: 3rem）
+- フォントを太く（font-weight: 800）
+- 下に余白を追加（margin: 0 0 1rem 0）
+- テキストに影を追加（text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3)）
+
+.descriptionのスタイルも追加してください：
+- フォントサイズを調整（font-size: 1.2rem）
+- フォントを細く（font-weight: 300）
+- 下に余白を追加（margin: 0 0 2rem 0）
+- 少し透明に（opacity: 0.9）
+- 行間を広く（line-height: 1.6）`,
+      hint: '複数のクラスを同時にスタイリングできます。フォントのサイズや太さで見た目が大きく変わります。',
+      initialCode: `/* タイトルのスタイル */
+.title {
+/* ここにCSSを書いていきます */
+}
+
+/* 説明文のスタイル */
+.description {
 /* ここにCSSを書いていきます */
 }`,
-      solutionCode: `.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #4c51bf;
-  text-align: center;
-  color: white;
+      solutionCode: `.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
 }`,
       solutionTargetFile: 'styles.css',
       initialFiles: {
-        'styles.css': `.container {
+        'styles.css': `/* タイトルのスタイル */
+.title {
+/* ここにCSSを書いていきます */
+}
+
+/* 説明文のスタイル */
+.description {
 /* ここにCSSを書いていきます */
 }`,
         'App.jsx': `import './styles.css'
@@ -137,58 +158,88 @@ export default App`,
     },
     {
       stepNumber: 2,
-      title: 'タイトルを目立たせよう',
-      instruction: `次に、タイトルのスタイルを設定します。
-styles.cssに .title のスタイルを追加してください：
+      title: 'コンテナのレイアウトを作ろう',
+      instruction: `次に、コンテナの基本的なレイアウトを設定しましょう。
 
-- フォントサイズを大きく（font-size: 3rem）
-- フォントを太く（font-weight: 800） 
-- 下に余白を追加（margin: 0 0 1rem 0）
-- テキストに影を追加（text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3)）`,
-      hint: 'remは相対単位で、1rem = 16px程度です',
-      initialCode: `/* Step 1: 基本的なスタイル */
-.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #4c51bf;
-  text-align: center;
-  color: white;
-}
-
-/* Step 2: タイトルのスタイル */
-.title {
-/* ここにCSSを書いていきます */
-}`,
-      solutionCode: `.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #4c51bf;
-  text-align: center;
-  color: white;
-}
-
+.containerのスタイルを追加してください：
+- 最大幅を設定（max-width: 600px）
+- 中央寄せ（margin: 2rem auto）
+- 内側の余白（padding: 2rem）
+- 背景色（background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)）
+- 角丸（border-radius: 20px）
+- 美しい影（box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1)）
+- テキストを中央寄せ（text-align: center）
+- 白いテキスト色（color: white）
+- システムフォント（font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif）`,
+      hint: 'linear-gradientでグラデーション背景を作ることができます。数値が大きいほど影が大きくなります。',
+      initialCode: `/* タイトルのスタイル */
 .title {
   font-size: 3rem;
   font-weight: 800;
   margin: 0 0 1rem 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 説明文のスタイル */
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* コンテナのスタイル */
+.container {
+/* ここにCSSを書いていきます */
 }`,
-      solutionTargetFile: 'styles.css',
-      initialFiles: {
-        'styles.css': `/* Step 1: 基本的なスタイル */
+      solutionCode: `.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
 .container {
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #4c51bf;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   text-align: center;
   color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}`,
+      solutionTargetFile: 'styles.css',
+      initialFiles: {
+        'styles.css': `/* タイトルのスタイル */
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Step 2: タイトルのスタイル */
-.title {
+/* 説明文のスタイル */
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* コンテナのスタイル */
+.container {
 /* ここにCSSを書いていきます */
 }`,
         'App.jsx': `import './styles.css'
@@ -212,125 +263,19 @@ export default App`,
     },
     {
       stepNumber: 3,
-      title: '説明文を読みやすくしよう',
-      instruction: `説明文のスタイルを追加して、読みやすくしましょう。
-styles.cssに .description のスタイルを追加してください：
-
-- フォントサイズを調整（font-size: 1.2rem）
-- フォントを細く（font-weight: 300）
-- 下に余白を追加（margin: 0 0 2rem 0）
-- 少し透明に（opacity: 0.9）
-- 行間を広く（line-height: 1.6）`,
-      hint: 'opacityは0〜1の値で、1が完全不透明、0が完全透明です',
-      initialCode: `/* Step 1: 基本的なスタイル */
-.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #4c51bf;
-  text-align: center;
-  color: white;
-}
-
-/* Step 2: タイトルのスタイル */
-.title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin: 0 0 1rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Step 3: 説明文のスタイル */
-.description {
-/* ここにCSSを書いていきます */
-}`,
-      solutionCode: `.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #4c51bf;
-  text-align: center;
-  color: white;
-}
-
-.title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin: 0 0 1rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.description {
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin: 0 0 2rem 0;
-  opacity: 0.9;
-  line-height: 1.6;
-}`,
-      solutionTargetFile: 'styles.css',
-      initialFiles: {
-        'styles.css': `/* Step 1: 基本的なスタイル */
-.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #4c51bf;
-  text-align: center;
-  color: white;
-}
-
-/* Step 2: タイトルのスタイル */
-.title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin: 0 0 1rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Step 3: 説明文のスタイル */
-.description {
-/* ここにCSSを書いていきます */
-}`,
-        'App.jsx': `import './styles.css'
-
-const App = () => {
-  return (
-    <div className="container">
-      <h1 className="title">React App</h1>
-      <p className="description">Reactの基本構造を学ぶ</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
-    </div>
-  )
-}
-
-export default App`,
-      },
-      defaultFile: 'styles.css',
-      validation: {
-        includes: ['className="description"', "import './styles.css'"],
-      },
-    },
-    {
-      stepNumber: 4,
       title: '画像を美しくしよう',
-      instruction: `画像のスタイルを設定して、見た目を改善しましょう。
-styles.cssに .container img のスタイルを追加してください：
+      instruction: `最後に、画像のスタイルを設定して、見た目を最終的に仕上げましょう。
 
+.container imgのスタイルを追加してください：
 - 最大幅100%（max-width: 100%）
 - 高さ自動調整（height: auto）
-- 角丸にする（border-radius: 15px）`,
-      hint: 'border-radiusで角を丸くできます。数値が大きいほど丸くなります',
-      initialCode: `/* Step 1: 基本的なスタイル */
-.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #4c51bf;
-  text-align: center;
-  color: white;
-}
+- 回転アニメーションを追加（animation: rotate 8s linear infinite）
 
-/* Step 2: タイトルのスタイル */
+@keyframes rotateで回転アニメーションを定義：
+- from：transform: rotate(0deg)
+- to：transform: rotate(360deg)`,
+      hint: '@keyframesでアニメーションを定義できます。linearは一定速度、infiniteは無限ループを意味します。',
+      initialCode: `/* タイトルのスタイル */
 .title {
   font-size: 3rem;
   font-weight: 800;
@@ -338,7 +283,7 @@ styles.cssに .container img のスタイルを追加してください：
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Step 3: 説明文のスタイル */
+/* 説明文のスタイル */
 .description {
   font-size: 1.2rem;
   font-weight: 300;
@@ -347,20 +292,24 @@ styles.cssに .container img のスタイルを追加してください：
   line-height: 1.6;
 }
 
-/* Step 4: 画像のスタイル */
+/* コンテナのスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* 画像のスタイル */
 .container img {
 /* ここにCSSを書いていきます */
 }`,
-      solutionCode: `.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #4c51bf;
-  text-align: center;
-  color: white;
-}
-
-.title {
+      solutionCode: `.title {
   font-size: 3rem;
   font-weight: 800;
   margin: 0 0 1rem 0;
@@ -373,27 +322,37 @@ styles.cssに .container img のスタイルを追加してください：
   margin: 0 0 2rem 0;
   opacity: 0.9;
   line-height: 1.6;
+}
+
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 .container img {
   max-width: 100%;
   height: auto;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: rotate 8s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }`,
       solutionTargetFile: 'styles.css',
       initialFiles: {
-        'styles.css': `/* Step 1: 基本的なスタイル */
-.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #4c51bf;
-  text-align: center;
-  color: white;
-}
-
-/* Step 2: タイトルのスタイル */
+        'styles.css': `/* タイトルのスタイル */
 .title {
   font-size: 3rem;
   font-weight: 800;
@@ -401,7 +360,7 @@ styles.cssに .container img のスタイルを追加してください：
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Step 3: 説明文のスタイル */
+/* 説明文のスタイル */
 .description {
   font-size: 1.2rem;
   font-weight: 300;
@@ -410,7 +369,20 @@ styles.cssに .container img のスタイルを追加してください：
   line-height: 1.6;
 }
 
-/* Step 4: 画像のスタイル */
+/* コンテナのスタイル */
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* 画像のスタイル */
 .container img {
 /* ここにCSSを書いていきます */
 }`,
@@ -433,179 +405,16 @@ export default App`,
         includes: ['<img', "import './styles.css'"],
       },
     },
-    {
-      stepNumber: 5,
-      title: '高度なスタイリングで完成させよう',
-      instruction: `最後に、より高度なスタイリングを追加して完成させましょう。
-
-.containerを更新：
-- グラデーション背景（background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)）
-- 角丸（border-radius: 20px）
-- 美しい影（box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1)）
-- システムフォント（font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif）
-
-画像に回転アニメーションを追加：
-- .container img に、ゆっくり回転するアニメーション（animation: rotate 8s linear infinite）
-- @keyframes rotate でアニメーションを定義
-- 0度から360度まで8秒かけて回転`,
-      hint: 'linear-gradientでグラデーション、@keyframes rotateでアニメーションを定義できます',
-      initialCode: `/* Step 1: 基本的なスタイル */
-.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #4c51bf;
-  text-align: center;
-  color: white;
-}
-
-/* Step 2: タイトルのスタイル */
-.title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin: 0 0 1rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Step 3: 説明文のスタイル */
-.description {
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin: 0 0 2rem 0;
-  opacity: 0.9;
-  line-height: 1.6;
-}
-
-/* Step 4: 画像のスタイル */
-.container img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-/* Step 5: 高度なスタイリング */
-/* .containerを更新してグラデーションや角丸を追加 */
-.container {
-/* ここにCSSを書いていきます */
-}
-
-/* .container imgに回転アニメーションを追加 */
-.container img {
-/* ここにCSSを書いていきます */
-}`,
-      solutionCode: `.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  color: white;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-}
-
-.title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin: 0 0 1rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.description {
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin: 0 0 2rem 0;
-  opacity: 0.9;
-  line-height: 1.6;
-}
-
-.container img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-  animation: rotate 8s linear infinite;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}`,
-      solutionTargetFile: 'styles.css',
-      initialFiles: {
-        'styles.css': `/* Step 1: 基本的なスタイル */
-.container {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #4c51bf;
-  text-align: center;
-  color: white;
-}
-
-/* Step 2: タイトルのスタイル */
-.title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin: 0 0 1rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Step 3: 説明文のスタイル */
-.description {
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin: 0 0 2rem 0;
-  opacity: 0.9;
-  line-height: 1.6;
-}
-
-/* Step 4: 画像のスタイル */
-.container img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-/* Step 5: 高度なスタイリング */
-/* .containerを更新してグラデーションや角丸を追加 */
-.container {
-/* ここにCSSを書いていきます */
-}
-
-/* .container imgに回転アニメーションを追加 */
-.container img {
-/* ここにCSSを書いていきます */
-}`,
-        'App.jsx': `import './styles.css'
-
-const App = () => {
-  return (
-    <div className="container">
-      <h1 className="title">React App</h1>
-      <p className="description">Reactの基本構造を学ぶ</p>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />
-    </div>
-  )
-}
-
-export default App`,
-      },
-      defaultFile: 'styles.css',
-      validation: {
-        includes: ["import './styles.css'", 'className="container"'],
-      },
-    },
   ],
 
   initialFiles: {
-    'styles.css': `.container {
+    'styles.css': `/* タイトルのスタイル */
+.title {
+/* ここにCSSを書いていきます */
+}
+
+/* 説明文のスタイル */
+.description {
 /* ここにCSSを書いていきます */
 }`,
     'App.jsx': `import './styles.css'
@@ -639,7 +448,21 @@ const App = () => {
 }
 
 export default App`,
-    'styles.css': `/* React学習用のスタイル */
+    'styles.css': `.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
 .container {
   max-width: 600px;
   margin: 2rem auto;
@@ -652,26 +475,9 @@ export default App`,
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
-.title {
-  font-size: 3rem;
-  font-weight: 800;
-  margin: 0 0 1rem 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  color: white;
-}
-
-.description {
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin: 0 0 2rem 0;
-  opacity: 0.9;
-  line-height: 1.6;
-}
-
 .container img {
   max-width: 100%;
   height: auto;
-  border-radius: 15px;
   animation: rotate 8s linear infinite;
 }
 
