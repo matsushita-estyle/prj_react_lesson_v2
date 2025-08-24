@@ -207,7 +207,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
                   className="flex items-center px-3 py-2 text-sm font-medium text-gray-300 hover:text-gray-100"
                   onClick={() => handleTabClick(fileName)}
                 >
-                  <span className="max-w-32 truncate">{fileName}</span>
+                  <span className="max-w-32 truncate">{fileName.split('/').pop()}</span>
                 </button>
                 <button
                   className="rounded px-1 py-2 text-gray-500 hover:bg-gray-600 hover:text-gray-300"

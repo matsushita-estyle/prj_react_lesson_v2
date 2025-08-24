@@ -1,6 +1,19 @@
 'use client'
 
 import React, { useState } from 'react'
+import {
+  Folder,
+  FolderOpen,
+  File,
+  FileText,
+  FileCode,
+  Braces,
+  Hash,
+  Globe,
+  FolderPlus,
+  FilePlus
+} from 'lucide-react'
+import { Code } from '@mui/icons-material'
 
 interface FileTreeNode {
   name: string
@@ -76,28 +89,34 @@ const FileTree: React.FC<FileTreeProps> = ({
     return pathMap.get('')?.children || []
   }
 
-  const getFileIcon = (fileName: string): string => {
+  const getFileIcon = (fileName: string): React.ReactNode => {
     const extension = fileName.split('.').pop()?.toLowerCase()
+    const iconProps = { size: 16, className: 'text-gray-400' }
+    
     switch (extension) {
       case 'jsx':
       case 'tsx':
-        return '⚛️'
+        return <Code fontSize="small" sx={{ color: '#61DAFB' }} />
       case 'js':
+        return <FileCode {...iconProps} className="text-yellow-400" />
       case 'ts':
-        return '📄'
+        return <FileCode {...iconProps} className="text-blue-500" />
       case 'css':
-        return '🎨'
+        return <Hash {...iconProps} className="text-blue-600" />
       case 'html':
-        return '🌐'
+        return <Globe {...iconProps} className="text-orange-500" />
       case 'json':
-        return '📋'
+        return <Braces {...iconProps} className="text-yellow-500" />
+      case 'md':
+        return <FileText {...iconProps} className="text-blue-300" />
       default:
-        return '📄'
+        return <File {...iconProps} />
     }
   }
 
-  const getDirectoryIcon = (isExpanded: boolean): string => {
-    return isExpanded ? '📂' : '📁'
+  const getDirectoryIcon = (isExpanded: boolean): React.ReactNode => {
+    const iconProps = { size: 16, className: 'text-yellow-500' }
+    return isExpanded ? <FolderOpen {...iconProps} /> : <Folder {...iconProps} />
   }
 
   const toggleDirectory = (path: string) => {
@@ -213,7 +232,7 @@ const FileTree: React.FC<FileTreeProps> = ({
           <div className="flex items-center">
             {showRenameInput === node.path ? (
               <div className="flex w-full items-center gap-2" style={indentStyle}>
-                <span className="text-xs">{getDirectoryIcon(isExpanded)}</span>
+                <span className="flex items-center">{getDirectoryIcon(isExpanded)}</span>
                 <input
                   type="text"
                   value={renameValue}
@@ -237,24 +256,24 @@ const FileTree: React.FC<FileTreeProps> = ({
                 onClick={() => toggleDirectory(node.path)}
                 onContextMenu={(e) => handleRightClick(e, node.path, 'directory')}
               >
-                <span className="text-xs">{getDirectoryIcon(isExpanded)}</span>
+                <span className="flex items-center">{getDirectoryIcon(isExpanded)}</span>
                 <span className="truncate text-gray-200">{node.name || 'root'}</span>
               </button>
             )}
             <div className="flex gap-1 mr-2">
               <button
-                className="rounded px-1 text-xs text-gray-500 hover:bg-gray-600 hover:text-gray-300"
+                className="rounded p-1 text-gray-500 hover:bg-gray-600 hover:text-gray-300"
                 onClick={() => handleAddFile(node.path)}
                 title="新しいファイルを追加"
               >
-                📄
+                <FilePlus size={16} />
               </button>
               <button
-                className="rounded px-1 text-xs text-gray-500 hover:bg-gray-600 hover:text-gray-300"
+                className="rounded p-1 text-gray-500 hover:bg-gray-600 hover:text-gray-300"
                 onClick={() => handleAddDirectory(node.path)}
                 title="新しいフォルダを追加"
               >
-                📁
+                <FolderPlus size={16} />
               </button>
             </div>
           </div>
@@ -262,7 +281,7 @@ const FileTree: React.FC<FileTreeProps> = ({
           {showAddDirInput === node.path && (
             <div style={{ paddingLeft: `${(depth + 1) * 16 + 12}px` }} className="py-1">
               <div className="flex items-center gap-1">
-                <span className="text-xs">📁</span>
+                <span className="flex items-center"><Folder size={16} className="text-yellow-500" /></span>
                 <input
                   type="text"
                   value={newDirName}
@@ -286,7 +305,7 @@ const FileTree: React.FC<FileTreeProps> = ({
           {showAddFileInput === node.path && (
             <div style={{ paddingLeft: `${(depth + 1) * 16 + 12}px` }} className="py-1">
               <div className="flex items-center gap-1">
-                <span className="text-xs">📄</span>
+                <span className="flex items-center"><File size={16} className="text-gray-400" /></span>
                 <input
                   type="text"
                   value={newFileName}
@@ -324,7 +343,7 @@ const FileTree: React.FC<FileTreeProps> = ({
         <div key={node.path}>
           {showRenameInput === node.path ? (
             <div className="flex w-full items-center gap-2 py-1.5" style={indentStyle}>
-              <span className="text-xs">{getFileIcon(node.name)}</span>
+              <span className="flex items-center">{getFileIcon(node.name)}</span>
               <input
                 type="text"
                 value={renameValue}
@@ -352,7 +371,7 @@ const FileTree: React.FC<FileTreeProps> = ({
               onClick={() => onFileSelect(node.path)}
               onContextMenu={(e) => handleRightClick(e, node.path, 'file')}
             >
-              <span className="text-xs">{getFileIcon(node.name)}</span>
+              <span className="flex items-center">{getFileIcon(node.name)}</span>
               <span className="truncate">{node.name}</span>
             </button>
           )}

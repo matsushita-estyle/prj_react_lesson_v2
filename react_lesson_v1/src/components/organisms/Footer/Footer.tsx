@@ -17,12 +17,19 @@ const Footer: React.FC<FooterProps> = ({
     <footer
       className={`flex justify-center gap-12 border-t border-gray-700 bg-black p-4 ${className}`}
     >
-      {prevLessonId && (
+      {prevLessonId ? (
         <a
           href={`/lessons/${prevLessonId}`}
           className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-green-500 bg-black hover:bg-green-500 text-green-500 hover:text-black focus:ring-green-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
         >
           Previous
+        </a>
+      ) : (
+        <a
+          href={`/`}
+          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-green-500 bg-black hover:bg-green-500 text-green-500 hover:text-black focus:ring-green-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
+        >
+          Back Home
         </a>
       )}
       <button
