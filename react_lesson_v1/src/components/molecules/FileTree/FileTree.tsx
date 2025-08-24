@@ -227,30 +227,30 @@ const FileTree: React.FC<FileTreeProps> = ({
                   }}
                   onBlur={() => handleRenameCancel()}
                   autoFocus
-                  className="flex-1 rounded border border-gray-300 px-2 py-1 text-xs"
+                  className="flex-1 rounded border border-gray-600 bg-gray-800 text-gray-200 px-2 py-1 text-xs"
                 />
               </div>
             ) : (
               <button
-                className="flex w-full items-center gap-2 py-1.5 text-left text-sm transition-colors hover:bg-gray-100"
+                className="flex w-full items-center gap-2 py-1.5 text-left text-sm transition-colors hover:bg-gray-700"
                 style={indentStyle}
                 onClick={() => toggleDirectory(node.path)}
                 onContextMenu={(e) => handleRightClick(e, node.path, 'directory')}
               >
                 <span className="text-xs">{getDirectoryIcon(isExpanded)}</span>
-                <span className="truncate text-gray-700">{node.name || 'root'}</span>
+                <span className="truncate text-gray-200">{node.name || 'root'}</span>
               </button>
             )}
             <div className="flex gap-1 mr-2">
               <button
-                className="rounded px-1 text-xs text-gray-400 hover:bg-gray-200 hover:text-gray-600"
+                className="rounded px-1 text-xs text-gray-500 hover:bg-gray-600 hover:text-gray-300"
                 onClick={() => handleAddFile(node.path)}
                 title="新しいファイルを追加"
               >
                 📄
               </button>
               <button
-                className="rounded px-1 text-xs text-gray-400 hover:bg-gray-200 hover:text-gray-600"
+                className="rounded px-1 text-xs text-gray-500 hover:bg-gray-600 hover:text-gray-300"
                 onClick={() => handleAddDirectory(node.path)}
                 title="新しいフォルダを追加"
               >
@@ -276,7 +276,7 @@ const FileTree: React.FC<FileTreeProps> = ({
                   }}
                   onBlur={handleCancelAddDirectory}
                   autoFocus
-                  className="flex-1 rounded border border-gray-300 px-2 py-1 text-xs"
+                  className="flex-1 rounded border border-gray-600 bg-gray-800 text-gray-200 px-2 py-1 text-xs"
                   placeholder="フォルダ名を入力"
                 />
               </div>
@@ -300,7 +300,7 @@ const FileTree: React.FC<FileTreeProps> = ({
                   }}
                   onBlur={handleCancelAddFile}
                   autoFocus
-                  className="flex-1 rounded border border-gray-300 px-2 py-1 text-xs"
+                  className="flex-1 rounded border border-gray-600 bg-gray-800 text-gray-200 px-2 py-1 text-xs"
                   placeholder="ファイル名を入力"
                 />
               </div>
@@ -338,15 +338,15 @@ const FileTree: React.FC<FileTreeProps> = ({
                 }}
                 onBlur={() => handleRenameCancel()}
                 autoFocus
-                className="flex-1 rounded border border-gray-300 px-2 py-1 text-xs"
+                className="flex-1 rounded border border-gray-600 bg-gray-800 text-gray-200 px-2 py-1 text-xs"
               />
             </div>
           ) : (
             <button
-              className={`flex w-full items-center gap-2 py-1.5 text-left text-sm transition-colors hover:bg-gray-100 ${
+              className={`flex w-full items-center gap-2 py-1.5 text-left text-sm transition-colors hover:bg-gray-700 ${
                 node.path === activeFile
-                  ? 'bg-blue-50 border-r-2 border-blue-500 text-blue-700'
-                  : 'text-gray-700'
+                  ? 'bg-blue-900 border-r-2 border-blue-400 text-blue-300'
+                  : 'text-gray-200'
               }`}
               style={indentStyle}
               onClick={() => onFileSelect(node.path)}
@@ -364,8 +364,8 @@ const FileTree: React.FC<FileTreeProps> = ({
   const fileTree = buildFileTree(Object.keys(files))
 
   return (
-    <div className={`relative flex h-full flex-col bg-gray-50 ${className}`}>
-      <div className="border-b border-gray-200 px-3 py-2 text-xs font-semibold text-gray-500">
+    <div className={`relative flex h-full flex-col bg-gray-900 ${className}`}>
+      <div className="border-b border-gray-700 px-3 py-2 text-xs font-semibold text-gray-300">
         FILES
       </div>
       <div className="flex-1 overflow-y-auto">
@@ -375,20 +375,20 @@ const FileTree: React.FC<FileTreeProps> = ({
       {/* コンテキストメニュー */}
       {showContextMenu && (
         <div
-          className="fixed z-50 rounded-md border border-gray-300 bg-white shadow-lg"
+          className="fixed z-50 rounded-md border border-gray-600 bg-gray-800 shadow-lg"
           style={{
             left: showContextMenu.x,
             top: showContextMenu.y,
           }}
         >
           <button
-            className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+            className="block w-full px-4 py-2 text-left text-sm text-gray-200 hover:bg-gray-700"
             onClick={() => handleRename(showContextMenu.path)}
           >
             名前を変更
           </button>
           <button
-            className="block w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-gray-100"
+            className="block w-full px-4 py-2 text-left text-sm text-red-400 hover:bg-gray-700"
             onClick={() => handleDelete(showContextMenu.path)}
           >
             削除

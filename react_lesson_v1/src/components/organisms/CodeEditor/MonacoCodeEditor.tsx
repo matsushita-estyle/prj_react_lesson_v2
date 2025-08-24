@@ -164,7 +164,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     <div className={`flex h-full ${className}`}>
       {/* ファイルツリー */}
       {isFileTreeOpen && (
-        <div className="min-w-[200px] border-r border-gray-300">
+        <div className="min-w-[200px] border-r border-gray-600">
           <FileTree
             files={files}
             activeFile={activeFile}
@@ -178,14 +178,14 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
       )}
 
       {/* エディター部分 */}
-      <div className="flex flex-1 flex-col bg-white">
+      <div className="flex flex-1 flex-col bg-gray-900">
         {/* ファイルタブとトグルボタン */}
-        <div className="flex items-center justify-between overflow-x-auto border-b border-gray-200 bg-gray-50">
+        <div className="flex items-center justify-between overflow-x-auto border-b border-gray-700 bg-gray-800">
           <div className="flex overflow-x-auto">
             {/* ファイルツリートグルボタン */}
             <button
               onClick={() => setIsFileTreeOpen(!isFileTreeOpen)}
-              className="flex items-center border-r border-gray-200 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+              className="flex items-center border-r border-gray-600 px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-gray-100"
               title={
                 isFileTreeOpen
                   ? 'ファイルツリーを閉じる'
@@ -197,20 +197,20 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
             {openTabs.map((fileName) => (
               <div
                 key={fileName}
-                className={`flex min-w-0 items-center border-r border-gray-200 ${
+                className={`flex min-w-0 items-center border-r border-gray-600 ${
                   fileName === activeFile
-                    ? 'border-b-2 border-blue-500 bg-white'
-                    : 'hover:bg-gray-100'
+                    ? 'border-b-2 border-blue-400 bg-gray-700'
+                    : 'hover:bg-gray-700'
                 }`}
               >
                 <button
-                  className="flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-800"
+                  className="flex items-center px-3 py-2 text-sm font-medium text-gray-300 hover:text-gray-100"
                   onClick={() => handleTabClick(fileName)}
                 >
                   <span className="max-w-32 truncate">{fileName}</span>
                 </button>
                 <button
-                  className="rounded px-1 py-2 text-gray-400 hover:bg-gray-200 hover:text-gray-600"
+                  className="rounded px-1 py-2 text-gray-500 hover:bg-gray-600 hover:text-gray-300"
                   onClick={() => handleTabClose(fileName)}
                 >
                   ×
@@ -219,10 +219,10 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
             ))}
           </div>
           {/* フォーマットボタン */}
-          <div className="flex-shrink-0 border-l border-gray-200 px-2">
+          <div className="flex-shrink-0 border-l border-gray-600 px-2">
             <button
               onClick={handleFormatCode}
-              className="rounded px-3 py-1 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+              className="rounded px-3 py-1 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-gray-100"
               title="コードを整形 (Alt+Shift+F)"
             >
               Format
