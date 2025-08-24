@@ -9,6 +9,7 @@ interface MonacoCodeEditorProps {
   activeFile: string;
   onFileChange?: (fileName: string, content: string) => void;
   onActiveFileChange?: (fileName: string) => void;
+  onDirectoryAdd?: (parentPath: string, directoryName: string) => void;
   className?: string;
 }
 
@@ -17,6 +18,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
   activeFile,
   onFileChange,
   onActiveFileChange,
+  onDirectoryAdd,
   className = '',
 }) => {
   const [openTabs, setOpenTabs] = useState<string[]>([activeFile]);
@@ -159,6 +161,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
             files={files}
             activeFile={activeFile}
             onFileSelect={handleFileSelect}
+            onDirectoryAdd={onDirectoryAdd}
           />
         </div>
       )}

@@ -946,7 +946,7 @@ export default ProductInfo`,
 
   // 右のコードエディタの初期ファイル
   initialEditorFiles: {
-    'App.jsx': `import './styles.css'
+    'react-app/App.jsx': `import './styles.css'
 
 const App = () => {
   const getStarRating = (rating) => {
@@ -978,8 +978,8 @@ const App = () => {
 }
 
 export default App`,
-    'ProductCard.jsx': `// ここにProductCardコンポーネントを作成してくださいi`,
-    'styles.css': `/* 商品カード用のスタイル */
+    'react-app/ProductCard.jsx': `// ここにProductCardコンポーネントを作成してください`,
+    'react-app/styles.css': `/* 商品カード用のスタイル */
 .product-card {
   width: 280px;
   margin: 0;

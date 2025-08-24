@@ -6,6 +6,7 @@ interface CodeEditorProps {
   activeFile: string
   onFileChange?: (fileName: string, content: string) => void
   onActiveFileChange?: (fileName: string) => void
+  onDirectoryAdd?: (parentPath: string, directoryName: string) => void
   className?: string
 }
 
