@@ -14,7 +14,8 @@ export interface LessonStep {
   solutionCodes?: SolutionCode[]  // 複数のソリューションコード
   solutionTargetFile?: string  // solutionCodeの貼り付け先ファイル（後方互換性）
   copyableCode?: string | string[] | { label: string; code: string }[]  // コピー可能なコードスニペット
-  initialFiles?: Record<string, string>  // ステップごとの初期ファイル
+  initialFiles?: Record<string, string>  // ステップごとの初期ファイル（後方互換性のため残す）
+  initialStepFiles?: Record<string, string>  // ステップごとの初期ファイル
   defaultFile?: string  // ステップで最初に表示するファイル
   validation?: {
     includes?: string[]
@@ -36,7 +37,8 @@ export interface Lesson {
   steps?: LessonStep[]
   
   // Code files - 従来の構造（互換性のため残す）
-  initialFiles?: Record<string, string>
+  initialFiles?: Record<string, string>  // 後方互換性のため残す
+  initialEditorFiles?: Record<string, string>  // 右のコードエディタの初期ファイル
   solutionFiles?: Record<string, string>
   defaultFile?: string  // デフォルトで表示するファイル名
   

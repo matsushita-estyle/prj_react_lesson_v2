@@ -150,7 +150,7 @@ const App = () => {
 export default App`,
         },
       ],
-      initialFiles: {
+      initialStepFiles: {
         'App.jsx': `import './styles.css'
 
 const App = () => {
@@ -324,7 +324,7 @@ const App = () => {
 
 export default App`,
           targetFile: 'App.jsx',
-          label: 'App.jsx - ProductCardのインポート'
+          label: 'App.jsx - ProductCardのインポート',
         },
         {
           code: `import './styles.css'
@@ -360,11 +360,11 @@ const ProductCard = () => {
 
 export default ProductCard`,
           targetFile: 'ProductCard.jsx',
-          label: 'ProductCard.jsx - 完全なコンポーネント'
-        }
+          label: 'ProductCard.jsx - 完全なコンポーネント',
+        },
       ] as SolutionCode[],
       validation: {
-        includes: ['import ProductCard', 'from \'./ProductCard\''],
+        includes: ['import ProductCard', "from './ProductCard'"],
       },
     },
     {
@@ -406,7 +406,7 @@ export default ProductImage`,
 <ProductImage />`,
         },
       ],
-      initialFiles: {
+      initialStepFiles: {
         'App.jsx': `import ProductCard from './ProductCard'
 
 const App = () => {
@@ -596,7 +596,7 @@ export default ProductCard`,
 
 export default ProductImage`,
           targetFile: 'ProductImage.jsx',
-          label: 'ProductImage.jsx - 画像コンポーネント'
+          label: 'ProductImage.jsx - 画像コンポーネント',
         },
         {
           code: `import './styles.css'
@@ -627,11 +627,15 @@ const ProductCard = () => {
 
 export default ProductCard`,
           targetFile: 'ProductCard.jsx',
-          label: 'ProductCard.jsx - ProductImageを使用'
-        }
+          label: 'ProductCard.jsx - ProductImageを使用',
+        },
       ] as SolutionCode[],
       validation: {
-        includes: ['<img', 'className="product-image"', 'export default ProductImage'],
+        includes: [
+          '<img',
+          'className="product-image"',
+          'export default ProductImage',
+        ],
       },
     },
     {
@@ -687,7 +691,7 @@ const ProductCard = () => {
 }`,
         },
       ],
-      initialFiles: {
+      initialStepFiles: {
         'App.jsx': `import ProductCard from './ProductCard'
 
 const App = () => {
@@ -895,7 +899,7 @@ export default ProductImage`,
 
 export default ProductInfo`,
           targetFile: 'ProductInfo.jsx',
-          label: 'ProductInfo.jsx - 商品情報コンポーネント'
+          label: 'ProductInfo.jsx - 商品情報コンポーネント',
         },
         {
           code: `import './styles.css'
@@ -913,11 +917,16 @@ const ProductCard = () => {
 
 export default ProductCard`,
           targetFile: 'ProductCard.jsx',
-          label: 'ProductCard.jsx - ProductInfoを追加'
-        }
+          label: 'ProductCard.jsx - ProductInfoを追加',
+        },
       ] as SolutionCode[],
       validation: {
-        includes: ['<h1>', '<p className="price">', 'getStarRating', 'export default ProductInfo'],
+        includes: [
+          '<h1>',
+          '<p className="price">',
+          'getStarRating',
+          'export default ProductInfo',
+        ],
       },
     },
     {
@@ -950,7 +959,7 @@ const ProductCard = () => {
 export default ProductCard`,
         },
       ],
-      initialFiles: {
+      initialStepFiles: {
         'App.jsx': `import ProductCard from './ProductCard'
 
 const App = () => {
@@ -1171,11 +1180,16 @@ const ProductCard = () => {
 
 export default ProductCard`,
           targetFile: 'ProductCard.jsx',
-          label: 'ProductCard.jsx - 完成版'
-        }
+          label: 'ProductCard.jsx - 完成版',
+        },
       ] as SolutionCode[],
       validation: {
-        includes: ['import ProductImage', 'import ProductInfo', '<ProductImage />', '<ProductInfo />'],
+        includes: [
+          'import ProductImage',
+          'import ProductInfo',
+          '<ProductImage />',
+          '<ProductInfo />',
+        ],
       },
     },
     {
@@ -1237,7 +1251,7 @@ export default App`,
 }`,
         },
       ],
-      initialFiles: {
+      initialStepFiles: {
         'App.jsx': `import ProductCard from './ProductCard'
 
 const App = () => {
@@ -1388,7 +1402,7 @@ const App = () => {
 
 export default App`,
           targetFile: 'App.jsx',
-          label: 'App.jsx - 複数の商品カード表示'
+          label: 'App.jsx - 複数の商品カード表示',
         },
         {
           code: `import './styles.css'
@@ -1406,7 +1420,7 @@ const ProductCard = () => {
 
 export default ProductCard`,
           targetFile: 'ProductCard.jsx',
-          label: 'ProductCard.jsx - 完成版（変更不要）'
+          label: 'ProductCard.jsx - 完成版（変更不要）',
         },
         {
           code: `const ProductImage = () => {
@@ -1440,7 +1454,7 @@ export default ProductCard`,
 
 export default ProductImage`,
           targetFile: 'ProductImage.jsx',
-          label: 'ProductImage.jsx - ランダム画像表示機能（オプション）'
+          label: 'ProductImage.jsx - ランダム画像表示機能（オプション）',
         },
         {
           code: `const ProductInfo = () => {
@@ -1485,8 +1499,8 @@ export default ProductImage`,
 
 export default ProductInfo`,
           targetFile: 'ProductInfo.jsx',
-          label: 'ProductInfo.jsx - ランダム商品情報（オプション）'
-        }
+          label: 'ProductInfo.jsx - ランダム商品情報（オプション）',
+        },
       ] as SolutionCode[],
       validation: {
         includes: ['<ProductCard />', 'product-grid', 'app-title'],
@@ -1494,8 +1508,8 @@ export default ProductInfo`,
     },
   ],
 
-  // 互換性のため、最終的な完成形も残す
-  initialFiles: {
+  // 右のコードエディタの初期ファイル
+  initialEditorFiles: {
     'App.jsx': `import './styles.css'
 
 const App = () => {
@@ -1528,7 +1542,7 @@ const App = () => {
 }
 
 export default App`,
-    'ProductCard.jsx': `// ここにProductCardコンポーネントを作成してください`,
+    'ProductCard.jsx': `// ここにProductCardコンポーネントを作成してくださいi`,
     'styles.css': `/* 商品カード用のスタイル */
 .product-card {
   width: 280px;

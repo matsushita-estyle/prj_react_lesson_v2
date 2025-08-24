@@ -13,7 +13,7 @@ export default function LessonDetailPage({ lesson }: LessonDetailPageProps) {
     <LessonTemplate
       lessonTitle={lesson.title}
       courseTitle={`レッスン ${lesson.lessonNumber}`}
-      initialFiles={lesson.initialFiles || {}}
+      initialFiles={lesson.initialEditorFiles || lesson.initialFiles || {}}
       lesson={lesson}
     />
   )

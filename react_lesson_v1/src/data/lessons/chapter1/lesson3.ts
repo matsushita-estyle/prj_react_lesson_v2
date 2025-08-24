@@ -141,7 +141,7 @@ const GoodExample = () => {
           code: `<h1>{productName}</h1>`,
         },
       ],
-      initialFiles: {
+      initialStepFiles: {
         'App.jsx': `import './styles.css'
 
 const App = () => {
@@ -197,7 +197,7 @@ const altText = "スマートウォッチの商品画像";`,
 />`,
         },
       ],
-      initialFiles: {
+      initialStepFiles: {
         'App.jsx': `import './styles.css'
 
 const App = () => {
@@ -264,7 +264,7 @@ const discountRate = 0.20;`,
 <p className="discount-price">割引価格: {price - price * discountRate}円</p>`,
         },
       ],
-      initialFiles: {
+      initialStepFiles: {
         'App.jsx': `import './styles.css'
 
 const App = () => {
@@ -345,7 +345,7 @@ export default App`,
           code: `<p className="rating">評価: {getStarRating(4)}</p>`,
         },
       ],
-      initialFiles: {
+      initialStepFiles: {
         'App.jsx': `import './styles.css'
 
 const App = () => {
@@ -444,7 +444,7 @@ export default App`,
 <p className="rating">評価: {getStarRating(product.rating)}</p>`,
         },
       ],
-      initialFiles: {
+      initialStepFiles: {
         'App.jsx': `import './styles.css'
 
 const App = () => {
@@ -515,8 +515,8 @@ export default App`,
     },
   ],
 
-  // 互換性のため、最終的な完成形も残す
-  initialFiles: {
+  // 右のコードエディタの初期ファイル
+  initialEditorFiles: {
     'App.jsx': `import './styles.css'
 
 const App = () => {
@@ -740,4 +740,5 @@ export default App`,
   },
 
   previousLessonId: 'chapter1-lesson2',
+  nextLessonId: 'chapter1-lesson4',
 };

@@ -144,7 +144,7 @@ line-height: 1.6;`,
   line-height: 1.6;
 }`,
       solutionTargetFile: 'styles.css',
-      initialFiles: {
+      initialStepFiles: {
         'styles.css': `/* タイトルのスタイル */
 .title {
 /* ここにCSSを書いていきます */
@@ -258,7 +258,7 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }`,
       solutionTargetFile: 'styles.css',
-      initialFiles: {
+      initialStepFiles: {
         'styles.css': `/* タイトルのスタイル */
 .title {
   font-size: 3rem;
@@ -414,7 +414,7 @@ animation: rotate 8s linear infinite;`,
   }
 }`,
       solutionTargetFile: 'styles.css',
-      initialFiles: {
+      initialStepFiles: {
         'styles.css': `/* タイトルのスタイル */
 .title {
   font-size: 3rem;
@@ -470,7 +470,7 @@ export default App`,
     },
   ],
 
-  initialFiles: {
+  initialEditorFiles: {
     'styles.css': `/* タイトルのスタイル */
 .title {
 /* ここにCSSを書いていきます */

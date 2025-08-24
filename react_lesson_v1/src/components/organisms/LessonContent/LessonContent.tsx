@@ -159,9 +159,29 @@ export default function LessonContent({
               </div>
 
               {/* 初期コード（あれば） */}
-              {(step.initialCode || step.initialFiles) && (
+              {(step.initialCode || step.initialFiles || step.initialStepFiles) && (
                 <div className="mb-4">
-                  {step.initialFiles &&
+                  {/* 新しいinitialStepFilesを優先的に表示 */}
+                  {step.initialStepFiles &&
+                    Object.entries(step.initialStepFiles).map(
+                      ([fileName, fileContent]) => (
+                        <div key={fileName} className="mb-2">
+                          <h4 className="mb-1 text-xs font-semibold text-gray-500">
+                            {fileName}
+                          </h4>
+                          <div className="overflow-hidden rounded-lg border border-gray-300">
+                            <div className="bg-gray-100 p-4">
+                              <pre className="overflow-x-auto text-xs text-gray-700">
+                                <code>{fileContent}</code>
+                              </pre>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    )}
+                  
+                  {/* 後方互換性のためinitialFilesもサポート */}
+                  {!step.initialStepFiles && step.initialFiles &&
                     Object.entries(step.initialFiles).map(
                       ([fileName, fileContent]) => (
                         <div key={fileName} className="mb-2">
