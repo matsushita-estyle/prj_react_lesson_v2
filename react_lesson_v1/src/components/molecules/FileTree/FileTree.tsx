@@ -14,6 +14,9 @@ interface FileTreeProps {
   activeFile: string
   onFileSelect: (fileName: string) => void
   onDirectoryAdd?: (parentPath: string, directoryName: string) => void
+  onFileAdd?: (parentPath: string, fileName: string) => void
+  onRename?: (oldPath: string, newPath: string) => void
+  onDelete?: (path: string) => void
   className?: string
 }
 
@@ -22,11 +25,19 @@ const FileTree: React.FC<FileTreeProps> = ({
   activeFile,
   onFileSelect,
   onDirectoryAdd,
+  onFileAdd,
+  onRename,
+  onDelete,
   className = '',
 }) => {
   const [expandedDirs, setExpandedDirs] = useState<Set<string>>(new Set(['', 'react-app']))
   const [showAddDirInput, setShowAddDirInput] = useState<string | null>(null)
+  const [showAddFileInput, setShowAddFileInput] = useState<string | null>(null)
+  const [showContextMenu, setShowContextMenu] = useState<{ path: string; x: number; y: number; type: 'file' | 'directory' } | null>(null)
+  const [showRenameInput, setShowRenameInput] = useState<string | null>(null)
   const [newDirName, setNewDirName] = useState('')
+  const [newFileName, setNewFileName] = useState('')
+  const [renameValue, setRenameValue] = useState('')
 
   const buildFileTree = (filePaths: string[]): FileTreeNode[] => {
     const pathMap = new Map<string, FileTreeNode>()
@@ -101,7 +112,14 @@ const FileTree: React.FC<FileTreeProps> = ({
 
   const handleAddDirectory = (parentPath: string) => {
     setShowAddDirInput(parentPath)
+    setShowAddFileInput(null)
     setNewDirName('')
+  }
+
+  const handleAddFile = (parentPath: string) => {
+    setShowAddFileInput(parentPath)
+    setShowAddDirInput(null)
+    setNewFileName('')
   }
 
   const handleSubmitNewDirectory = (parentPath: string) => {
@@ -112,10 +130,77 @@ const FileTree: React.FC<FileTreeProps> = ({
     }
   }
 
+  const handleSubmitNewFile = (parentPath: string) => {
+    if (newFileName.trim() && onFileAdd) {
+      onFileAdd(parentPath, newFileName.trim())
+      setShowAddFileInput(null)
+      setNewFileName('')
+    }
+  }
+
   const handleCancelAddDirectory = () => {
     setShowAddDirInput(null)
     setNewDirName('')
   }
+
+  const handleCancelAddFile = () => {
+    setShowAddFileInput(null)
+    setNewFileName('')
+  }
+
+  const handleRightClick = (e: React.MouseEvent, path: string, type: 'file' | 'directory') => {
+    e.preventDefault()
+    e.stopPropagation()
+    setShowContextMenu({
+      path,
+      x: e.clientX,
+      y: e.clientY,
+      type
+    })
+  }
+
+  const handleRename = (path: string) => {
+    const pathParts = path.split('/')
+    const currentName = pathParts[pathParts.length - 1]
+    setRenameValue(currentName)
+    setShowRenameInput(path)
+    setShowContextMenu(null)
+  }
+
+  const handleRenameSubmit = (oldPath: string) => {
+    if (renameValue.trim() && onRename) {
+      const pathParts = oldPath.split('/')
+      pathParts[pathParts.length - 1] = renameValue.trim()
+      const newPath = pathParts.join('/')
+      onRename(oldPath, newPath)
+    }
+    setShowRenameInput(null)
+    setRenameValue('')
+  }
+
+  const handleRenameCancel = () => {
+    setShowRenameInput(null)
+    setRenameValue('')
+  }
+
+  const handleDelete = (path: string) => {
+    if (onDelete) {
+      onDelete(path)
+    }
+    setShowContextMenu(null)
+  }
+
+  const handleClickOutside = () => {
+    setShowContextMenu(null)
+  }
+
+  // グローバルクリックでコンテキストメニューを閉じる
+  React.useEffect(() => {
+    if (showContextMenu) {
+      document.addEventListener('click', handleClickOutside)
+      return () => document.removeEventListener('click', handleClickOutside)
+    }
+  }, [showContextMenu])
 
   const renderNode = (node: FileTreeNode, depth: number = 0): React.ReactNode => {
     const indentStyle = { paddingLeft: `${depth * 16 + 12}px` }
@@ -126,21 +211,52 @@ const FileTree: React.FC<FileTreeProps> = ({
       return (
         <div key={node.path}>
           <div className="flex items-center">
-            <button
-              className="flex w-full items-center gap-2 py-1.5 text-left text-sm transition-colors hover:bg-gray-100"
-              style={indentStyle}
-              onClick={() => toggleDirectory(node.path)}
-            >
-              <span className="text-xs">{getDirectoryIcon(isExpanded)}</span>
-              <span className="truncate text-gray-700">{node.name || 'root'}</span>
-            </button>
-            <button
-              className="mr-2 rounded px-1 text-xs text-gray-400 hover:bg-gray-200 hover:text-gray-600"
-              onClick={() => handleAddDirectory(node.path)}
-              title="新しいフォルダを追加"
-            >
-              +
-            </button>
+            {showRenameInput === node.path ? (
+              <div className="flex w-full items-center gap-2" style={indentStyle}>
+                <span className="text-xs">{getDirectoryIcon(isExpanded)}</span>
+                <input
+                  type="text"
+                  value={renameValue}
+                  onChange={(e) => setRenameValue(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleRenameSubmit(node.path)
+                    } else if (e.key === 'Escape') {
+                      handleRenameCancel()
+                    }
+                  }}
+                  onBlur={() => handleRenameCancel()}
+                  autoFocus
+                  className="flex-1 rounded border border-gray-300 px-2 py-1 text-xs"
+                />
+              </div>
+            ) : (
+              <button
+                className="flex w-full items-center gap-2 py-1.5 text-left text-sm transition-colors hover:bg-gray-100"
+                style={indentStyle}
+                onClick={() => toggleDirectory(node.path)}
+                onContextMenu={(e) => handleRightClick(e, node.path, 'directory')}
+              >
+                <span className="text-xs">{getDirectoryIcon(isExpanded)}</span>
+                <span className="truncate text-gray-700">{node.name || 'root'}</span>
+              </button>
+            )}
+            <div className="flex gap-1 mr-2">
+              <button
+                className="rounded px-1 text-xs text-gray-400 hover:bg-gray-200 hover:text-gray-600"
+                onClick={() => handleAddFile(node.path)}
+                title="新しいファイルを追加"
+              >
+                📄
+              </button>
+              <button
+                className="rounded px-1 text-xs text-gray-400 hover:bg-gray-200 hover:text-gray-600"
+                onClick={() => handleAddDirectory(node.path)}
+                title="新しいフォルダを追加"
+              >
+                📁
+              </button>
+            </div>
           </div>
           
           {showAddDirInput === node.path && (
@@ -167,6 +283,30 @@ const FileTree: React.FC<FileTreeProps> = ({
             </div>
           )}
           
+          {showAddFileInput === node.path && (
+            <div style={{ paddingLeft: `${(depth + 1) * 16 + 12}px` }} className="py-1">
+              <div className="flex items-center gap-1">
+                <span className="text-xs">📄</span>
+                <input
+                  type="text"
+                  value={newFileName}
+                  onChange={(e) => setNewFileName(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleSubmitNewFile(node.path)
+                    } else if (e.key === 'Escape') {
+                      handleCancelAddFile()
+                    }
+                  }}
+                  onBlur={handleCancelAddFile}
+                  autoFocus
+                  className="flex-1 rounded border border-gray-300 px-2 py-1 text-xs"
+                  placeholder="ファイル名を入力"
+                />
+              </div>
+            </div>
+          )}
+          
           {isExpanded && node.children && (
             <div>
               {node.children.map((child) => renderNode(child, depth + 1))}
@@ -175,20 +315,48 @@ const FileTree: React.FC<FileTreeProps> = ({
         </div>
       )
     } else {
+      // .gitkeepファイルは非表示にする
+      if (node.name === '.gitkeep') {
+        return null
+      }
+      
       return (
-        <button
-          key={node.path}
-          className={`flex w-full items-center gap-2 py-1.5 text-left text-sm transition-colors hover:bg-gray-100 ${
-            node.path === activeFile
-              ? 'bg-blue-50 border-r-2 border-blue-500 text-blue-700'
-              : 'text-gray-700'
-          }`}
-          style={indentStyle}
-          onClick={() => onFileSelect(node.path)}
-        >
-          <span className="text-xs">{getFileIcon(node.name)}</span>
-          <span className="truncate">{node.name}</span>
-        </button>
+        <div key={node.path}>
+          {showRenameInput === node.path ? (
+            <div className="flex w-full items-center gap-2 py-1.5" style={indentStyle}>
+              <span className="text-xs">{getFileIcon(node.name)}</span>
+              <input
+                type="text"
+                value={renameValue}
+                onChange={(e) => setRenameValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleRenameSubmit(node.path)
+                  } else if (e.key === 'Escape') {
+                    handleRenameCancel()
+                  }
+                }}
+                onBlur={() => handleRenameCancel()}
+                autoFocus
+                className="flex-1 rounded border border-gray-300 px-2 py-1 text-xs"
+              />
+            </div>
+          ) : (
+            <button
+              className={`flex w-full items-center gap-2 py-1.5 text-left text-sm transition-colors hover:bg-gray-100 ${
+                node.path === activeFile
+                  ? 'bg-blue-50 border-r-2 border-blue-500 text-blue-700'
+                  : 'text-gray-700'
+              }`}
+              style={indentStyle}
+              onClick={() => onFileSelect(node.path)}
+              onContextMenu={(e) => handleRightClick(e, node.path, 'file')}
+            >
+              <span className="text-xs">{getFileIcon(node.name)}</span>
+              <span className="truncate">{node.name}</span>
+            </button>
+          )}
+        </div>
       )
     }
   }
@@ -196,13 +364,37 @@ const FileTree: React.FC<FileTreeProps> = ({
   const fileTree = buildFileTree(Object.keys(files))
 
   return (
-    <div className={`flex h-full flex-col bg-gray-50 ${className}`}>
+    <div className={`relative flex h-full flex-col bg-gray-50 ${className}`}>
       <div className="border-b border-gray-200 px-3 py-2 text-xs font-semibold text-gray-500">
         FILES
       </div>
       <div className="flex-1 overflow-y-auto">
         {fileTree.map((node) => renderNode(node))}
       </div>
+      
+      {/* コンテキストメニュー */}
+      {showContextMenu && (
+        <div
+          className="fixed z-50 rounded-md border border-gray-300 bg-white shadow-lg"
+          style={{
+            left: showContextMenu.x,
+            top: showContextMenu.y,
+          }}
+        >
+          <button
+            className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+            onClick={() => handleRename(showContextMenu.path)}
+          >
+            名前を変更
+          </button>
+          <button
+            className="block w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-gray-100"
+            onClick={() => handleDelete(showContextMenu.path)}
+          >
+            削除
+          </button>
+        </div>
+      )}
     </div>
   )
 }

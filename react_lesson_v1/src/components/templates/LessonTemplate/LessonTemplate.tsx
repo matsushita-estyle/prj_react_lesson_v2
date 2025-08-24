@@ -42,6 +42,75 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
     }))
   }
 
+  const handleDirectoryAdd = (parentPath: string, directoryName: string) => {
+    // 空のディレクトリを表示するため.gitkeepファイルを作成
+    const directoryPath = parentPath ? `${parentPath}/${directoryName}` : directoryName
+    const gitkeepPath = `${directoryPath}/.gitkeep`
+    setFiles((prev) => ({
+      ...prev,
+      [gitkeepPath]: '',
+    }))
+  }
+
+  const handleFileAdd = (parentPath: string, fileName: string) => {
+    const filePath = parentPath ? `${parentPath}/${fileName}` : fileName
+    setFiles((prev) => ({
+      ...prev,
+      [filePath]: '',
+    }))
+    setActiveFile(filePath)
+  }
+
+  const handleRename = (oldPath: string, newPath: string) => {
+    if (oldPath === newPath) return
+    
+    setFiles((prev) => {
+      const newFiles = { ...prev }
+      
+      // oldPathがディレクトリの場合、そのディレクトリ内のすべてのファイルの名前を変更
+      const filesToRename = Object.keys(newFiles).filter(path => 
+        path === oldPath || path.startsWith(oldPath + '/')
+      )
+      
+      filesToRename.forEach(filePath => {
+        const relativePath = filePath.substring(oldPath.length)
+        const newFilePath = newPath + relativePath
+        newFiles[newFilePath] = newFiles[filePath]
+        delete newFiles[filePath]
+        
+        // アクティブファイルが変更されたファイルの場合、新しいパスに更新
+        if (filePath === activeFile) {
+          setActiveFile(newFilePath)
+        }
+      })
+      
+      return newFiles
+    })
+  }
+
+  const handleDelete = (path: string) => {
+    setFiles((prev) => {
+      const newFiles = { ...prev }
+      
+      // pathがディレクトリの場合、そのディレクトリ内のすべてのファイルを削除
+      const filesToDelete = Object.keys(newFiles).filter(filePath => 
+        filePath === path || filePath.startsWith(path + '/')
+      )
+      
+      filesToDelete.forEach(filePath => {
+        delete newFiles[filePath]
+        
+        // 削除されたファイルがアクティブファイルの場合、別のファイルをアクティブにする
+        if (filePath === activeFile) {
+          const remainingFiles = Object.keys(newFiles).filter(f => !f.endsWith('/.gitkeep'))
+          setActiveFile(remainingFiles.length > 0 ? remainingFiles[0] : '')
+        }
+      })
+      
+      return newFiles
+    })
+  }
+
 
   const handleCheckMaterials = () => {
     setIsMaterialModalOpen(true)
@@ -112,6 +181,10 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
             activeFile={activeFile}
             onFileChange={handleFileChange}
             onActiveFileChange={setActiveFile}
+            onDirectoryAdd={handleDirectoryAdd}
+            onFileAdd={handleFileAdd}
+            onRename={handleRename}
+            onDelete={handleDelete}
             className="h-full"
           />
         }
