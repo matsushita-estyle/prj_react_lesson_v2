@@ -29,7 +29,9 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
 }) => {
   const [openTabs, setOpenTabs] = useState<string[]>([activeFile]);
   const [isFileTreeOpen, setIsFileTreeOpen] = useState<boolean>(false);
-  const [editorInstance, setEditorInstance] = useState<import('monaco-editor').editor.IStandaloneCodeEditor | null>(null);
+  const [editorInstance, setEditorInstance] = useState<
+    import('monaco-editor').editor.IStandaloneCodeEditor | null
+  >(null);
 
   // ファイル拡張子から言語を判定
   const getLanguageFromFileName = (fileName: string): string => {
@@ -162,7 +164,7 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
     <div className={`flex h-full ${className}`}>
       {/* ファイルツリー */}
       {isFileTreeOpen && (
-        <div className="w-100 border-r border-gray-300">
+        <div className="min-w-[200px] border-r border-gray-300">
           <FileTree
             files={files}
             activeFile={activeFile}
@@ -180,39 +182,41 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
         {/* ファイルタブとトグルボタン */}
         <div className="flex items-center justify-between overflow-x-auto border-b border-gray-200 bg-gray-50">
           <div className="flex overflow-x-auto">
-          {/* ファイルツリートグルボタン */}
-          <button
-            onClick={() => setIsFileTreeOpen(!isFileTreeOpen)}
-            className="flex items-center border-r border-gray-200 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-800"
-            title={
-              isFileTreeOpen ? 'ファイルツリーを閉じる' : 'ファイルツリーを開く'
-            }
-          >
-            {isFileTreeOpen ? '<' : '>'}
-          </button>
-          {openTabs.map((fileName) => (
-            <div
-              key={fileName}
-              className={`flex min-w-0 items-center border-r border-gray-200 ${
-                fileName === activeFile
-                  ? 'border-b-2 border-blue-500 bg-white'
-                  : 'hover:bg-gray-100'
-              }`}
+            {/* ファイルツリートグルボタン */}
+            <button
+              onClick={() => setIsFileTreeOpen(!isFileTreeOpen)}
+              className="flex items-center border-r border-gray-200 px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+              title={
+                isFileTreeOpen
+                  ? 'ファイルツリーを閉じる'
+                  : 'ファイルツリーを開く'
+              }
             >
-              <button
-                className="flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-800"
-                onClick={() => handleTabClick(fileName)}
+              {isFileTreeOpen ? '<' : '>'}
+            </button>
+            {openTabs.map((fileName) => (
+              <div
+                key={fileName}
+                className={`flex min-w-0 items-center border-r border-gray-200 ${
+                  fileName === activeFile
+                    ? 'border-b-2 border-blue-500 bg-white'
+                    : 'hover:bg-gray-100'
+                }`}
               >
-                <span className="max-w-32 truncate">{fileName}</span>
-              </button>
-              <button
-                className="rounded px-1 py-2 text-gray-400 hover:bg-gray-200 hover:text-gray-600"
-                onClick={() => handleTabClose(fileName)}
-              >
-                ×
-              </button>
-            </div>
-          ))}
+                <button
+                  className="flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-800"
+                  onClick={() => handleTabClick(fileName)}
+                >
+                  <span className="max-w-32 truncate">{fileName}</span>
+                </button>
+                <button
+                  className="rounded px-1 py-2 text-gray-400 hover:bg-gray-200 hover:text-gray-600"
+                  onClick={() => handleTabClose(fileName)}
+                >
+                  ×
+                </button>
+              </div>
+            ))}
           </div>
           {/* フォーマットボタン */}
           <div className="flex-shrink-0 border-l border-gray-200 px-2">
