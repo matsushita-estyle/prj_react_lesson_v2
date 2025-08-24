@@ -1,4 +1,4 @@
-import { Lesson } from '@/lib/types/lesson';
+import { Lesson, SolutionCode } from '@/lib/types/lesson';
 
 export const chapter1Lesson2: Lesson = {
   id: 'chapter1-lesson2',
@@ -129,7 +129,9 @@ line-height: 1.6;`,
 .description {
 /* ここにCSSを書いていきます */
 }`,
-      solutionCode: `.title {
+      solutionCodes: [
+        {
+          code: `.title {
   font-size: 3rem;
   font-weight: 800;
   margin: 0 0 1rem 0;
@@ -143,7 +145,10 @@ line-height: 1.6;`,
   opacity: 0.9;
   line-height: 1.6;
 }`,
-      solutionTargetFile: 'styles.css',
+          solutionTargetFile: 'react-app/styles.css',
+          label: 'styles.css - タイトルと説明のスタイル',
+        },
+      ] as SolutionCode[],
       initialStepFiles: {
         'styles.css': `/* タイトルのスタイル */
 .title {
@@ -231,7 +236,9 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif
 .container {
 /* ここにCSSを書いていきます */
 }`,
-      solutionCode: `.title {
+      solutionCodes: [
+        {
+          code: `.title {
   font-size: 3rem;
   font-weight: 800;
   margin: 0 0 1rem 0;
@@ -257,7 +264,10 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif
   color: white;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }`,
-      solutionTargetFile: 'styles.css',
+          solutionTargetFile: 'react-app/styles.css',
+          label: 'styles.css - コンテナのスタイル追加',
+        },
+      ] as SolutionCode[],
       initialStepFiles: {
         'styles.css': `/* タイトルのスタイル */
 .title {
@@ -372,7 +382,9 @@ animation: rotate 8s linear infinite;`,
 .container img {
 /* ここにCSSを書いていきます */
 }`,
-      solutionCode: `.title {
+      solutionCodes: [
+        {
+          code: `.title {
   font-size: 3rem;
   font-weight: 800;
   margin: 0 0 1rem 0;
@@ -413,7 +425,10 @@ animation: rotate 8s linear infinite;`,
     transform: rotate(360deg);
   }
 }`,
-      solutionTargetFile: 'styles.css',
+          solutionTargetFile: 'react-app/styles.css',
+          label: 'styles.css - アニメーション追加',
+        },
+      ] as SolutionCode[],
       initialStepFiles: {
         'styles.css': `/* タイトルのスタイル */
 .title {
@@ -471,7 +486,7 @@ export default App`,
   ],
 
   initialEditorFiles: {
-    'styles.css': `/* タイトルのスタイル */
+    'react-app/styles.css': `/* タイトルのスタイル */
 .title {
 /* ここにCSSを書いていきます */
 }
@@ -480,7 +495,7 @@ export default App`,
 .description {
 /* ここにCSSを書いていきます */
 }`,
-    'App.jsx': `import './styles.css'
+    'react-app/App.jsx': `import './styles.css'
 
 const App = () => {
   return (
@@ -495,10 +510,10 @@ const App = () => {
 export default App`,
   },
 
-  defaultFile: 'styles.css',
+  defaultFile: 'react-app/styles.css',
 
   solutionFiles: {
-    'App.jsx': `import './styles.css'
+    'react-app/App.jsx': `import './styles.css'
 
 const App = () => {
   return (
@@ -511,7 +526,7 @@ const App = () => {
 }
 
 export default App`,
-    'styles.css': `.title {
+    'react-app/styles.css': `.title {
   font-size: 3rem;
   font-weight: 800;
   margin: 0 0 1rem 0;

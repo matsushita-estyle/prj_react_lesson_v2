@@ -84,7 +84,7 @@ const SimpleSandpack: React.FC<SimpleSandpackProps> = ({ files, className = '' }
     // App.jsxをエントリーポイントとして使用するためのindex.js
     '/index.js': `import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
+import App from './react-app/App.jsx';
 
 const root = createRoot(document.getElementById('root'));
 root.render(

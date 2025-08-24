@@ -1,4 +1,4 @@
-import { Lesson } from '@/lib/types/lesson';
+import { Lesson, SolutionCode } from '@/lib/types/lesson';
 
 export const chapter1Lesson3: Lesson = {
   id: 'chapter1-lesson3',
@@ -157,7 +157,9 @@ const App = () => {
 
 export default App`
       },
-      solutionCode: `import './styles.css'
+      solutionCodes: [
+        {
+          code: `import './styles.css'
 
 const App = () => {
   const productName = "スマートウォッチ";
@@ -170,7 +172,10 @@ const App = () => {
 }
 
 export default App`,
-      solutionTargetFile: 'App.jsx',
+          solutionTargetFile: 'react-app/App.jsx',
+          label: 'App.jsx - 解答コード',
+        },
+      ] as SolutionCode[],
       validation: {
         includes: ['{productName}', "import './styles.css'"],
       },
@@ -219,7 +224,9 @@ const App = () => {
 
 export default App`
       },
-      solutionCode: `import './styles.css'
+      solutionCodes: [
+        {
+          code: `import './styles.css'
 
 const App = () => {
   const productName = "スマートウォッチ";
@@ -240,7 +247,10 @@ const App = () => {
 }
 
 export default App`,
-      solutionTargetFile: 'App.jsx',
+          solutionTargetFile: 'react-app/App.jsx',
+          label: 'App.jsx - 解答コード',
+        },
+      ] as SolutionCode[],
       validation: {
         includes: ['src={imageUrl}', 'alt={altText}', "import './styles.css'"],
       },
@@ -291,7 +301,9 @@ const App = () => {
 
 export default App`
       },
-      solutionCode: `import './styles.css'
+      solutionCodes: [
+        {
+          code: `import './styles.css'
 
 const App = () => {
   const productName = "スマートウォッチ";
@@ -317,7 +329,10 @@ const App = () => {
 }
 
 export default App`,
-      solutionTargetFile: 'App.jsx',
+          solutionTargetFile: 'react-app/App.jsx',
+          label: 'App.jsx - 解答コード',
+        },
+      ] as SolutionCode[],
       validation: {
         includes: [
           '{price}',
@@ -376,7 +391,9 @@ const App = () => {
 
 export default App`
       },
-      solutionCode: `import './styles.css'
+      solutionCodes: [
+        {
+          code: `import './styles.css'
 
 const App = () => {
   const productName = "スマートウォッチ";
@@ -407,7 +424,10 @@ const App = () => {
 }
 
 export default App`,
-      solutionTargetFile: 'App.jsx',
+          solutionTargetFile: 'react-app/App.jsx',
+          label: 'App.jsx - 解答コード',
+        },
+      ] as SolutionCode[],
       validation: {
         includes: ['{getStarRating(4)}', "import './styles.css'"],
       },
@@ -471,7 +491,9 @@ const App = () => {
 
 export default App`
       },
-      solutionCode: `import './styles.css'
+      solutionCodes: [
+        {
+          code: `import './styles.css'
 
 const App = () => {
   const getStarRating = (rating) => {
@@ -503,7 +525,10 @@ const App = () => {
 }
 
 export default App`,
-      solutionTargetFile: 'App.jsx',
+          solutionTargetFile: 'react-app/App.jsx',
+          label: 'App.jsx - 解答コード',
+        },
+      ] as SolutionCode[],
       validation: {
         includes: [
           '{product.name}',
@@ -517,7 +542,7 @@ export default App`,
 
   // 右のコードエディタの初期ファイル
   initialEditorFiles: {
-    'App.jsx': `import './styles.css'
+    'react-app/App.jsx': `import './styles.css'
 
 const App = () => {
   // ここに商品名の変数を定義してください
@@ -531,7 +556,7 @@ const App = () => {
 }
 
 export default App`,
-    'styles.css': `/* 商品カード用のスタイル */
+    'react-app/styles.css': `/* 商品カード用のスタイル */
 .product-card {
   max-width: 420px;
   margin: 2rem auto;
@@ -607,7 +632,7 @@ export default App`,
   },
 
   solutionFiles: {
-    'App.jsx': `import './styles.css'
+    'react-app/App.jsx': `import './styles.css'
 
 const App = () => {
   const getStarRating = (rating) => {
@@ -639,7 +664,7 @@ const App = () => {
 }
 
 export default App`,
-    'styles.css': `/* 商品カード用のスタイル */
+    'react-app/styles.css': `/* 商品カード用のスタイル */
 .product-card {
   max-width: 420px;
   margin: 2rem auto;

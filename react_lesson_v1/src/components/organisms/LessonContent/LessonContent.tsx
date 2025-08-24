@@ -310,11 +310,11 @@ export default function LessonContent({
                             {onApplyCode && (
                               <button
                                 onClick={() => {
-                                  onApplyCode(solution.targetFile, solution.code);
+                                  onApplyCode(solution.solutionTargetFile, solution.code);
                                 }}
                                 className="absolute top-2 right-2 z-10 rounded bg-blue-500 px-3 py-2 text-xs text-white transition-colors hover:bg-blue-600"
                               >
-                                {solution.targetFile}に反映 📝
+                                {solution.solutionTargetFile}に反映 📝
                               </button>
                             )}
                             <pre className="overflow-x-auto text-xs text-gray-700">

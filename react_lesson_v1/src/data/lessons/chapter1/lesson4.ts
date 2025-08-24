@@ -198,7 +198,7 @@ const App = () => {
 }
 
 export default App`,
-          targetFile: 'App.jsx',
+          solutionTargetFile: 'react-app/App.jsx',
           label: 'App.jsx - ProductCardのインポート',
         },
         {
@@ -234,7 +234,7 @@ const ProductCard = () => {
 }
 
 export default ProductCard`,
-          targetFile: 'ProductCard.jsx',
+          solutionTargetFile: 'react-app/ProductCard.jsx',
           label: 'ProductCard.jsx - 完全なコンポーネント',
         },
       ] as SolutionCode[],
@@ -345,7 +345,7 @@ export default ProductCard`,
 }
 
 export default ProductImage`,
-          targetFile: 'ProductImage.jsx',
+          solutionTargetFile: 'react-app/ProductImage.jsx',
           label: 'ProductImage.jsx - 画像コンポーネント',
         },
         {
@@ -376,7 +376,7 @@ const ProductCard = () => {
 }
 
 export default ProductCard`,
-          targetFile: 'ProductCard.jsx',
+          solutionTargetFile: 'react-app/ProductCard.jsx',
           label: 'ProductCard.jsx - ProductImageを使用',
         },
       ] as SolutionCode[],
@@ -523,7 +523,7 @@ export default ProductImage`,
 }
 
 export default ProductInfo`,
-          targetFile: 'ProductInfo.jsx',
+          solutionTargetFile: 'react-app/ProductInfo.jsx',
           label: 'ProductInfo.jsx - 商品情報コンポーネント',
         },
         {
@@ -541,7 +541,7 @@ const ProductCard = () => {
 }
 
 export default ProductCard`,
-          targetFile: 'ProductCard.jsx',
+          solutionTargetFile: 'react-app/ProductCard.jsx',
           label: 'ProductCard.jsx - ProductInfoを追加',
         },
       ] as SolutionCode[],
@@ -679,7 +679,7 @@ const ProductCard = () => {
 }
 
 export default ProductCard`,
-          targetFile: 'ProductCard.jsx',
+          solutionTargetFile: 'react-app/ProductCard.jsx',
           label: 'ProductCard.jsx - 完成版',
         },
       ] as SolutionCode[],
@@ -837,7 +837,7 @@ const App = () => {
 }
 
 export default App`,
-          targetFile: 'App.jsx',
+          solutionTargetFile: 'react-app/App.jsx',
           label: 'App.jsx - 複数の商品カード表示',
         },
         {
@@ -855,7 +855,7 @@ const ProductCard = () => {
 }
 
 export default ProductCard`,
-          targetFile: 'ProductCard.jsx',
+          solutionTargetFile: 'react-app/ProductCard.jsx',
           label: 'ProductCard.jsx - 完成版（変更不要）',
         },
         {
@@ -889,7 +889,7 @@ export default ProductCard`,
 }
 
 export default ProductImage`,
-          targetFile: 'ProductImage.jsx',
+          solutionTargetFile: 'react-app/ProductImage.jsx',
           label: 'ProductImage.jsx - ランダム画像表示機能（オプション）',
         },
         {
@@ -934,7 +934,7 @@ export default ProductImage`,
 }
 
 export default ProductInfo`,
-          targetFile: 'ProductInfo.jsx',
+          solutionTargetFile: 'react-app/ProductInfo.jsx',
           label: 'ProductInfo.jsx - ランダム商品情報（オプション）',
         },
       ] as SolutionCode[],
@@ -1107,7 +1107,7 @@ export default App`,
   },
 
   solutionFiles: {
-    'App.jsx': `import ProductCard from './ProductCard'
+    'react-app/App.jsx': `import ProductCard from './ProductCard'
 import './styles.css'
 
 const App = () => {
@@ -1125,7 +1125,7 @@ const App = () => {
 }
 
 export default App`,
-    'ProductCard.jsx': `import './styles.css'
+    'react-app/ProductCard.jsx': `import './styles.css'
 import ProductImage from './ProductImage'
 import ProductInfo from './ProductInfo'
 
@@ -1139,7 +1139,7 @@ const ProductCard = () => {
 }
 
 export default ProductCard`,
-    'ProductImage.jsx': `const ProductImage = () => {
+    'react-app/ProductImage.jsx': `const ProductImage = () => {
   const product = {
     imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300&h=300&fit=crop&crop=center",
     altText: "スマートウォッチの商品画像"
@@ -1155,7 +1155,7 @@ export default ProductCard`,
 }
 
 export default ProductImage`,
-    'ProductInfo.jsx': `const ProductInfo = () => {
+    'react-app/ProductInfo.jsx': `const ProductInfo = () => {
   const getStarRating = (rating) => {
     return '⭐'.repeat(rating);
   }
@@ -1178,7 +1178,7 @@ export default ProductImage`,
 }
 
 export default ProductInfo`,
-    'styles.css': `/* 商品カード用のスタイル */
+    'react-app/styles.css': `/* 商品カード用のスタイル */
 .product-card {
   width: 280px;
   margin: 0;

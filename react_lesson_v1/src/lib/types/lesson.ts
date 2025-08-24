@@ -1,6 +1,6 @@
 export interface SolutionCode {
   code: string
-  targetFile: string  // このコードを適用するファイル
+  solutionTargetFile: string  // このコードを適用するファイル
   label?: string  // オプション: ソリューションの説明ラベル
 }
 

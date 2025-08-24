@@ -1,4 +1,4 @@
-import { Lesson } from '@/lib/types/lesson';
+import { Lesson, SolutionCode } from '@/lib/types/lesson';
 
 export const chapter1Lesson1: Lesson = {
   id: 'chapter1-lesson1',
@@ -186,12 +186,17 @@ export default App`
           code: `<div>こんにちは</div>`,
         },
       ],
-      solutionCode: `const App = () => {
+      solutionCodes: [
+        {
+          code: `const App = () => {
   return <div>こんにちは</div>
 }
 
 export default App`,
-      solutionTargetFile: 'App.jsx',
+          solutionTargetFile: 'react-app/App.jsx',
+          label: 'App.jsx - こんにちはの表示',
+        },
+      ] as SolutionCode[],
       validation: {
         includes: ['こんにちは'],
       },
@@ -215,12 +220,17 @@ export default App`
           code: `<h1>ようこそReactへ！</h1>`,
         },
       ],
-      solutionCode: `const App = () => {
+      solutionCodes: [
+        {
+          code: `const App = () => {
   return <h1>ようこそReactへ！</h1>
 }
 
 export default App`,
-      solutionTargetFile: 'App.jsx',
+          solutionTargetFile: 'react-app/App.jsx',
+          label: 'App.jsx - 見出しの表示',
+        },
+      ] as SolutionCode[],
       validation: {
         includes: ['<h1>', 'ようこそReactへ', '</h1>'],
       },
@@ -252,7 +262,9 @@ export default App`
     <p>Reactの基本構造を学ぶ</p>`,
         },
       ],
-      solutionCode: `const App = () => {
+      solutionCodes: [
+        {
+          code: `const App = () => {
   return (
     <div>
       <h1>React App</h1>
@@ -262,7 +274,10 @@ export default App`
 }
 
 export default App`,
-      solutionTargetFile: 'App.jsx',
+          solutionTargetFile: 'react-app/App.jsx',
+          label: 'App.jsx - 複数要素の表示',
+        },
+      ] as SolutionCode[],
       validation: {
         includes: ['<div>', '<h1>', '<p>', '</div>'],
       },
@@ -301,7 +316,9 @@ export default App`
 </div>`,
         },
       ],
-      solutionCode: `import './styles.css'
+      solutionCodes: [
+        {
+          code: `import './styles.css'
 
 const App = () => {
   return (
@@ -313,7 +330,10 @@ const App = () => {
 }
 
 export default App`,
-      solutionTargetFile: 'App.jsx',
+          solutionTargetFile: 'react-app/App.jsx',
+          label: 'App.jsx - スタイル適用',
+        },
+      ] as SolutionCode[],
       validation: {
         includes: [
           'className="container"',
@@ -351,7 +371,9 @@ export default App`
           code: `<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png" alt="React学習画像" />`,
         },
       ],
-      solutionCode: `import './styles.css'
+      solutionCodes: [
+        {
+          code: `import './styles.css'
 
 const App = () => {
   return (
@@ -364,7 +386,10 @@ const App = () => {
 }
 
 export default App`,
-      solutionTargetFile: 'App.jsx',
+          solutionTargetFile: 'react-app/App.jsx',
+          label: 'App.jsx - 画像の追加',
+        },
+      ] as SolutionCode[],
       validation: {
         includes: ['<img', '/>'],
       },
@@ -373,12 +398,12 @@ export default App`,
 
   // 右のコードエディタの初期ファイル
   initialEditorFiles: {
-    'App.jsx': `const App = () => {
+    'react-app/App.jsx': `const App = () => {
   return <div>{/* ここにコードを書いてください */}</div>
 }
 
 export default App`,
-    'styles.css': `/* React学習用のスタイル */
+    'react-app/styles.css': `/* React学習用のスタイル */
 .container {
   max-width: 600px;
   margin: 2rem auto;
@@ -419,7 +444,7 @@ export default App`,
   },
 
   solutionFiles: {
-    'App.jsx': `import './styles.css'
+    'react-app/App.jsx': `import './styles.css'
 
 const App = () => {
   return (
@@ -432,7 +457,7 @@ const App = () => {
 }
 
 export default App`,
-    'styles.css': `/* React学習用のスタイル */
+    'react-app/styles.css': `/* React学習用のスタイル */
 .container {
   max-width: 600px;
   margin: 2rem auto;
