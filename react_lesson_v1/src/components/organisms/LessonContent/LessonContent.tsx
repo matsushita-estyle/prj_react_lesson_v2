@@ -3,6 +3,9 @@
 import React, { useState } from 'react';
 import { LessonStep } from '@/lib/types/lesson';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 interface LessonContentProps {
   taskDescription?: string;
@@ -294,9 +297,19 @@ export default function LessonContent({
               {/* 解答例ボタン */}
               <button
                 onClick={() => toggleSolution(index)}
-                className="rounded bg-green-500 px-4 py-2 text-sm text-white transition-colors hover:bg-green-600"
+                className="flex items-center gap-2 rounded bg-green-500 px-4 py-2 text-sm text-white transition-colors hover:bg-green-600"
               >
-                {showSolutions[index] ? '解答例を隠す' : '解答例を見る'} ✅
+                {showSolutions[index] ? (
+                  <>
+                    解答例を隠す
+                    <VisibilityOffIcon fontSize="small" />
+                  </>
+                ) : (
+                  <>
+                    解答例を見る
+                    <VisibilityIcon fontSize="small" />
+                  </>
+                )}
               </button>
             </div>
 
@@ -323,9 +336,10 @@ export default function LessonContent({
                                   solution.code
                                 );
                               }}
-                              className="absolute top-2 right-2 z-10 rounded bg-blue-500 px-3 py-2 text-xs text-white transition-colors hover:bg-blue-600"
+                              className="absolute top-2 right-2 z-10 flex cursor-pointer items-center gap-2 rounded bg-blue-500 px-3 py-2 text-xs text-white transition-colors hover:bg-blue-600"
                             >
-                              {solution.solutionTargetFile}に反映 📝
+                              コードに反映
+                              <IntegrationInstructionsIcon fontSize="small" />
                             </button>
                           )}
                           <pre className="overflow-x-auto text-xs text-gray-700">
