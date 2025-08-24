@@ -207,7 +207,9 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
                   className="flex items-center px-3 py-2 text-sm font-medium text-gray-300 hover:text-gray-100"
                   onClick={() => handleTabClick(fileName)}
                 >
-                  <span className="max-w-32 truncate">{fileName.split('/').pop()}</span>
+                  <span className="max-w-32 truncate">
+                    {fileName.split('/').pop()}
+                  </span>
                 </button>
                 <button
                   className="rounded px-1 py-2 text-gray-500 hover:bg-gray-600 hover:text-gray-300"
@@ -218,20 +220,18 @@ const MonacoCodeEditor: React.FC<MonacoCodeEditorProps> = ({
               </div>
             ))}
           </div>
-          {/* フォーマットボタン */}
-          <div className="flex-shrink-0 border-l border-gray-600 px-2">
-            <button
-              onClick={handleFormatCode}
-              className="rounded px-3 py-1 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-gray-100"
-              title="コードを整形 (Alt+Shift+F)"
-            >
-              Format
-            </button>
-          </div>
         </div>
 
         {/* Monaco Editor */}
-        <div className="flex-1">
+        <div className="flex-1 relative">
+          {/* Format Button - absolute positioned */}
+          <button
+            onClick={handleFormatCode}
+            className="absolute top-4 right-4 z-10 px-5 py-1 bg-white cursor-pointer text-black text-sm rounded hover:bg-gray-100 transition-colors shadow-md"
+            title="コードを整形 (Alt+Shift+F)"
+          >
+            Format
+          </button>
           <div
             className="h-full"
             style={{
