@@ -10,9 +10,7 @@ export interface LessonStep {
   instruction: string
   hint?: string
   initialCode?: string
-  solutionCode?: string  // 後方互換性のため残す（単一ソリューション）
   solutionCodes?: SolutionCode[]  // 複数のソリューションコード
-  solutionTargetFile?: string  // solutionCodeの貼り付け先ファイル（後方互換性）
   copyableCode?: string | string[] | { label: string; code: string }[]  // コピー可能なコードスニペット
   initialFiles?: Record<string, string>  // ステップごとの初期ファイル（後方互換性のため残す）
   initialStepFiles?: Record<string, string>  // ステップごとの初期ファイル
@@ -33,13 +31,12 @@ export interface Lesson {
   taskDescription?: string  // 全体の説明（optional）
   material?: string  // 教材コンテンツ
   
-  // Stepped approach - 新しい構造
-  steps?: LessonStep[]
+  // Stepped approach - 必須
+  steps: LessonStep[]
   
-  // Code files - 従来の構造（互換性のため残す）
+  // Code files
   initialFiles?: Record<string, string>  // 後方互換性のため残す
   initialEditorFiles?: Record<string, string>  // 右のコードエディタの初期ファイル
-  solutionFiles?: Record<string, string>
   defaultFile?: string  // デフォルトで表示するファイル名
   
   // Navigation

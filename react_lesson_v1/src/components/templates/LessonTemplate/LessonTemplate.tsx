@@ -126,15 +126,14 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
   }
 
 
-  const lessonContent = (
+  const lessonContent = lesson ? (
     <LessonContent
-      taskDescription={lesson?.taskDescription}
-      solutionFiles={lesson?.solutionFiles}
-      steps={lesson?.steps}
+      taskDescription={lesson.taskDescription}
+      steps={lesson.steps}
       onApplyCode={handleApplyCode}
-      nextLessonId={lesson?.nextLessonId}
+      nextLessonId={lesson.nextLessonId}
     />
-  )
+  ) : null
 
   const previewContent = <PreviewPanel code={files} />
 
