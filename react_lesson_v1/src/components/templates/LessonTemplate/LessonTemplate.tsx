@@ -12,6 +12,7 @@ import ResizablePanel from '@/components/molecules/ResizablePanel'
 import SideMenu from '@/components/molecules/SideMenu'
 import { useSideMenu } from '@/hooks/useSideMenu'
 import { Lesson } from '@/lib/types/lesson'
+import { allLessons, getAvailableLessons } from '@/data/lessons'
 
 interface LessonTemplateProps {
   lessonTitle: string
@@ -137,31 +138,19 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
 
   const previewContent = <PreviewPanel code={files} />
 
+  // 全レッスンをチャプターごとにグループ化
+  const availableLessons = getAvailableLessons()
+  const availableIds = new Set(availableLessons.map(l => l.id))
+  
   const lessons = [
     {
       chapterTitle: 'チャプター１',
-      chapterLessons: [
-        {
-          id: 'chapter1-lesson1',
-          title: '01. Reactに触れてみよう',
-          href: '/lessons/chapter1-lesson1',
-        },
-        {
-          id: 'chapter1-lesson2',
-          title: '02. CSSでスタイルを適用してみよう',
-          href: '/lessons/chapter1-lesson2',
-        },
-        {
-          id: 'chapter1-lesson3',
-          title: '03. JSXの中にJavaScriptを埋め込む',
-          href: '/lessons/chapter1-lesson3',
-        },
-        {
-          id: 'chapter1-lesson4',
-          title: '04. コンポーネントを分割して再利用しよう',
-          href: '/lessons/chapter1-lesson4',
-        },
-      ],
+      chapterLessons: allLessons.map((lesson, index) => ({
+        id: lesson.id,
+        title: `${String(index + 1).padStart(2, '0')}. ${lesson.title}`,
+        href: `/lessons/${lesson.id}`,
+        isAvailable: availableIds.has(lesson.id),
+      })),
     },
   ]
 
@@ -197,6 +186,7 @@ const LessonTemplate: React.FC<LessonTemplateProps> = ({
         onCheckMaterials={handleCheckMaterials}
         nextLessonId={lesson?.nextLessonId}
         prevLessonId={lesson?.previousLessonId}
+        isNextLessonAvailable={lesson?.nextLessonId ? availableIds.has(lesson.nextLessonId) : true}
       />
 
       {/* サイドメニュー */}

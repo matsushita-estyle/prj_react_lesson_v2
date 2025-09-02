@@ -11,6 +11,7 @@ interface SideMenuProps {
       id: string
       title: string
       href: string
+      isAvailable?: boolean
     }>
   }>
 }
@@ -83,17 +84,24 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose, lessons }) => {
                 <div className="space-y-1">
                   {chapter.chapterLessons.map((lesson) => {
                     const isCurrentLesson = lesson.href === pathname
+                    const isAvailable = lesson.isAvailable !== false
                     return (
                       <button
                         key={lesson.id}
-                        onClick={() => handleLessonClick(lesson.href)}
+                        onClick={() => isAvailable && handleLessonClick(lesson.href)}
+                        disabled={!isAvailable}
                         className={`w-full rounded-md p-3 text-left text-sm transition-colors ${
-                          isCurrentLesson
+                          !isAvailable
+                            ? 'bg-gray-800/50 text-gray-500 cursor-not-allowed'
+                            : isCurrentLesson
                             ? 'bg-blue-600 text-white font-semibold'
                             : 'bg-gray-800 text-white hover:bg-gray-700'
                         }`}
                       >
-                        {lesson.title}
+                        <div className="flex items-center justify-between">
+                          <span>{lesson.title}</span>
+                          {!isAvailable && <span className="text-xs text-gray-500">準備中</span>}
+                        </div>
                       </button>
                     )
                   })}
