@@ -16,8 +16,16 @@ export const getLessonById = (id: string): Lesson | undefined => {
 };
 
 export const getAvailableLessons = (): Lesson[] => {
-  // 現在は最初の2つのレッスンのみ利用可能
-  return allLessons.slice(0, 2);
+  // 環境変数から利用可能なレッスン数を取得（デフォルト: 2）
+  const availableCount = parseInt(
+    process.env.NEXT_PUBLIC_AVAILABLE_LESSONS_COUNT || '2',
+    10
+  );
+  
+  // 有効な範囲内に制限（最小1、最大: 全レッスン数）
+  const validCount = Math.max(1, Math.min(availableCount, allLessons.length));
+  
+  return allLessons.slice(0, validCount);
 };
 
 export const getUpcomingLessons = (): Lesson[] => {
