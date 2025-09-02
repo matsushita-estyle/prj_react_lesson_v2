@@ -4,6 +4,9 @@ export const chapter1Lesson1: Lesson = {
   id: 'chapter1-lesson1',
   title: 'Reactに触れてみよう',
   lessonNumber: 1,
+  description: 'Reactの基本概念を理解し、最初のReactコンポーネントを作成します',
+  difficulty: '初級',
+  estimatedMinutes: 30,
 
   material: `# Reactって何だろう？
 

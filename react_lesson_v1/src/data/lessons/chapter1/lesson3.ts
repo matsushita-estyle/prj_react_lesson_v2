@@ -2,8 +2,11 @@ import { Lesson, SolutionCode } from '@/lib/types/lesson';
 
 export const chapter1Lesson3: Lesson = {
   id: 'chapter1-lesson3',
-  title: 'JSXの中にJavaScriptを埋め込む',
+  title: 'JSXをマスターしよう',
   lessonNumber: 3,
+  description: 'JSXの基本文法とルールを学習します',
+  difficulty: '初級',
+  estimatedMinutes: 30,
 
   material: `# JSXの中にJavaScriptを埋め込む
 

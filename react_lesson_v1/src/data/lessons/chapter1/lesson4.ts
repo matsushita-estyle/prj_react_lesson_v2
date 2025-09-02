@@ -4,6 +4,9 @@ export const chapter1Lesson4: Lesson = {
   id: 'chapter1-lesson4',
   title: 'コンポーネントを分割して再利用しよう',
   lessonNumber: 4,
+  description: 'コンポーネントを小さな部品に分割して、再利用性を高める方法を学びます',
+  difficulty: '中級',
+  estimatedMinutes: 45,
 
   material: `# コンポーネントを分割して再利用しよう
 

@@ -4,6 +4,7 @@ interface FooterProps {
   onCheckMaterials?: () => void;
   nextLessonId?: string;
   prevLessonId?: string;
+  isNextLessonAvailable?: boolean;
   className?: string;
 }
 
@@ -11,6 +12,7 @@ const Footer: React.FC<FooterProps> = ({
   onCheckMaterials,
   nextLessonId,
   prevLessonId,
+  isNextLessonAvailable = true,
   className = '',
 }) => {
   return (
@@ -39,12 +41,22 @@ const Footer: React.FC<FooterProps> = ({
         Text Book
       </button>
       {nextLessonId ? (
-        <a
-          href={`/lessons/${nextLessonId}`}
-          className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-cyan-500 bg-black hover:bg-cyan-500 text-cyan-500 hover:text-black focus:ring-cyan-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
-        >
-          Next
-        </a>
+        isNextLessonAvailable ? (
+          <a
+            href={`/lessons/${nextLessonId}`}
+            className="font-medium rounded-md transition-colors focus:outline-none focus:ring-2 border-2 border-cyan-500 bg-black hover:bg-cyan-500 text-cyan-500 hover:text-black focus:ring-cyan-500 px-4 py-1.5 text-base text-center cursor-pointer w-32"
+          >
+            Next
+          </a>
+        ) : (
+          <button
+            disabled
+            className="font-medium rounded-md border-2 border-gray-600 bg-black text-gray-600 px-4 py-1.5 text-base text-center cursor-not-allowed w-32"
+            title="次のレッスンは準備中です"
+          >
+            Next
+          </button>
+        )
       ) : (
         <a
           href={`/`}

@@ -2,8 +2,11 @@ import { Lesson, SolutionCode } from '@/lib/types/lesson';
 
 export const chapter1Lesson2: Lesson = {
   id: 'chapter1-lesson2',
-  title: 'CSSでスタイルを適用してみよう',
+  title: 'JSXの中にJavaScriptを埋め込む',
   lessonNumber: 2,
+  description: 'JSXの中でJavaScriptの式や変数を使う方法を学び、動的なコンテンツの表示を習得します',
+  difficulty: '初級',
+  estimatedMinutes: 30,
 
   material: `# CSSでスタイルを適用してみよう
 
